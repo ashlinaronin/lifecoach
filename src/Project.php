@@ -18,6 +18,12 @@
             $this->id = (int)$id;
         }
 
+
+
+        // Get and Set Methods ==============================================
+
+
+
         function setName ($new_name)
         {
             $this->name = $new_name;
@@ -60,11 +66,13 @@
 
         function getId()
         {
-            return $this->id; 
+            return $this->id;
         }
 
 
-        // Basic DB altering methods
+
+        // BASIC DB Altering Methods ========================================
+
 
         function save()
         {
@@ -77,15 +85,72 @@
             $this->id = $GLOBALS['DB']->lastInsertId();
         }
 
+
         function delete()
         {
-            $GLOBALS['DB']->exec("DELETE FROM projects WHERE id = {$this->getId()};");
+            // Deletes all Steps associated to project before deletion of the Project
+            $project_id_to_delete = $this->getId();
+            $GLOBALS['DB']->exec("DELETE FROM steps WHERE project_id = {$project_id_to_delete};");
+            $GLOBALS['DB']->exec("DELETE FROM projects WHERE id = {$project_id_to_delete};");
+        }
+
+
+        function updateName($new_name)
+        {
+            $GLOBALS['DB']->exec("UPDATE projects SET name = '{$new_name}' WHERE id = {$this->getId()};");
+            $this->setName($new_name);
+        }
+
+
+        function updateMotivation($new_motivation)
+        {
+            $GLOBALS['DB']->exec("UPDATE project SET motivation = '{$new_motivation}' WHERE id = {$this->getId()};");
+            $this->setMotivation($new_motivation);
+        }
+
+
+        function updateDueDate($new_due_date)
+        {
+            $GLOBALS['DB']->exec("UPDATE project SET due_date = '{$new_due_date}' WHERE id = {$this->getId()};");
+            $this->setDueDate($new_due_date);
         }
 
 
 
+        // Methods involving other tables ===================================
 
-        // STATIC Methods 
+
+
+        function getSteps ()
+        {
+            $steps_query = $GLOBALS['DB']->query(
+                "SELECT steps.* FROM
+                    projects JOIN steps ON (projects.id = steps.project_id)
+                 WHERE projects.id = {$this->getId()};"
+            );
+
+            $matching_steps = array();
+            foreach($steps_query as $step) {
+                $description = $step['description'];
+                $project_id = $step['project_id'];
+                $position = $step['position'];
+                $id = $step['id'];
+                $new_step = new Step($description,$project_id,$position,$id);
+                array_push($matching_steps, $new_step);
+            }
+            return $matching_steps;
+        }
+
+        function deleteStep ($step_to_delete)
+        {
+            $GLOBALS['DB']->exec("DELETE FROM steps WHERE id = {$step_to_delete->getId()};");
+        }
+
+
+
+        // STATIC Methods ===================================================
+
+
 
         static function find($search_id)
         {
@@ -97,7 +162,7 @@
                     $found_project = $project;
                 }
             }
-            return $found_project; 
+            return $found_project;
         }
 
 
