@@ -10,7 +10,7 @@
 
 	$server = 'mysql:host=localhost;dbname=lifecoach_test';
 	$username = 'root';
-	$password = '';
+	$password = 'root';
 	$DB = new PDO ($server, $username, $password);
 
 	class StepTest extends PHPUnit_Framework_TestCase
@@ -19,7 +19,7 @@
 		protected function tearDown()
 		{
 			Step::deleteAll();
-			// Project::deleteAll(); 
+			// Project::deleteAll();
 		}
 
 		function test_getDescription()
@@ -31,10 +31,10 @@
 			$test_step = new Step($description, $project_id, $position);
 
 			//Act
-			$result = $test_step->getDescription(); 
+			$result = $test_step->getDescription();
 
 			//Assert
-			$this->assertEquals($description,$result); 
+			$this->assertEquals($description,$result);
 
 		}
 
@@ -47,7 +47,7 @@
 			$test_step = new Step($description, $project_id, $position);
 
 			//Act
-			$test_step->save(); 
+			$test_step->save();
 
 			//Assert
 			$result = Step::getAll();

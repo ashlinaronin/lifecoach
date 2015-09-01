@@ -11,7 +11,7 @@
 
     $server = 'mysql:host=localhost;dbname=lifecoach_test';
     $username = 'root';
-    $password = '';
+    $password = 'root';
     $DB = new PDO($server, $username, $password);
 
 
@@ -103,7 +103,7 @@
             $result = Project::getAll();
 
             //Assert
-            $this->assertEquals([],$result); 
+            $this->assertEquals([],$result);
         }
 
         function test_delete()
@@ -119,7 +119,7 @@
             $name2 = "Learn French";
             $motivation2 = "To travel";
             $test_project2 = new Project($name2,$motivation2,$due_date,$priority);
-            $test_project2->save();  
+            $test_project2->save();
 
             //Act
             $test_project->delete();
@@ -143,13 +143,13 @@
             $name2 = "Learn French";
             $motivation2 = "To travel";
             $test_project2 = new Project($name2,$motivation2,$due_date,$priority);
-            $test_project2->save(); 
-            
-            //Act 
-            $result = Project::find($test_project2->getId()); 
+            $test_project2->save();
+
+            //Act
+            $result = Project::find($test_project2->getId());
 
             //Assert
-            $this->assertEquals($test_project2,$result); 
+            $this->assertEquals($test_project2,$result);
 
         }
 

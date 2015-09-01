@@ -27,4 +27,8 @@
     });
 
     return $app;
+
+    $app->get('/current_habits', function() use ($app) {
+        return $app['twig']->render('current_habits.html.twig', array('habits' => Habit::getAll())); 
+    })
 ?>
