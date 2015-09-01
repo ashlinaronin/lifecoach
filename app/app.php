@@ -6,7 +6,6 @@
     require_once __DIR__."/../src/Journal.php";
     require_once __DIR__."/../src/Step.php";
 
-
     use Symfony\Component\Debug\Debug;
     Debug::enable();
 
@@ -51,6 +50,11 @@
     $app->get('/new_habit', function() use ($app) {
       return $app['twig']->render('new_habit.html.twig');
     });
+
+
+    // Include Coach Routes
+    require_once __DIR__."/../routes/coach.php";
+
 
     return $app;
 ?>
