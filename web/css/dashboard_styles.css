@@ -1,0 +1,14 @@
+
+
+/* Medium Devices 768px and up */
+@media (min-width: 768px) {
+  #habits {
+    margin: 0 2% 0 2%;
+  }
+
+}
+
+.navbar .navbar-brand {
+  margin-left: 10%;
+  display: inline-block;
+}
