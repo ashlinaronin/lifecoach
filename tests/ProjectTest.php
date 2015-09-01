@@ -6,7 +6,7 @@
 */
 
     require_once "src/Project.php";
-    // require_once "src/Step";
+    require_once "src/Step.php";
 
 
     $server = 'mysql:host=localhost;dbname=lifecoach_test';
@@ -21,7 +21,7 @@
         protected function tearDown()
         {
             Project::deleteAll();
-            // Steps::deleteAll();
+            Step::deleteAll();
         }
 
         function test_getName()
@@ -147,15 +147,143 @@
 
             //Act
             $result = Project::find($test_project2->getId());
+<<<<<<< HEAD
+
+            //Assert
+            $this->assertEquals($test_project2,$result);
+=======
 
             //Assert
             $this->assertEquals($test_project2,$result);
 
         }
 
-        // test addStep
+        function test_updateName()
+        {
+            //Arrange
+            $name = "Build a shed";
+            $motivation = "have storage";
+            $due_date = "2015-09-09";
+            $priority = 1;
+            $test_project = new Project($name,$motivation,$due_date,$priority);
+            $test_project->save();
 
-        // test getSteps
+            $new_name = "Tear down a shed";
+
+            //Act
+            $test_project->updateName($new_name);
+            $result = $test_project->getName();
+
+            //Assert
+            $this->assertEquals($new_name,$result);
+
+        }
+
+        function test_updateMotivation()
+        {
+            //Arrange
+            $name = "Build a shed";
+            $motivation = "have storage";
+            $due_date = "2015-09-09";
+            $priority = 1;
+            $test_project = new Project($name,$motivation,$due_date,$priority);
+            $test_project->save();
+
+            $new_motivation = "save frustration";
+
+            //Act
+            $test_project->updateMotivation($new_motivation);
+            $result = $test_project->getMotivation();
+
+            //Assert
+            $this->assertEquals($new_motivation,$result);
+
+        }
+
+        function test_updateDueDate()
+        {
+            //Arrange
+            $name = "Build a shed";
+            $motivation = "have storage";
+            $due_date = "2015-09-09";
+            $priority = 1;
+            $test_project = new Project($name,$motivation,$due_date,$priority);
+            $test_project->save();
+
+            $new_due_date = "2015-10-10";
+
+            //Act
+            $test_project->updateDueDate($new_due_date);
+            $result = $test_project->getDueDate();
+
+            //Assert
+            $this->assertEquals($new_due_date,$result);
+
+        }
+
+
+        function test_getSteps()
+        {
+            //Arrange
+            $name = "Build a shed";
+            $motivation = "have storage";
+            $due_date = "2015-09-09";
+            $priority = 1;
+            $test_project = new Project($name,$motivation,$due_date,$priority);
+            $test_project->save();
+
+            $description = "Buy a beret";
+            $project_id = $test_project->getId();
+            $position = 1;
+            $test_step = new Step($description, $project_id, $position);
+            $test_step->save();
+
+            $description2 = "Eat French bread";
+            $position2 = 2;
+            $test_step2 = new Step($description2, $project_id, $position2);
+            $test_step2->save();
+
+            //Act
+            $result = $test_project->getSteps();
+
+            //Assert
+            $this->assertEquals([$test_step,$test_step2],$result);
+
+        }
+
+
+        function test_deleteStep()
+        {
+            //Arrange
+            $name = "Build a shed";
+            $motivation = "have storage";
+            $due_date = "2015-09-09";
+            $priority = 1;
+            $test_project = new Project($name,$motivation,$due_date,$priority);
+            $test_project->save();
+
+            $description = "Buy a beret";
+            $project_id = $test_project->getId();
+            $position = 1;
+            $test_step = new Step($description, $project_id, $position);
+            $test_step->save();
+
+            $description2 = "Eat French bread";
+            $position2 = 2;
+            $test_step2 = new Step($description2, $project_id, $position2);
+            $test_step2->save();
+
+            //Act
+            $test_project->deleteStep($test_step);
+            $result = $test_project->getSteps();
+
+            //Assert
+            $this->assertEquals([$test_step2],$result);
+>>>>>>> f941f7b9cef202cb6eefe8cdf741a5182d9aee6a
+
+        }
+
+
 
 
     }
