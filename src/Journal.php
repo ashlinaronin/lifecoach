@@ -105,6 +105,7 @@
         }
       }
 
+
       static function lastEntry()
       {
         $entries = Journal::getAll();
@@ -120,6 +121,20 @@
         $last_entry = max($dates);
         return $last_entry;
 
+      }
+
+      static function findDate($search_date)
+      {
+          $found_journal = null;
+          $journals = Journal::getAll();
+          foreach($journals as $journal) {
+              $entry_date = $journal->getDate();
+              if ($entry_date == $search_date) {
+                  $found_journal = $journal;
+              }
+          }
+
+          return $found_journal;
       }
     }
 
