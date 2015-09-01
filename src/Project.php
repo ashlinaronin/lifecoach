@@ -138,6 +138,11 @@
             return $matching_steps;
         }
 
+        function deleteStep ($step_to_delete)
+        {
+            $GLOBALS['DB']->exec("DELETE FROM steps WHERE id = {$step_to_delete->getId()};"); 
+        }
+
 
 
         // STATIC Methods ===================================================
