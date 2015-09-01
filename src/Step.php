@@ -11,8 +11,8 @@
 		function __construct($description, $project_id, $position, $id=null)
 		{
 			$this->description = $description;
-			$this->project_id  = $project_id;
-			$this->position    = $position;
+			$this->project_id  = (int)$project_id;
+			$this->position    = (int)$position;
 			$this->id          = (int)$id;
 		}
 
@@ -98,6 +98,19 @@
 				array_push($steps, $new_step);
 			}
 			return $steps;
+		}
+
+
+		static function find($search_id)
+		{
+			$found_step = null;
+			$steps = Step::getAll();
+			foreach($steps as $step) {
+				if($step->getId() == $search_id) {
+					$found_step = $step;
+				}
+			}
+			return $found_step;
 		}
 
 

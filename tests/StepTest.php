@@ -130,7 +130,28 @@
 		}
 
 
+		function test_find()
+		{
+			//Arrange
+			$description = "Buy book on learning French";
+			$project_id = 1;
+			$position = 1;
+			$test_step = new Step($description, $project_id, $position);
+			$test_step->save();
 
+			$description2 = "Buy French bread";
+			$project_id2 = 1;
+			$position2 = 2;
+			$test_step2 = new Step($description2, $project_id2, $position2);
+			$test_step2->save();
+
+			//Act
+			$result = Step::find($test_step2->getId());
+
+			//Assert
+			$this->assertEquals($test_step2, $result);
+
+		}
 
 
 
