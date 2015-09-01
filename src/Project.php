@@ -88,7 +88,10 @@
 
         function delete()
         {
-            $GLOBALS['DB']->exec("DELETE FROM projects WHERE id = {$this->getId()};");
+            // Deletes all Steps associated to project before deletion of the Project
+            $project_id_to_delete = $this->getId();
+            $GLOBALS['DB']->exec("DELETE FROM steps WHERE project_id = {$project_id_to_delete};");
+            $GLOBALS['DB']->exec("DELETE FROM projects WHERE id = {$project_id_to_delete};");
         }
 
 
@@ -140,7 +143,7 @@
 
         function deleteStep ($step_to_delete)
         {
-            $GLOBALS['DB']->exec("DELETE FROM steps WHERE id = {$step_to_delete->getId()};"); 
+            $GLOBALS['DB']->exec("DELETE FROM steps WHERE id = {$step_to_delete->getId()};");
         }
 
 
