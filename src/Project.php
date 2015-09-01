@@ -77,16 +77,19 @@
             $this->id = $GLOBALS['DB']->lastInsertId();
         }
 
+
         function delete()
         {
             $GLOBALS['DB']->exec("DELETE FROM projects WHERE id = {$this->getId()};");
         }
+
 
         function updateName($new_name)
         {
             $GLOBALS['DB']->exec("UPDATE projects SET name = '{$new_name}' WHERE id = {$this->getId()};");
             $this->setName($new_name);
         }
+
 
         function updateMotivation($new_motivation)
         {
@@ -95,6 +98,11 @@
         }
 
 
+        function updateDueDate($new_due_date)
+        {
+            $GLOBALS['DB']->exec("UPDATE project SET due_date = '{$new_due_date}' WHERE id = {$this->getId()};");
+            $this->setDueDate($new_due_date);            
+        }
 
 
 

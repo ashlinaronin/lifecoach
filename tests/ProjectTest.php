@@ -195,6 +195,27 @@
 
         }
 
+        function test_updateDueDate()
+        {
+            //Arrange
+            $name = "Build a shed";
+            $motivation = "have storage";
+            $due_date = "2015-09-09";
+            $priority = 1;
+            $test_project = new Project($name,$motivation,$due_date,$priority);
+            $test_project->save();
+
+            $new_due_date = "2015-10-10";
+
+            //Act
+            $test_project->updateDueDate($new_due_date);
+            $result = $test_project->getDueDate();
+
+            //Assert
+            $this->assertEquals($new_due_date,$result);
+
+        }
+
 
         // test addStep
 
