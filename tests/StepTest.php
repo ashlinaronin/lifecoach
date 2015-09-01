@@ -173,6 +173,25 @@
 
 		}
 
+		function test_updateProjectId()
+		{
+			//Arrange
+			$description = "Buy book on learning French";
+			$project_id = 1;
+			$position = 1;
+			$test_step = new Step($description, $project_id, $position);
+			$test_step->save();
+
+			//Act
+			$new_project_id = 3;
+			$test_step->updateProjectId($new_project_id);
+
+			//Assert
+			$result = $test_step->getProjectId();
+			$this->assertEquals($new_project_id, $result);
+
+		}
+
 
 
 
