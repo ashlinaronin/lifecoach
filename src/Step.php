@@ -4,20 +4,22 @@
 	{
 
 		private $description;
-		private $project_id; 
+		private $project_id;
 		private $position;
-		private $id; 
+		private $id;
 
 		function __construct($description, $project_id, $position, $id=null)
 		{
 			$this->description = $description;
-			$this->project_id = $project_id;
-			$this->position = $position;
-			$this->id = (int)$id; 
+			$this->project_id  = (int)$project_id;
+			$this->position    = (int)$position;
+			$this->id          = (int)$id;
 		}
 
 
-		// Get and Set Methods
+
+		// Get and Set Methods ====================================================
+
 
 		function setDescription($new_description)
 		{
@@ -36,12 +38,12 @@
 
 		function getProjectId()
 		{
-			return $this->project_id; 
+			return $this->project_id;
 		}
 
 		function setPosition($new_position)
 		{
-			$this->position = $new_position; 
+			$this->position = $new_position;
 		}
 
 		function getPosition()
@@ -51,11 +53,13 @@
 
 		function getId()
 		{
-			return $this->id; 
+			return $this->id;
 		}
 
 
-		// Basic Database Methods
+		// Basic Database Methods =================================================
+
+
 
 		function save()
 		{
@@ -64,20 +68,46 @@
 				 {$this->getProjectId()},
 				 {$this->getPosition()}
 			);");
-			$this->id = $GLOBALS['DB']->lastInsertId(); 
+			$this->id = $GLOBALS['DB']->lastInsertId();
+		}
+
+
+		function updateDescription($new_description)
+		{
+			$GLOBALS['DB']->exec("UPDATE steps SET description = '{$new_description}' WHERE id = {$this->getId()};");
+			$this->setDescription($new_description);
+		}
+
+
+		function updateProjectId($new_project_id)
+		{
+			$GLOBALS['DB']->exec("UPDATE steps SET project_id = '{$new_project_id}' WHERE id = {$this->getId()};");
+			$this->setProjectId($new_project_id);
+		}
+
+
+		function updatePosition($new_position)
+		{
+			$GLOBALS['DB']->exec("UPDATE steps SET position = '{$new_position}' WHERE id = {$this->getId()};");
+			$this->setPosition($new_position);
+		}
+
+
+		function delete()
+		{
+			$GLOBALS['DB']->exec("DELETE FROM steps WHERE id = {$this->getId()};");
 		}
 
 
 
 
-
-		// STATIC Methods
+		// STATIC Methods =========================================================
 
 
 
 		static function getAll()
 		{
-			$returned_steps = $GLOBALS['DB']->exec("SELECT * FROM steps;");
+			$returned_steps = $GLOBALS['DB']->query("SELECT * FROM steps;");
 
 			$steps = array();
 
@@ -90,8 +120,22 @@
 				$new_step = new Step($description,$project_id,$position,$id);
 				array_push($steps, $new_step);
 			}
-			return $steps; 
+			return $steps;
 		}
+
+
+		static function find($search_id)
+		{
+			$found_step = null;
+			$steps = Step::getAll();
+			foreach($steps as $step) {
+				if($step->getId() == $search_id) {
+					$found_step = $step;
+				}
+			}
+			return $found_step;
+		}
+
 
 		static function deleteAll()
 		{
