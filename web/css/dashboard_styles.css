@@ -53,9 +53,23 @@ html, body {
   padding-top: 5%;
 }
 
+.mainBody {
+  padding-bottom: 2.5%;
+}
+
+.mainBody a {
+  color: #333;
+  text-decoration: none;
+}
+
+.mainBody a:hover {
+  text-decoration: underline;
+}
+
 #projects {
   background: #ebf8ff;
   border-radius: 4%;
+
 }
 
 #habits {

@@ -1,8 +1,14 @@
 <html>
   <head>
     <title>Onnie's Habits</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/current_projects_styles.css" rel = "stylesheet">
   </head>
   <body>
+    {% include 'navbar/nav.html' %}
+    <div class = "container" id = "mainContainer">
+      <div class = "row row-centered" id = "mainRow">
+        <div class = "col-xl-5 col-lg-5 col-md-5 col-sm-5 col-sm-offset-1 col-centered mainBody" id="habits">
 
     <h1>Active Habits</h1>
       {% if habits is not empty %}

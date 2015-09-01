@@ -2,6 +2,7 @@
 
     require_once __DIR__."/../vendor/autoload.php";
     require_once __DIR__."/../src/Habit.php";
+    require_once __DIR__."/../src/Project.php";
 
     use Symfony\Component\Debug\Debug;
     Debug::enable();
