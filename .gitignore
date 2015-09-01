@@ -1,1 +1,9 @@
+<<<<<<< HEAD
 vendor/
+=======
+vendor
+.DS_Store
+.Trashes
+composer.lock
+temp
+>>>>>>> upstream/master
