@@ -1,13 +1,9 @@
 <?php
 
     require_once __DIR__."/../vendor/autoload.php";
-<<<<<<< HEAD
-    require_once __DIR__."/../src/Project.php";
-=======
     require_once __DIR__."/../src/Habit.php";
     require_once __DIR__."/../src/Project.php";
     require_once __DIR__."/../src/Journal.php";
->>>>>>> upstream/master
     require_once __DIR__."/../src/Step.php";
 
 
@@ -21,11 +17,8 @@
     $server = 'mysql:host=localhost;dbname=lifecoach';
     $username = 'root';
     $password = 'root';
-<<<<<<< HEAD
-    $DB = new PDO($server, $username, $password, $DB);
-=======
     $DB = new PDO($server, $username, $password);
->>>>>>> upstream/master
+
 
     use Symfony\Component\HttpFoundation\Request;
     Request::enableHttpMethodParameterOverride();
@@ -53,7 +46,6 @@
         return $app['twig']->render('dashboard.html.twig');
     });
 
-<<<<<<< HEAD
 
 
     // Project page routes ===================================================
@@ -127,10 +119,6 @@
     });
 
 
-
-
-
-=======
     $app->get('/current_habits', function() use ($app) {
         return $app['twig']->render('current_habits.html.twig', array('habits' => Habit::getAll()));
     });
@@ -144,15 +132,10 @@
         return $app['twig']->render('current_habits.html.twig', array('habits' => Habit::getAll()));
     });
 
-    $app->get('/current_projects', function() use ($app) {
-        return $app['twig']->render('current_projects.html.twig', array('projects' => Project::getAll()));
-    });
-
     $app->get('/new_habit', function() use ($app) {
       return $app['twig']->render('new_habit.html.twig');
     });
 
-<<<<<<< HEAD
     $app->get('/new_journal_entry', function() use ($app) {
         $time_zone = date_default_timezone_set('America/Los_Angeles');
         $todays_date = date("M-d-Y");
@@ -181,8 +164,5 @@
         return $app['twig']->render('new_journal_entry.html.twig', array('date' => $todays_date, 'existing_entry' => $existing_entry, 'todays_entry' => $todays_entry));
     });
 
-=======
->>>>>>> upstream/master
->>>>>>> 527e59be00864966a93c15e9396152611d91f9cc
     return $app;
 ?>
