@@ -88,6 +88,13 @@
             $this->setName($new_name);
         }
 
+        function updateMotivation($new_motivation)
+        {
+            $GLOBALS['DB']->exec("UPDATE project SET motivation = '{$new_motivation}' WHERE id = {$this->getId()};");
+            $this->setMotivation($new_motivation);
+        }
+
+
 
 
 

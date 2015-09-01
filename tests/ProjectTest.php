@@ -174,6 +174,27 @@
 
         }
 
+        function test_updateMotivation()
+        {
+            //Arrange
+            $name = "Build a shed";
+            $motivation = "have storage";
+            $due_date = "2015-09-09";
+            $priority = 1;
+            $test_project = new Project($name,$motivation,$due_date,$priority);
+            $test_project->save();
+
+            $new_motivation = "save frustration";
+
+            //Act
+            $test_project->updateMotivation($new_motivation);
+            $result = $test_project->getMotivation();
+
+            //Assert
+            $this->assertEquals($new_motivation,$result);
+
+        }
+
 
         // test addStep
 
