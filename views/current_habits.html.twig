@@ -1,21 +1,59 @@
 <html>
   <head>
     <title>Onnie's Habits</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/current_projects_styles.css" rel = "stylesheet">
   </head>
   <body>
+    <nav class = "navbar navbar-default">
 
-    <h1>Active Habits</h1>
-      {% if habits is not empty %}
-      <ul>
-          {% for habit in habits %}
-          <li><a href="/habits/{{ habit.getId }}">{{ habit.getName }}</a></li>
-      </ul>
-      {% endfor %}
+        <div class = "container-fluid">
 
-      {% else %}
-      <p>No habits currently entered.</p>
-      <p><a href="/new_habit">Click here to enter a new habit.</a></p>
-      {% endif %}
+            <!--Brand and Toggle -->
+            <div class = "navbar-header">
+
+                <button type = "button" class = "navbar-toggle collapsed" data-toggle = "collapse"
+                        data-target = "#header-navbar-collapse-1" aria-expanded = "false">
+                        <span class = "icon-bar"></span>
+                        <span class = "icon-bar"></span>
+                        <span class = "icon-bar"></span>
+                </button>
+                <a class = "navbar-brand" href = "#">Life Coach</a>
+            </div>
+
+            <!--Nav links -->
+            <div class="collapse navbar-collapse" id="links-navbar-collapse-1">
+                <ul class="nav navbar-nav pull-right">
+                    <li><a href="/dashboard">Dashboard</a></li>
+                    <li><a href="/current_projects">Projects</a></li>
+                    <li class = "active"><a href="/current_habits">Habits</a></li>
+                    <li><a href="#">Journal</a></li>
+                    <li><a href="#">About</a></li>
+                </ul>
+            </div>
+        </div>
+
+    </nav>
+
+    <div class = "container" id = "mainContainer">
+      <div class = "row row-centered" id = "mainRow">
+        <div class = "col-xl-5 col-lg-5 col-md-5 col-sm-5 col-sm-offset-1 col-centered mainBody" id="habits">
+
+          <h1>Active Habits</h1>
+            {% if habits is not empty %}
+            <ul>
+                {% for habit in habits %}
+                <li><a href="/habits/{{ habit.getId }}">{{ habit.getName }}</a></li>
+            </ul>
+            {% endfor %}
+
+            {% else %}
+            <p>No habits currently entered.</p>
+            <p><a href="/new_habit">Click here to enter a new habit.</a></p>
+            {% endif %}
+        </div>
+      </div>
+    </div>
 
 
 

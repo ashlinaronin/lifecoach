@@ -2,71 +2,49 @@
     <head>
         <title>Life Coach</title>
         <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+        <link href="css/dashboard_styles.css" rel = "stylesheet">
     </head>
     <body>
 
-        <nav class = "navbar navbar-default">
-
-            <div class = "container-fluid">
-
-                <!--Brand and Toggle -->
-                <div class = "navbar-header">
-
-                    <button type = "button" class = "navbar-toggle collapsed" data-toggle = "collapse"
-                            data-target = "#header-navbar-collapse-1" aria-expanded = "false">
-                            <span class = "icon-bar"></span>
-                            <span class = "icon-bar"></span>
-                            <span class = "icon-bar"></span>
-                    </button>
-                    <a class = "navbar-brand" href = "#">Life Coach</a>
-                </div>
-
-                <!--Nav links -->
-                <div class="collapse navbar-collapse" id="links-navbar-collapse-1">
-                    <ul class="nav navbar-nav">
-                        <li class = "active"><a href="#">Dashboard</a></li>
-                        <li><a href="#">Projects</a></li>
-                        <li><a href="#">Habits</a></li>
-                        <li><a href="#">Journal</a></li>
-                        <li><a href="#">About</a></li>
-                    </ul>
-                </div>
-            </div>
-
-        </nav>
-        <div class = "container text-center">
+        {% include 'navbar/nav.html' %}
+        <div class = "container text-center" id = "mainContainer">
 
             <div class = "row text-center">
 
                 <div class = "col-md-11 col-sm-11">
 
                     <h1>Hello Annie,</h1>
-                    <p>What would you like to do?</p>
+                    <p>What would you like to work on?</p>
 
                 </div>
 
             </div>
 
-            <div class = "row">
-                <!--<div class="col-xl-1.5 col-lg-1.5 col-md-1.5 col-sm-1"></div>-->
-                <div class = "col-xl-3 col-lg-3 col-md-3 col-sm-3 col-sm-offset-1" style = "background-color:lavenderblush";>
+            <div class = "row row-centered" id = "mainRow">
+                <div class = "col-xl-3 col-lg-3 col-md-3 col-sm-3 col-sm-offset-1 col-centered mainBody" id="projects">
 
-                    <h1>Projects</h1>
+                    <h1><a href = "/current_projects">Projects<a/></h1>
+                    <!-- Check for amount of active projects-->
+                    <h5><a href = "/current_projects">3 active projects</a></h5>
+                    <h5><a href = "/new_projects">Add a new project</a></h5>
                 </div>
 
-                <div class = "col-xl-3 col-lg-3 col-md-3 col-sm-3" style = "background-color:darkred";>
+                <div class = "col-xl-3 col-lg-3 col-md-3 col-sm-3 col-centered mainBody" id = "habits">
 
-                    <h1>Habits</h1>
+                    <h1><a href = "/current_habits">Habits</a></h1>
+                    <h5><a href = "/current_habits">5 active projects</a></h5>
+                    <h5><a href = "/new_habits">Add a habit</a><h5>
                 </div>
 
-                <div class = "col-xl-3 col-lg-3 col-md-3 col-sm-3" style = "background-color:#d3d3d3";>
+                <div class = "col-xl-3 col-lg-3 col-md-3 col-sm-3 col-centered mainBody" id="journal">
 
-                    <h1>Journal</h1>
+                    <h1><a href = "/new_entry">Journal</a></h1>
+                    <h5><a href = "/last_entry">last entry was Aug 9 2015</a></h5>
                 </div>
-                <!--<div class="col-xl-1.5 col-lg-1.5 col-md-1.5 col-sm-2"></div>-->
-
 
             </div>
-        </div>
+          </div>
+
+
     </body>
 </html>

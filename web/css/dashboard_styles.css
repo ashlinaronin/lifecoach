@@ -1,0 +1,98 @@
+
+html, body {
+  height: 100%;
+}
+
+/* Navbar styles*/
+
+.navbar .navbar-brand {
+  margin-left: 10%;
+  display: inline-block;
+}
+
+.navbar {
+  background: #1FB6FF;
+}
+
+.navbar-default .navbar-brand {
+    color: #fff;
+}
+
+.navbar-default .navbar-brand:hover {
+    color: #eee;
+}
+
+.navbar-default .navbar-brand:visited {
+    color: white;
+}
+
+.navbar-default .navbar-nav>li>a {
+  color: white;
+}
+
+.navbar-default .navbar-nav>.active>a {
+  color: white;
+  background-color: #0088c9;
+}
+
+.navbar-default .navbar-toggle {
+    border-color: #fff;
+}
+
+.navbar-default .navbar-toggle .icon-bar {
+    background-color: #fff;
+}
+
+/* Body styles */
+
+#mainContainer {
+  padding-top: 5%;
+}
+
+#mainRow {
+  padding-top: 5%;
+}
+
+.mainBody {
+  padding-bottom: 2.5%;
+}
+
+.mainBody a {
+  color: #333;
+  text-decoration: none;
+}
+
+.mainBody a:hover {
+  text-decoration: underline;
+}
+
+#projects {
+  background: #ebf8ff;
+  border-radius: 4%;
+
+}
+
+#habits {
+  background: #ebf8ff;
+  border-radius: 4%;
+}
+
+#journal {
+  background: #ebf8ff;
+  border-radius: 4%;
+}
+
+/* Medium Devices 768px and up */
+@media (min-width: 768px) {
+  #habits {
+    margin: 0 2% 0 2%;
+  }
+
+  #mainRow {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display:  flex;
+  }
+
+}
