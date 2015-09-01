@@ -2,6 +2,10 @@
 
     require_once __DIR__."/../vendor/autoload.php";
     require_once __DIR__."/../src/Habit.php";
+    require_once __DIR__."/../src/Project.php";
+    require_once __DIR__."/../src/Journal.php";
+    require_once __DIR__."/../src/Step.php";
+
 
     use Symfony\Component\Debug\Debug;
     Debug::enable();
@@ -28,6 +32,15 @@
     });
 
     $app->get('/current_habits', function() use ($app) {
+        return $app['twig']->render('current_habits.html.twig', array('habits' => Habit::getAll()));
+    });
+
+    $app->post('/current_habits', function() use ($app){
+        $name = $_POST['name'];
+        $motivation = $_POST['motivation'];
+        $interval_days = $_POST['interval_days'];
+        $habit = new Habit($name, $motivation, $interval_days, $id = null);
+        $habit->save();
         return $app['twig']->render('current_habits.html.twig', array('habits' => Habit::getAll()));
     });
 
