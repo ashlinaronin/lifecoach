@@ -70,6 +70,15 @@
 		}
 
 
+		function updateDescription($new_description)
+		{
+			$GLOBALS['DB']->exec("UPDATE steps SET description = '{$new_description}' WHERE id = {$this->getId()};");
+			$this->setDescription($new_description); 
+		}
+
+
+
+
 		function delete()
 		{
 			$GLOBALS['DB']->exec("DELETE FROM steps WHERE id = {$this->getId()};");

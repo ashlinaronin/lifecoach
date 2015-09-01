@@ -154,6 +154,27 @@
 		}
 
 
+		function test_updateDescription()
+		{
+			//Arrange
+			$description = "Buy book on learning French";
+			$project_id = 1;
+			$position = 1;
+			$test_step = new Step($description, $project_id, $position);
+			$test_step->save();
+
+			//Act
+			$new_description = "Get a beret";
+			$test_step->updateDescription($new_description);
+
+			//Assert
+			$result = $test_step->getDescription();
+			$this->assertEquals($new_description, $result);
+
+		}
+
+
+
 
 	}
 
