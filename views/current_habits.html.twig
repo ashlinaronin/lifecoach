@@ -1,0 +1,23 @@
+<html>
+  <head>
+    <title>Onnie's Habits</title>
+  </head>
+  <body>
+
+    <h1>Active Habits</h1>
+      {% if habits is not empty %}
+      <ul>
+          {% for habit in habits %}
+          <li><a href="/habits/{{ habit.getId }}">{{ habit.getName }}</a></li>
+      </ul>
+      {% endfor %}
+
+      {% else %}
+      <p>No habits currently entered.</p>
+      <p><a href="/new_habit">Click here to enter a new habit.</a></p>
+      {% endif %}
+
+
+
+  </body>
+</html>

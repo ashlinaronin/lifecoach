@@ -148,6 +148,11 @@
             //Act
             $result = Project::find($test_project2->getId());
 
+
+            //Assert
+            $this->assertEquals($test_project2,$result);
+
+
             //Assert
             $this->assertEquals($test_project2,$result);
 
@@ -274,6 +279,7 @@
 
             //Assert
             $this->assertEquals([$test_step2],$result);
+
 
         }
 

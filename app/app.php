@@ -1,7 +1,13 @@
 <?php
 
     require_once __DIR__."/../vendor/autoload.php";
+<<<<<<< HEAD
     require_once __DIR__."/../src/Project.php";
+=======
+    require_once __DIR__."/../src/Habit.php";
+    require_once __DIR__."/../src/Project.php";
+    require_once __DIR__."/../src/Journal.php";
+>>>>>>> upstream/master
     require_once __DIR__."/../src/Step.php";
 
 
@@ -15,7 +21,11 @@
     $server = 'mysql:host=localhost;dbname=lifecoach';
     $username = 'root';
     $password = 'root';
+<<<<<<< HEAD
     $DB = new PDO($server, $username, $password, $DB);
+=======
+    $DB = new PDO($server, $username, $password);
+>>>>>>> upstream/master
 
     use Symfony\Component\HttpFoundation\Request;
     Request::enableHttpMethodParameterOverride();
@@ -36,13 +46,14 @@
     }
 
 
-    // SILEX Routes ==========================================================
+    // Routes ================================================================
 
     //Home page
     $app->get('/dashboard', function() use ($app) {
         return $app['twig']->render('dashboard.html.twig');
     });
 
+<<<<<<< HEAD
 
 
     // Project page routes ===================================================
@@ -119,5 +130,28 @@
 
 
 
+=======
+    $app->get('/current_habits', function() use ($app) {
+        return $app['twig']->render('current_habits.html.twig', array('habits' => Habit::getAll()));
+    });
+
+    $app->post('/current_habits', function() use ($app){
+        $name = $_POST['name'];
+        $motivation = $_POST['motivation'];
+        $interval_days = $_POST['interval_days'];
+        $habit = new Habit($name, $motivation, $interval_days, $id = null);
+        $habit->save();
+        return $app['twig']->render('current_habits.html.twig', array('habits' => Habit::getAll()));
+    });
+
+    $app->get('/current_projects', function() use ($app) {
+        return $app['twig']->render('current_projects.html.twig', array('projects' => Project::getAll()));
+    });
+
+    $app->get('/new_habit', function() use ($app) {
+      return $app['twig']->render('new_habit.html.twig');
+    });
+
+>>>>>>> upstream/master
     return $app;
 ?>
