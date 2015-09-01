@@ -1,7 +1,7 @@
 <?php
 
     require_once __DIR__."/../vendor/autoload.php";
-    require_once __DIR__."/../src/Habit.php"; 
+    require_once __DIR__."/../src/Habit.php";
 
     use Symfony\Component\Debug\Debug;
     Debug::enable();
@@ -29,6 +29,14 @@
 
     $app->get('/current_habits', function() use ($app) {
         return $app['twig']->render('current_habits.html.twig', array('habits' => Habit::getAll()));
+    });
+
+    $app->get('/current_projects', function() use ($app) {
+        return $app['twig']->render('current_projects.html.twig', array('projects' => Project::getAll()));
+    });
+
+    $app->get('/new_habit', function() use ($app) {
+      return $app['twig']->render('new_habit.html.twig');
     });
 
     return $app;
