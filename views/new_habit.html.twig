@@ -1,0 +1,27 @@
+<html>
+  <head>
+    <title>Create a habit</title>
+  </head>
+  <body>
+
+    <h1>New Habit</h1>
+
+    <form action='/current_habits' method='post'>
+          <label for = 'name'>Habit name</label>
+          <input id = 'name' name='name' type='text'>
+
+          <label for = 'motivation'>Why do you want this habit?</label>
+          <input id = 'motivation' name='motivation' type='text'>
+
+          <label for = 'interval_days'>How many days in a row do you want to do this?</label>
+          <input id = 'interval_days' name='interval_days' type='integer'>
+
+          <button type='submit'>Create Habit</button>
+      </form>
+
+      <!-- <form action='/delete_categories' method = 'post'>
+          <button type='submit'>Clear</button>
+      </form> -->
+
+  </body>
+</html>
