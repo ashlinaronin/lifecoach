@@ -118,7 +118,7 @@
             $completed = false;
             $test_habit = new Habit($name, $motivation, $interval_days, $completed);
 
-            var_dump($test_habit);
+
 
             $test_habit->save();
 
@@ -147,12 +147,12 @@
 
             $result = Habit::getAll();
 
-            var_dump($result);
+
 
             $this->assertEquals([$test_habit, $test_habit2], $result);
 
         }
-        
+
         function testDeleteAll()
         {
             $name = "Meditate";
