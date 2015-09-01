@@ -4,16 +4,16 @@
 	{
 
 		private $description;
-		private $project_id; 
+		private $project_id;
 		private $position;
-		private $id; 
+		private $id;
 
 		function __construct($description, $project_id, $position, $id=null)
 		{
 			$this->description = $description;
-			$this->project_id = $project_id;
-			$this->position = $position;
-			$this->id = (int)$id; 
+			$this->project_id  = $project_id;
+			$this->position    = $position;
+			$this->id          = (int)$id;
 		}
 
 
@@ -36,12 +36,12 @@
 
 		function getProjectId()
 		{
-			return $this->project_id; 
+			return $this->project_id;
 		}
 
 		function setPosition($new_position)
 		{
-			$this->position = $new_position; 
+			$this->position = $new_position;
 		}
 
 		function getPosition()
@@ -51,7 +51,7 @@
 
 		function getId()
 		{
-			return $this->id; 
+			return $this->id;
 		}
 
 
@@ -64,7 +64,7 @@
 				 {$this->getProjectId()},
 				 {$this->getPosition()}
 			);");
-			$this->id = $GLOBALS['DB']->lastInsertId(); 
+			$this->id = $GLOBALS['DB']->lastInsertId();
 		}
 
 
@@ -77,7 +77,7 @@
 
 		static function getAll()
 		{
-			$returned_steps = $GLOBALS['DB']->exec("SELECT * FROM steps;");
+			$returned_steps = $GLOBALS['DB']->query("SELECT * FROM steps;");
 
 			$steps = array();
 
@@ -90,7 +90,7 @@
 				$new_step = new Step($description,$project_id,$position,$id);
 				array_push($steps, $new_step);
 			}
-			return $steps; 
+			return $steps;
 		}
 
 		static function deleteAll()

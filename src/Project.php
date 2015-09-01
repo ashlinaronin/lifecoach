@@ -60,7 +60,7 @@
 
         function getId()
         {
-            return $this->id; 
+            return $this->id;
         }
 
 
@@ -82,10 +82,16 @@
             $GLOBALS['DB']->exec("DELETE FROM projects WHERE id = {$this->getId()};");
         }
 
+        function updateName($new_name)
+        {
+            $GLOBALS['DB']->exec("UPDATE projects SET name = '{$new_name}' WHERE id = {$this->getId()};");
+            $this->setName($new_name);
+        }
 
 
 
-        // STATIC Methods 
+
+        // STATIC Methods
 
         static function find($search_id)
         {
@@ -97,7 +103,7 @@
                     $found_project = $project;
                 }
             }
-            return $found_project; 
+            return $found_project;
         }
 
 
