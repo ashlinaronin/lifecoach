@@ -18,6 +18,10 @@
             $this->id = (int)$id;
         }
 
+
+        // Get and Set Methods ==============================================
+
+
         function setName ($new_name)
         {
             $this->name = $new_name;
@@ -64,7 +68,9 @@
         }
 
 
-        // Basic DB altering methods
+
+        // BASIC DB Altering Methods ========================================
+
 
         function save()
         {
@@ -101,12 +107,24 @@
         function updateDueDate($new_due_date)
         {
             $GLOBALS['DB']->exec("UPDATE project SET due_date = '{$new_due_date}' WHERE id = {$this->getId()};");
-            $this->setDueDate($new_due_date);            
+            $this->setDueDate($new_due_date);
         }
 
 
 
-        // STATIC Methods
+        // Methods involving other tables ===================================
+
+
+        // Write function addStep()
+
+        // Write function getSteps()
+
+
+
+
+        // STATIC Methods ===================================================
+
+
 
         static function find($search_id)
         {
