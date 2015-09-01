@@ -8,6 +8,21 @@
 
 }
 
+#projects {
+  background: #ebf8ff;
+  border-radius: 4%;
+}
+
+#habits {
+  background: #ebf8ff;
+  border-radius: 4%;
+}
+
+#journal {
+  background: #ebf8ff;
+  border-radius: 4%;
+}
+
 .navbar .navbar-brand {
   margin-left: 10%;
   display: inline-block;
