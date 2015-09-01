@@ -6,7 +6,7 @@
 */
 
     require_once "src/Project.php";
-    // require_once "src/Step";
+    require_once "src/Step.php";
 
 
     $server = 'mysql:host=localhost;dbname=lifecoach_test';
@@ -21,7 +21,7 @@
         protected function tearDown()
         {
             Project::deleteAll();
-            // Steps::deleteAll();
+            Step::deleteAll();
         }
 
         function test_getName()
@@ -217,10 +217,34 @@
         }
 
 
-        // test addStep
+        function test_getSteps()
+        {
+            //Arrange
+            $name = "Build a shed";
+            $motivation = "have storage";
+            $due_date = "2015-09-09";
+            $priority = 1;
+            $test_project = new Project($name,$motivation,$due_date,$priority);
+            $test_project->save();
 
-        // test getSteps
+            $description = "Buy a beret";
+            $project_id = $test_project->getId();
+            $position = 1;
+            $test_step = new Step($description, $project_id, $position);
+            $test_step->save();
 
+            $description2 = "Eat French bread";
+            $position2 = 2;
+            $test_step2 = new Step($description2, $project_id, $position2);
+            $test_step2->save();
+
+            //Act
+            $result = $test_project->getSteps();
+
+            //Assert
+            $this->assertEquals([$test_step,$test_step2],$result);
+
+        }
 
     }
 

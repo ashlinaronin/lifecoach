@@ -19,7 +19,9 @@
         }
 
 
+
         // Get and Set Methods ==============================================
+
 
 
         function setName ($new_name)
@@ -115,10 +117,26 @@
         // Methods involving other tables ===================================
 
 
-        // Write function addStep()
 
-        // Write function getSteps()
+        function getSteps ()
+        {
+            $steps_query = $GLOBALS['DB']->query(
+                "SELECT steps.* FROM
+                    projects JOIN steps ON (projects.id = steps.project_id)
+                 WHERE projects.id = {$this->getId()};"
+            );
 
+            $matching_steps = array();
+            foreach($steps_query as $step) {
+                $description = $step['description'];
+                $project_id = $step['project_id'];
+                $position = $step['position'];
+                $id = $step['id'];
+                $new_step = new Step($description,$project_id,$position,$id);
+                array_push($matching_steps, $new_step);
+            }
+            return $matching_steps;
+        }
 
 
 
