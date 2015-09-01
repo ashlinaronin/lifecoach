@@ -1,6 +1,7 @@
 <?php
 
     require_once __DIR__."/../vendor/autoload.php";
+    require_once __DIR__."/../src/Habit.php"; 
 
     use Symfony\Component\Debug\Debug;
     Debug::enable();
@@ -9,10 +10,10 @@
 
     $app['debug'] = true;
 
-    // $server = 'mysql:host=localhost;dbname=lifecoach';
-    // $username = 'root';
-    // $password = 'root';
-    // $DB = new PDO($server, $username, $password, $DB);
+    $server = 'mysql:host=localhost;dbname=lifecoach';
+    $username = 'root';
+    $password = 'root';
+    $DB = new PDO($server, $username, $password);
 
     use Symfony\Component\HttpFoundation\Request;
     Request::enableHttpMethodParameterOverride();
@@ -26,9 +27,9 @@
         return $app['twig']->render('dashboard.html.twig');
     });
 
-    return $app;
-
     $app->get('/current_habits', function() use ($app) {
-        return $app['twig']->render('current_habits.html.twig', array('habits' => Habit::getAll())); 
-    })
+        return $app['twig']->render('current_habits.html.twig', array('habits' => Habit::getAll()));
+    });
+
+    return $app;
 ?>
