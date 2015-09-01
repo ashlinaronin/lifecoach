@@ -192,6 +192,29 @@
 
 		}
 
+		function test_updatePosition()
+		{
+			//Arrange
+			$description = "Buy book on learning French";
+			$project_id = 1;
+			$position = 1;
+			$test_step = new Step($description, $project_id, $position);
+			$test_step->save();
+
+			//Act
+			$new_position = 3;
+			$test_step->updatePosition($new_position);
+
+			//Assert
+			$result = $test_step->getPosition();
+			$this->assertEquals($new_position, $result);
+
+		}
+
+
+
+
+
 
 
 

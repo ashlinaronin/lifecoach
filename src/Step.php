@@ -17,7 +17,9 @@
 		}
 
 
-		// Get and Set Methods
+
+		// Get and Set Methods ====================================================
+
 
 		function setDescription($new_description)
 		{
@@ -76,10 +78,18 @@
 			$this->setDescription($new_description);
 		}
 
+
 		function updateProjectId($new_project_id)
 		{
 			$GLOBALS['DB']->exec("UPDATE steps SET project_id = '{$new_project_id}' WHERE id = {$this->getId()};");
-			$this->setProjectId($new_project_id); 
+			$this->setProjectId($new_project_id);
+		}
+
+
+		function updatePosition($new_position)
+		{
+			$GLOBALS['DB']->exec("UPDATE steps SET position = '{$new_position}' WHERE id = {$this->getId()};");
+			$this->setPosition($new_position);
 		}
 
 
