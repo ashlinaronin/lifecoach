@@ -55,7 +55,9 @@
 		}
 
 
-		// Basic Database Methods
+		// Basic Database Methods =================================================
+
+
 
 		function save()
 		{
@@ -68,10 +70,15 @@
 		}
 
 
+		function delete()
+		{
+			$GLOBALS['DB']->exec("DELETE FROM steps WHERE id = {$this->getId()};");
+		}
 
 
 
-		// STATIC Methods
+
+		// STATIC Methods =========================================================
 
 
 
@@ -92,6 +99,7 @@
 			}
 			return $steps;
 		}
+
 
 		static function deleteAll()
 		{
