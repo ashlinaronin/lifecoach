@@ -165,6 +165,7 @@
     // Include Other Routes
     require_once __DIR__."/../routes/coach_new_project.php";
     require_once __DIR__."/../routes/coach_active_project.php";
+    require_once __DIR__."/../routes/coach_new_habit.php";
     require_once __DIR__."/../routes/habit.php";
     require_once __DIR__."/../routes/journal.php";
     require_once __DIR__."/../routes/project.php";
