@@ -34,7 +34,7 @@
     $journal->patch('/entries/{id}', function($id) use ($app) {
       $entry = Journal::find($id);
       $entry_content = $entry->getContent();
-      $latest_entry = $entry_content . $_POST['content'];
+      $latest_entry = $entry_content . " " . $_POST['content'];
       $entry->updateContent($latest_entry);
       return $app ['twig']->render('journal/entry.html.twig', array('entry' => $entry));
     });
@@ -42,7 +42,7 @@
     $journal->patch('/entries_edit/{id}', function($id) use ($app) {
     $entry = Journal::find($id);
     $entry_content = $entry->getContent();
-    $latest_entry = $entry_content . $_POST['content'];
+    $latest_entry = $entry_content . " " . $_POST['content'];
     $entry->updateContent($latest_entry);
     return $app ['twig']->render('journal/entry.html.twig', array('entry' => $entry));
   });
