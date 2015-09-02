@@ -1,0 +1,26 @@
+<html>
+    <head>
+        <title>Life Coach</title>
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+        <link href="/css/dashboard_styles.css" rel = "stylesheet">
+    </head>
+
+    <body>
+        {% include 'navbar/nav.html' %}
+        <h1>{{ entry.getDate }}</h1>
+
+        {{ entry.getContent }}
+
+
+      <form action='/journal/entries_edit/{{ entry.getId }}' method='post'>
+              <input name="_method" type="hidden" value="patch">
+
+              <label for="content">Add more to this entry</label>
+              <input id="content" name="content" type="text">
+
+              <button type='submit'>Submit</button>
+        </form>
+
+    <a href="/journal/entries_archive">Back to archive</a>
+    </body>
+</html>
