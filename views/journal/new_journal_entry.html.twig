@@ -6,12 +6,8 @@
     <body>
         <h1>{{ date }}</h1>
 
-        {% if existing_entry is not empty %}
-            {{ existing_entry }}
-        {% endif %}
-
-
-        <form action='/save_journal_entry' method='post'>
+  
+        <form action='/journal/save_journal_entry' method='post'>
               <label for = 'entry'>Today's entry</label>
               <input id = 'entry' name='entry' type='text'>
 
