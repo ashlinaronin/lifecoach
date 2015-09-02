@@ -1,0 +1,21 @@
+<html>
+    <head>
+        <title>{{ project.getName }}</title>
+    </head>
+    <body>
+        <h1>Hi! I'm glad you have time to work on something.</h1>
+        <p>Let me remind you of your motivation for this project:</p>
+        <p><strong>{{ project.getMotivation }}</strong></p>
+
+        <p>You're doing great so far. x steps of x are complete.</p>
+
+        {# we should format the date nicer than this... twig has some options #}
+        <p>Your project is due on {{ project.getDueDate }}</p>
+
+        <a href='/coach/active_project/{{ project.getId }}/next_step'>
+            I'm ready to get started!
+        </a>
+
+
+    </body>
+</html>
