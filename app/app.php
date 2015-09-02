@@ -28,6 +28,10 @@
 
 
     //Home page
+    $app->get('/', function() use ($app){
+      return $app['twig']->render('index.html.twig');
+    });
+
     $app->get('/dashboard', function() use ($app) {
         return $app['twig']->render('dashboard.html.twig');
     });

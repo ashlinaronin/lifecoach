@@ -2,16 +2,17 @@
     $habit = $app['controllers_factory'];
 
     $habit->get('/current_habits', function() use ($app) {
+        $count = 0;
         return $app['twig']->render('habit/current_habits.html.twig', array('habits' => Habit::getAll()));
     });
 
-    $habit->post('/new_habit', function() use ($app){
+    $habit->post('/new_habit_motivation', function() use ($app) {
         $name = $_POST['name'];
-        $motivation = $_POST['motivation'];
-        $interval_days = $_POST['interval_days'];
+        $motivation = "";
+        $interval_days = 0;
         $habit = new Habit($name, $motivation, $interval_days, $id = null);
         $habit->save();
-        return $app['twig']->render('habit/current_habits.html.twig', array('habits' => Habit::getAll()));
+        return $app['twig']->render('habit/new_habit_motivation.html.twig', array('habits' => Habit::getAll()));
     });
 
     $habit->get('/new_habit', function() use ($app) {

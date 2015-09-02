@@ -129,7 +129,18 @@
           $GLOBALS['DB']->exec("DELETE FROM habits WHERE id = {$this->getId()};");
       }
 
+      function getCount()
+      {
+        $returned_habits = $GLOBALS['DB']->query("SELECT * FROM habits;");
 
+        $count = 0;
+
+        foreach($returned_habits as $habit) {
+          $habit_count = $count++;
+      }
+      return $habit_count;
+
+      }
     }
 
 ?>
