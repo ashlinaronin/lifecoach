@@ -31,13 +31,49 @@
             $motivation = "have storage";
             $due_date = "2015-09-09";
             $priority = 1;
-            $test_project = new Project($name,$motivation,$due_date,$priority);
+            $complete = 0;
+            $test_project = new Project($name,$motivation,$due_date,$priority,$complete);
 
             //Act
             $result = $test_project->getName();
 
             //Assert
             $this->assertEquals($name, $result);
+
+        }
+
+        function test_getComplete()
+        {
+            //Arrange
+            $name = "Build a shed";
+            $motivation = "have storage";
+            $due_date = "2015-09-09";
+            $priority = 1;
+            $test_project = new Project($name,$motivation,$due_date,$priority);
+
+            //Act
+            $result = $test_project->getComplete();
+
+            //Assert
+            $this->assertEquals(0, $result);
+
+        }
+
+        function test_setComplete()
+        {
+            //Arrange
+            $name = "Build a shed";
+            $motivation = "have storage";
+            $due_date = "2015-09-09";
+            $priority = 1;
+            $test_project = new Project($name,$motivation,$due_date,$priority);
+
+            //Act
+            $test_project->setComplete(1);
+            $result = $test_project->getComplete();
+
+            //Assert
+            $this->assertEquals(1, $result);
 
         }
 
@@ -152,10 +188,6 @@
             //Assert
             $this->assertEquals($test_project2,$result);
 
-
-            //Assert
-            $this->assertEquals($test_project2,$result);
-
         }
 
         function test_updateName()
@@ -172,10 +204,10 @@
 
             //Act
             $test_project->updateName($new_name);
-            $result = $test_project->getName();
+            $result = Project::getAll();
 
             //Assert
-            $this->assertEquals($new_name,$result);
+            $this->assertEquals($new_name,$result[0]->getName());
 
         }
 
@@ -193,10 +225,10 @@
 
             //Act
             $test_project->updateMotivation($new_motivation);
-            $result = $test_project->getMotivation();
+            $result = Project::getAll();
 
             //Assert
-            $this->assertEquals($new_motivation,$result);
+            $this->assertEquals($new_motivation,$result[0]->getMotivation());
 
         }
 
@@ -214,10 +246,10 @@
 
             //Act
             $test_project->updateDueDate($new_due_date);
-            $result = $test_project->getDueDate();
+            $result = Project::getAll();
 
             //Assert
-            $this->assertEquals($new_due_date,$result);
+            $this->assertEquals($new_due_date,$result[0]->getDueDate());
 
         }
 
@@ -279,7 +311,6 @@
 
             //Assert
             $this->assertEquals([$test_step2],$result);
-
 
         }
 
