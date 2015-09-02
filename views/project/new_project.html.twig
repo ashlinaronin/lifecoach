@@ -1,16 +1,51 @@
 <html>
   <head>
-    <title>Onnie's Habits</title>
+    <title>New Project</title>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
     <link href="css/current_projects_styles.css" rel = "stylesheet">
   </head>
   <body>
 
-    <p> Requires 4 input fields -
-          name,
-          motivation,
-          due_date,
-          priority     </p>
+        <h2>Create A Project:</h2><br>
+        <form action="/project/new_project" method="post">
+            <input name="_method" type="hidden" value="post">
+            <div class="row">
+                <div class="col-xs-2">
+                    <label for="name">Name: </label>
+                </div>
+                <div class="col-xs-2">
+                    <input id="name" name="name" type="text"><br>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-2">
+                    <label for="motivation">Motivation: </label>
+                </div>
+                <div class="col-xs-2">
+                    <input id="motivation" name="motivation" type="text"><br>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-2">
+                    <label for="due_date">Due Date: </label>
+                </div>
+                <div class="col-xs-2">
+                    <input id="due_date" name="due_date" type="date">
+                    <br>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-2">
+                    <label for="priority">Priority (1 to 5): </label>
+                </div>
+                <div class="col-xs-2">
+                    <input id="priority" name="priority" type="number" min="1" max="5">
+                    <br>
+                </div>
+            </div>
+            <br>
+            <button class="btn-default" type="submit">Create</button>
+        </form>
 
 
 
