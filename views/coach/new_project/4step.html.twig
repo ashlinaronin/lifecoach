@@ -27,6 +27,8 @@
 
         <a href="/{{ project.getId }}/due_date">No More Steps</a>
 
+        ((include project so far template display))
+
         ((form to add a step)) post to /{id}/step as long as we keep adding steps
         go to /{id}/due_date if there are no more steps
     </body>

@@ -166,7 +166,8 @@
 
 
     // Include Coach Routes
-    require_once __DIR__."/../routes/coach.php";
+    require_once __DIR__."/../routes/coach_new_project.php";
+    require_once __DIR__."/../routes/coach_active_project.php";
 
 
 
