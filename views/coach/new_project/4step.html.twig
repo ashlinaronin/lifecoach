@@ -1,18 +1,18 @@
 <html>
     <head>
-        <title>{% if current_project.getSteps|length == 0 %}
+        <title>{% if project.getSteps|length == 0 %}
                 First Step
-                {% elseif current_project.getSteps|length > 0 %}
+                {% elseif project.getSteps|length > 0 %}
                 Next Step
                 {% endif %}
         </title>
     </head>
     <body>
-        Take a look at what you came up with.
-        {{ dump }} here.
+        Take a look at what you came up with. Here's your dump:<br>
+        {{ dump }}<br><br>
 
-        {% if current_project.getSteps|length == 0 %}
-            What is the most basic step possible you could start this project with?
+        {% if project.getSteps|length == 0 %}
+            Looking at your dump, what do you think is the most basic step possible you could start this project with?
         {% else %}
             What is the next smallest step that needs to be done?
         {% endif %}
@@ -25,7 +25,7 @@
             <button type="submit">Submit</button>
         </form>
 
-        <a href="/{{ project.getId }}/due_date">No More Steps</a>
+        <a href="/coach/new_project/{{ project.getId }}/due_date">No More Steps</a><br><br>
 
         ((include project so far template display))
 

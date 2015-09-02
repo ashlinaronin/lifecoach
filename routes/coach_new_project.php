@@ -37,16 +37,12 @@
     ** show project as is so far
     ** prompt user to brain dump pre-reqs     */
     $coach_new_project->post('/{id}/prereqs', function($id) use ($app) {
-
         $project = Project::find($id);
-
 
         if (!empty($_POST['motivation'])) {
             $project->updateMotivation($_POST['motivation']);
-
-
         } else {
-
+            // some kind of error here
         }
 
         return $app['twig']->render('coach/new_project/3prereqs.html.twig', array(
@@ -65,16 +61,23 @@
 
     ** as of now, dump is just passed in post and not saved in db*/
     $coach_new_project->post('/{id}/step', function($id) use ($app) {
-
-
         $project = Project::find($id);
         $dump = $_POST['dump'];
+        $steps = $project->getSteps();
 
-        // figure out what position this step should go to
-        // need logic here!!!!!!!!
-        $step_position = 0;
-
+        // If we have a $_POST for the step description, add it now.
         if (!empty($_POST['step_description'])) {
+
+            $step_position = 0;
+            if (sizeof($steps) == 0) {
+                // There are no steps yet. This step should be added at pos 0.
+                $step_position = 0;
+            } else {
+                // If we have 3 steps, should add new one at pos 3.
+                // Because arrays start at index 0.
+                $step_position = sizeof($steps);
+            }
+
             $new_step = new Step(
                 $_POST['step_description'],
                 $project->getId(),
