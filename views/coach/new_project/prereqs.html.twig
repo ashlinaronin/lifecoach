@@ -4,6 +4,17 @@
     </head>
     <body>
         Can you think of any things that need to be finished before you can start on this project?
+
+        <form action="/{{ project.getId }}/step" method="post">
+            <label for="dump">Prereqs</label>
+
+            <!-- If possible, this should be some kind of input that allows the user to enter a bulleted list -->
+            <input type="text" name="dump">
+            <button type="submit">Submit</button>
+        </form>
+
+        ((include project so far template display))
+
         (brain dump here) post to /{id}/step
     </body>
 </html>

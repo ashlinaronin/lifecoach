@@ -4,6 +4,15 @@
     </head>
     <body>
         What inspires you to pursue this project? Try to answer this in a sentence or two.
+
+        <form action="/{{ project.getId }}/prereqs" method="post">
+            <label for="motivation">Motivation</label>
+            <input type="text" name="motivation">
+            <button type="submit">Submit</button>
+        </form>
+
+        ((include project so far template display))
+
         ((motivation form)) post to /{id}/prereqs
     </body>
 </html>

@@ -8,12 +8,26 @@
         </title>
     </head>
     <body>
+        Take a look at what you came up with.
+        {{ dump }} here.
+
         {% if current_project.getSteps|length == 0 %}
-            What is the most basic step possible you could start with?
+            What is the most basic step possible you could start this project with?
         {% else %}
-            What is the next smallest step to achieve?
+            What is the next smallest step that needs to be done?
         {% endif %}
 
-        ((form to add a step)) post to /{id}/due_date
+        <form action="/{{ project.getId }}/step" method="post">
+            <!-- pass dump in hidden post so user can continue to reference it-->
+            <input type="hidden" name="dump" value="{{dump}}">
+            <label for="step_description">Step description</label>
+            <input type="text" name="step_description">
+            <button type="submit">Submit</button>
+        </form>
+
+        <a href="/{{ project.getId }}/due_date">No More Steps</a>
+
+        ((form to add a step)) post to /{id}/step as long as we keep adding steps
+        go to /{id}/due_date if there are no more steps
     </body>
 </html>

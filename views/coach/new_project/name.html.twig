@@ -3,6 +3,13 @@
         <title>Name</title>
     </head>
     <body>
-        Can you think of a good name for this new project?
+        <p>Can you think of a good name for this new project?</p>
+        <form action="/motivation" method="post">
+            <label for="name">Name</label>
+            <input type="text" name="name">
+            <button type="submit">Submit</button>
+        </form>
+
+        ((name form)) post to /motivation
     </body>
 </html>

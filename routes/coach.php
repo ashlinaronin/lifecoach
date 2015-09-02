@@ -1,10 +1,6 @@
 <?php
     $coach = $app['controllers_factory'];
 
-    // $coach->get('/', function() use ($app) {
-    //     return $app['twig']->render('dashboard.html.twig');
-    // });
-
     // First page in new project coach flow
     // Don't need to pass Twig any data to display
     $coach->get('/', function() use ($app) {
@@ -15,10 +11,11 @@
     ** Each does the action from the previous page.
     ** The Twig templates will be responsive to display only the aspects
     ** of a project which have already been defined. */
-    $coach->post('/{id}/motivation', function($id) use ($app) {
+    $coach->post('/motivation', function() use ($app) {
         //create new project with name from last form
+        // We don't have an id yet, so can't use it in URL.
         // show project as is so far
-        $name = $_POST['project_name'];
+        $name = $_POST['name'];
         $motivation = null;
         $due_date = null;
         $priority = null;
@@ -36,6 +33,12 @@
         // prompt user to brain dump pre-reqs
         $project = Project::find($id);
 
+        if (!empty($_POST['motivation'])) {
+            $project->updateMotivation($_POST['motivation']);
+        } else {
+            // Some kind of error here
+        }
+
         return $app['twig']->render('coach/new_project/prereqs.html.twig', array(
             'project' => $project
         ));
@@ -45,7 +48,7 @@
         //store dump from last page
         //prompt user to parse the dump and
 
-        // need to check if this is the first step, middle or final step
+        // need to check if this is the first step or just a middle step
         // if user didn't click on "final step", keep going back to this route
         // until they have made all the steps
 
@@ -54,6 +57,10 @@
         $project = Project::find($id);
         $dump = $_POST['dump'];
 
+        if (!empty($_POST['step_description'])) {
+            // this method doesn't exist yet, need to implement it
+            $project->addStep();
+        }
 
         return $app['twig']->render('coach/new_project/prereqs.html.twig', array(
             'project' => $project,
@@ -62,7 +69,7 @@
 
     });
 
-    $coach->post('/{id}/due_date', function($id) use ($app) {
+    $coach->get('/{id}/due_date', function($id) use ($app) {
         // steps should all be complete now
         // only go to this page if they said last step was the final step
         // on this page ask for due date

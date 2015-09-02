@@ -5,6 +5,16 @@
     <body>
         When does this project need to be finished?
 
+        <form action="/{{ project.getId }}/update" method="post">
+            <label for="due_date">Due Date</label>
+
+            <!-- I'm sure there is a nicer date picker than this turd -->
+            <input type="date" name="due_date">
+            <button type="submit">Submit</button>
+        </form>
+
+        ((include project so far template display))
+
         ((due date form)) post to /{id}/update
     </body>
 </html>
