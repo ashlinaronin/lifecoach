@@ -1,0 +1,30 @@
+<html>
+    <head>
+    <title>Project</title>
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+        <link href="css/current_projects_styles.css" rel = "stylesheet">
+    </head>
+    <body>
+
+        <h1>Project Name: {{ project.getName }}</h1>
+        <ul>
+            <li>Motivation: {{ project.getMotivation }} </li>
+            <li>Due Date: {{ project.getDueDate }} </li>
+            <li>Priority: {{ project.getPriority }} </li>
+        </ul>
+
+        {% if steps is not empty %}
+            <ul>
+            {% for step in steps %}
+                <li>Step Description: {{ step.getDescription }}</li>
+                <li>Step Project Id: {{ step.getProjectId }}</li>
+                <li>Step Position: {{ step.getPosition }} </li>
+            {% endfor %}
+        {% else %}
+            <p>No Steps currently entered</p>
+        {% endif %}
+
+
+
+    </body>
+</html>
