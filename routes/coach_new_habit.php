@@ -31,7 +31,7 @@
         $completed = false;
         $habit = new Habit($name, $motivation, $interval_days, $completed);
         $habit->save();
-        return $app['twig']->render('coach/new_habit/2new_habit_motivation.html.twig', array('habits' => Habit::getAll()));
+        return $app['twig']->render('coach/new_habit/2new_habit_motivation.html.twig', array('habits' => Habit::getAll(), 'habit' => $habit));
     });
 
 
@@ -48,95 +48,37 @@
         }
 
         return $app['twig']->render('coach/new_habit/3prereqs.html.twig', array(
-            'project' => $project
+            'habit' => $habit
         ));
     });
 
 
 
-    // /* 4. Add a new step if we have $_POST for it at the appropriate position.
-    // ** Display the user's braindump so they can refer to it when creating steps.
-    // ** Store dump from last page by passing it as a secret input in the form. */
-    // $coach_new_project->post('/{id}/step', function($id) use ($app) {
-    //     $project = Project::find($id);
-    //     $dump = $_POST['dump'];
-    //     $steps = $project->getSteps();
-    //
-    //     // If we have a $_POST for the step description, add it now.
-    //     if (!empty($_POST['step_description'])) {
-    //
-    //         $step_position = 1;
-    //         if (sizeof($steps) == 0) {
-    //             // There are no steps yet. This step should be added at pos 1.
-    //             $step_position = 1;
-    //         } else {
-    //             // If we have 3 steps, should add new one at pos 4.
-    //             // Start counting steps from 1.
-    //             $step_position = sizeof($steps) + 1;
-    //         }
-    //
-    //         $new_step = new Step(
-    //             $_POST['step_description'],
-    //             $project->getId(),
-    //             $step_position
-    //         );
-    //         $new_step->save();
-    //     }
-    //
-    //     return $app['twig']->render('coach/new_project/4step.html.twig', array(
-    //         'project' => $project,
-    //         'steps' => $project->getSteps(),
-    //         'dump' => $dump
-    //     ));
-    // });
-    //
-    //
-    //
-    /* 4. Steps should all be complete now.
-    ** We only go to this page if user said they are done adding steps.
-    ** Here we don't take any $_POST data, just ask for due_date and
-    ** process that on the next page. */
-    // $coach_new_project->get('/{id}/due_date', function($id) use ($app) {
-    //     $project = Project::find($id);
-    //
-    //     return $app['twig']->render('coach/new_project/5due_date.html.twig', array(
-    //         'project' => $project,
-    //         'steps' => $project->getSteps()
-    //     ));
-    // });
-    //
-    //
-    //
-    //
-    //
-    // /* 6. Add due date from previous page.
-    // ** Give user option to edit the project as they have entered it. */
-    // $coach_new_project->post('/{id}/update', function($id) use ($app) {
-    //     $project = Project::find($id);
-    //     $project->updateDueDate($_POST['due_date']);
-    //
-    //     return $app['twig']->render('coach/new_project/6update.html.twig', array(
-    //         'project' => $project,
-    //         'steps' => $project->getSteps()
-    //     ));
-    // });
-    //
-    //
-    //
-    // /* 7. If anything was edited, update it here.
-    // ** Display congratulations, redirect to dashboard. */
-    // $coach_new_project->post('/{id}/finished', function($id) use ($app) {
-    //     $project = Project::find($id);
-    //
-    //     // logic to do updating here
-    //
-    //     return $app['twig']->render('coach/new_project/7finished.html.twig', array(
-    //         'project' => $project,
-    //         'steps' => $project->getSteps()
-    //     ));
-    // });
+    /* 4. Add a new step if we have $_POST for it at the appropriate position.
+    ** Display the user's braindump so they can refer to it when creating steps.
+    ** Store dump from last page by passing it as a secret input in the form. */
+    $coach_new_habit->post('/{id}/intervaldays', function($id) use ($app) {
+        $habit = Habit::find($id);
+        $dump = $_POST['dump'];
 
 
+
+        return $app['twig']->render('coach/new_habit/4interval_days.html.twig', array(
+            'habit' => $habit,
+            'dump' => $dump
+        ));
+    });
+
+    $coach_new_habit->post('/{id}/update_intervaldays', function($id) use ($app) {
+      $habit = Habit::find($id);
+      $interval_days = $_POST['intervaldays'];
+      $habit->updateIntervalDays($interval_days);
+      return $app['twig']->render('coach/new_habit/5finished_habit.html.twig', array('habit' => $habit));
+    });
+
+
+
+    
 
     // Place all urls in this file at /coach/new_project/*
     $app->mount('/coach/new_habit', $coach_new_habit);

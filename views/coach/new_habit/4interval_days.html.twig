@@ -1,0 +1,20 @@
+<html>
+  <head>
+    <title></title>
+  </head>
+  <body>
+
+    {{ dump }}
+
+    based on what you wrote above, how many days do you think you can do this habit in a row?
+
+    <form action="/coach/new_habit/{{ habit.getId }}/update_intervaldays" method="post">
+        <label for="intervaldays">enter the number of days in the interval</label>
+        <input type="integer" name="intervaldays">
+
+        <!-- pass dump in hidden post so user can continue to reference it-->
+        <input type="hidden" name="dump" value="{{dump}}">
+        <button type="submit">Submit</button>
+    </form>
+  </body>
+</html>

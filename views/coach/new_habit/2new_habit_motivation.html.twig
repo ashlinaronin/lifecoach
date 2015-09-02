@@ -16,7 +16,7 @@
         <div class = "col-xl-5 col-lg-5 col-md-5 col-sm-5 col-sm-offset-1 col-centered mainBody" id="habits">
 
 
-          <form action='/coach/new_habit/{id}/prereqs' method='post'>
+          <form action='/coach/new_habit/{{ habit.getId }}/prereqs' method='post'>
             <div class="form-group">
                 <input id = 'motivation' name='motivation' class ='form-control' type='text'>
             </div>
