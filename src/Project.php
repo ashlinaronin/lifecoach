@@ -15,7 +15,7 @@
             $this->motivation = $motivation;
             $this->due_date = $due_date;
             $this->priority = $priority;
-            $this->id = (int)$id;
+            $this->id = (int) $id;
         }
 
 
@@ -82,7 +82,7 @@
                 '{$this->getDueDate()}',
                 {$this->getPriority()}
             );");
-            $this->id = $GLOBALS['DB']->lastInsertId();
+            $this->id = (int) $GLOBALS['DB']->lastInsertId();
         }
 
 
