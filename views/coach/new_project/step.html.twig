@@ -1,0 +1,19 @@
+<html>
+    <head>
+        <title>{% if current_project.getSteps|length == 0 %}
+                First Step
+                {% elseif current_project.getSteps|length > 0 %}
+                Next Step
+                {% endif %}
+        </title>
+    </head>
+    <body>
+        {% if current_project.getSteps|length == 0 %}
+            What is the most basic step possible you could start with?
+        {% else %}
+            What is the next smallest step to achieve?
+        {% endif %}
+
+        ((form to add a step)) post to /{id}/due_date
+    </body>
+</html>
