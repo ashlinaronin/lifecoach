@@ -5,13 +5,12 @@
     <body>
         <p>Can you think of a good name for this new project?</p>
 
-        {% set vars = {
-            'form_url': '/coach/new_project/motivation',
-            'input_value': 'name',
-            'label_text': 'Name'
-            }
-        %}
-        {% include 'coach/partials/simple_qa_form.html.twig' with vars %}
+        <form action="/coach/new_project/motivation" method="post">
+            <label for="name">Name</label>
+            <input type="text" name="name">
+            <button type="submit">Submit</button>
+        </form>
+
 
     </body>
 </html>
