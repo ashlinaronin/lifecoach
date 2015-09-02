@@ -5,13 +5,16 @@
     <body>
         Can you think of any things that need to be finished before you can start on this project?
 
-        <form action="/{{ project.getId }}/step" method="post">
-            <label for="dump">Prereqs</label>
 
-            <!-- If possible, this should be some kind of input that allows the user to enter a bulleted list -->
-            <input type="text" name="dump">
-            <button type="submit">Submit</button>
-        </form>
+        <!-- If possible, this should be some kind of input that allows the user to enter a bulleted list -->
+        {# this syntax around project.getId is string interpolation in Twig #}
+        {% set vars = {
+            'form_url': "/coach/new_project/#{ project.getId }/step",
+            'input_value': 'dump',
+            'label_text': 'Prerequisites'
+            }
+        %}
+        {% include 'coach/partials/simple_qa_form.html.twig' with vars %}
 
         ((include project so far template display))
 

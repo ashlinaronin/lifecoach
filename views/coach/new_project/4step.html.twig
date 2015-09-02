@@ -17,7 +17,7 @@
             What is the next smallest step that needs to be done?
         {% endif %}
 
-        <form action="/{{ project.getId }}/step" method="post">
+        <form action="/coach/new_project/{{ project.getId }}/step" method="post">
             <!-- pass dump in hidden post so user can continue to reference it-->
             <input type="hidden" name="dump" value="{{dump}}">
             <label for="step_description">Step description</label>
