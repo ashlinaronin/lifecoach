@@ -42,6 +42,11 @@
     return $app ['twig']->render('journal/entry.html.twig', array('entry' => $entry));
   });
 
+    $journal->get("/entries_archive", function() use ($app){
+      $entries = Journal::getAll();
+      return $app['twig']->render('journal/entries_archive.html.twig', array('entries' => $entries));
+    });
+
 
 
 
