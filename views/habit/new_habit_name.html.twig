@@ -1,14 +1,16 @@
-<html>
-  <head>
-      <title>Create a habit</title>
-      <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
-      <link href="css/new_habit_styles.css" rel="stylesheet">
-  </head>
+{% set vars = {
+    'page_title': 'New Habit Name',
+    'css_url': '/css/new_habit_styles.css'
+}
+
+%}
+{% include 'partials/header.html.twig' with vars %}
   <body>
     {% include 'navbar/nav.html' %}
 
     <div class = "container" id = "mainContainer">
       <div class = "row row-centered" id = "mainRow">
+
         <div class = "col-xl-8 col-lg-8 col-md-11 col-sm-12 col-sm-offset-1 col-centered mainBody" id="habits">
 
         <h1>What good habit would you like to start?</h1>
