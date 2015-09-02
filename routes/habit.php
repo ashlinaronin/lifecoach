@@ -18,10 +18,21 @@
       return $app['twig']->render('habit/new_habit_name.html.twig');
     });
 
-    // $habit->get('/habits/{id}', function($id) use ($app) {
-    //   $habit = Habit::find($id);
-    //   return $app['tiwg']->render('')
-    // });
+    $habit->get('/habits/{id}', function($id) use ($app) {
+      $habit = Habit::find($id);
+      return $app['twig']->render('habit/habit_edit.html.twig', array('habit' => $habit));
+    });
+
+    $habit->patch('/habits/{id}', function($id) use ($app) {
+      $habit = Habit::find($id);
+      $name = $_POST['name'];
+      $motivation = $_POST['motivation'];
+      $interval_days = $_POST['interval_days'];
+      $habit->updateName($name);
+      $habit->updateMotivation($motivation);
+      $habit->updateIntervalDays($interval_days);
+      return $app['twig']->render('habit/habit_edit.html.twig', array('habit' => $habit));
+    });
 
 
 

@@ -1,0 +1,22 @@
+<html>
+    <head>
+        <title>Onnie's Journal</title>
+    </head>
+
+    <body>
+        <h1>{{ entry.getDate }}</h1>
+
+        {{ entry.getContent }}
+
+
+      <form action='/journal/entries_edit/{{ entry.getId }}' method='post'>
+              <input name="_method" type="hidden" value="patch">
+
+              <label for="content">Add more to this entry</label>
+              <input id="content" name="content" type="text">
+
+              <button type='submit'>Submit</button>
+        </form>
+
+    </body>
+</html>

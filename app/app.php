@@ -45,14 +45,6 @@
         return $app['twig']->render('dashboard.html.twig');
     });
 
-
-
-
-
-
-
-
-
     // Include Coach Routes
     require_once __DIR__."/../routes/coach.php";
     require_once __DIR__."/../routes/habit.php";
