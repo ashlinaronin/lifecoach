@@ -16,6 +16,7 @@
       {% set active_page = '/current_habits' %}
       {% include 'partials/nav.html' %}
 
+
     <div class = "container" id = "mainContainer">
       <div class = "row row-centered" id = "mainRow">
         <div class = "col-xl-5 col-lg-5 col-md-5 col-sm-5 col-sm-offset-1 col-centered mainBody" id="habits">
@@ -24,7 +25,8 @@
             {% if habits is not empty %}
             <ul>
                 {% for habit in habits %}
-                <li>{{ habit.getName }} <a href="/habits/{{ habit.getId }}">Edit</a><a href="habits/{{ habit.getId }}/coaching">Coaching</a></li>
+                <li>{{ habit.getName }} <a href="/habit/habits/{{ habit.getId }}">Edit</a><a href="habits/{{ habit.getId }}/coaching">Coaching</a></li>
+                <ul>{{ habit.getIntervalDays }} days (eventually want days completed)</ul>
             </ul>
             {% endfor %}
 

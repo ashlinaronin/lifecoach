@@ -15,7 +15,7 @@
             $this->motivation = $motivation;
             $this->due_date = $due_date;
             $this->priority = $priority;
-            $this->id = (int)$id;
+            $this->id = (int) $id;
         }
 
 
@@ -82,7 +82,7 @@
                 '{$this->getDueDate()}',
                 {$this->getPriority()}
             );");
-            $this->id = $GLOBALS['DB']->lastInsertId();
+            $this->id = (int) $GLOBALS['DB']->lastInsertId();
         }
 
 
@@ -104,14 +104,14 @@
 
         function updateMotivation($new_motivation)
         {
-            $GLOBALS['DB']->exec("UPDATE project SET motivation = '{$new_motivation}' WHERE id = {$this->getId()};");
+            $GLOBALS['DB']->exec("UPDATE projects SET motivation = '{$new_motivation}' WHERE id = {$this->getId()};");
             $this->setMotivation($new_motivation);
         }
 
 
         function updateDueDate($new_due_date)
         {
-            $GLOBALS['DB']->exec("UPDATE project SET due_date = '{$new_due_date}' WHERE id = {$this->getId()};");
+            $GLOBALS['DB']->exec("UPDATE projects SET due_date = '{$new_due_date}' WHERE id = {$this->getId()};");
             $this->setDueDate($new_due_date);
         }
 
@@ -126,7 +126,7 @@
             $steps_query = $GLOBALS['DB']->query(
                 "SELECT steps.* FROM
                     projects JOIN steps ON (projects.id = steps.project_id)
-                 WHERE projects.id = {$this->getId()};"
+                 WHERE projects.id = {$this->getId()} ORDER BY priority;"
             );
 
             $matching_steps = array();
