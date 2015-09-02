@@ -135,7 +135,7 @@
       return $app['twig']->render('new_habit.html.twig');
     });
 
-<<<<<<< HEAD
+
     $app->get('/new_journal_entry', function() use ($app) {
         $time_zone = date_default_timezone_set('America/Los_Angeles');
         $todays_date = date("M-d-Y");
