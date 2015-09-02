@@ -17,6 +17,9 @@
             What is the next smallest step that needs to be done?
         {% endif %}
 
+
+        {% include 'coach/partials/project_display.html.twig' %}
+
         <form action="/coach/new_project/{{ project.getId }}/step" method="post">
             <!-- pass dump in hidden post so user can continue to reference it-->
             <input type="hidden" name="dump" value="{{dump}}">
@@ -25,11 +28,7 @@
             <button type="submit">Submit</button>
         </form>
 
-        <a href="/coach/new_project/{{ project.getId }}/due_date">No More Steps</a><br><br>
+        <a href="/coach/new_project/{{ project.getId }}/due_date">That's enough steps.</a><br><br>
 
-        ((include project so far template display))
-
-        ((form to add a step)) post to /{id}/step as long as we keep adding steps
-        go to /{id}/due_date if there are no more steps
     </body>
 </html>

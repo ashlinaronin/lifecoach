@@ -5,7 +5,6 @@
     <body>
         Can you think of any things that need to be finished before you can start on this project?
 
-
         <!-- If possible, this should be some kind of input that allows the user to enter a bulleted list -->
         {# this syntax around project.getId is string interpolation in Twig #}
         {% set vars = {
@@ -16,8 +15,6 @@
         %}
         {% include 'coach/partials/simple_qa_form.html.twig' with vars %}
 
-        ((include project so far template display))
-
-        (brain dump here) post to /{id}/step
+        {% include 'coach/partials/project_display.html.twig' %}
     </body>
 </html>
