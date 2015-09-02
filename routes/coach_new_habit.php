@@ -16,7 +16,7 @@
 
 
     $coach_new_habit->get('/name', function() use ($app) {
-      return $app['twig']->render('habit/new_habit_name.html.twig');
+      return $app['twig']->render('coach/new_habit/1new_habit_name.html.twig');
     });
 
 
@@ -24,35 +24,36 @@
     ** We don't have an id yet, so can't use it in URL.
     ** Then, display project as is so far. */
 
-    $coach_new_habit->post('/new_habit_motivation', function() use ($app) {
+    $coach_new_habit->post('/motivation', function() use ($app) {
         $name = $_POST['name'];
         $motivation = null;
         $interval_days = 0;
-        $habit = new Habit($name, $motivation, $interval_days);
+        $completed = false;
+        $habit = new Habit($name, $motivation, $interval_days, $completed);
         $habit->save();
-        return $app['twig']->render('coach/new_habit/new_habit_motivation.html.twig', array('habits' => Habit::getAll()));
+        return $app['twig']->render('coach/new_habit/2new_habit_motivation.html.twig', array('habits' => Habit::getAll()));
     });
 
 
-    // /* 3. Add motivation from last form to project.
-    // ** Show project as is so far.
-    // ** Prompt user to brain dump pre-reqs.     */
-    // $coach_new_project->post('/{id}/prereqs', function($id) use ($app) {
-    //     $project = Project::find($id);
-    //
-    //     if (!empty($_POST['motivation'])) {
-    //         $project->updateMotivation($_POST['motivation']);
-    //     } else {
-    //         // some kind of error here
-    //     }
-    //
-    //     return $app['twig']->render('coach/new_project/3prereqs.html.twig', array(
-    //         'project' => $project
-    //     ));
-    // });
-    //
-    //
-    //
+    /* 3. Add motivation from last form to habit.
+    ** Show habit as is so far.
+    ** Prompt user to brain dump pre-reqs.     */
+    $coach_new_habit->post('/{id}/prereqs', function($id) use ($app) {
+        $habit = Habit::find($id);
+
+        if (!empty($_POST['motivation'])) {
+            $habit->updateMotivation($_POST['motivation']);
+        } else {
+            // some kind of error here
+        }
+
+        return $app['twig']->render('coach/new_habit/3prereqs.html.twig', array(
+            'project' => $project
+        ));
+    });
+
+
+
     // /* 4. Add a new step if we have $_POST for it at the appropriate position.
     // ** Display the user's braindump so they can refer to it when creating steps.
     // ** Store dump from last page by passing it as a secret input in the form. */
@@ -91,10 +92,10 @@
     //
     //
     //
-    // /* 5. Steps should all be complete now.
-    // ** We only go to this page if user said they are done adding steps.
-    // ** Here we don't take any $_POST data, just ask for due_date and
-    // ** process that on the next page. */
+    /* 4. Steps should all be complete now.
+    ** We only go to this page if user said they are done adding steps.
+    ** Here we don't take any $_POST data, just ask for due_date and
+    ** process that on the next page. */
     // $coach_new_project->get('/{id}/due_date', function($id) use ($app) {
     //     $project = Project::find($id);
     //

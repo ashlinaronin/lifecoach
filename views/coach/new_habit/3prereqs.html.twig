@@ -1,0 +1,17 @@
+<html>
+    <head>
+        <title>Pre-requisites</title>
+    </head>
+    <body>
+        Can you think of any things that need to be finished before you can start building this habit?
+
+        <!-- If possible, this should be some kind of input that allows the user to enter a bulleted list -->
+        <form action="/coach/new_project/{{ project.getId }}/step" method="post">
+            <label for="dump">Prerequisites</label>
+            <input type="text" name="dump">
+            <button type="submit">Submit</button>
+        </form>
+
+        {% include 'coach/partials/project_display.html.twig' %}
+    </body>
+</html>
