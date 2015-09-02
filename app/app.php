@@ -27,29 +27,10 @@
     ));
 
 
-    // Function for escaping special characters on form input
-    function formatFormInput ($input_array)
-    {
-        $output_array = array();
-        foreach($input_array as $key => $value) {
-            $output_array[$key] = preg_quote($value, "'");
-        }
-        return $output_array;
-    }
-
-
-    // Routes ================================================================
-
     //Home page
     $app->get('/dashboard', function() use ($app) {
         return $app['twig']->render('dashboard.html.twig');
     });
-
-
-
-
-
-
 
 
 
