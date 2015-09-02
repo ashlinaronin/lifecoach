@@ -51,11 +51,15 @@
 
     $app->get('/current_projects', function() use ($app) {
         return $app['twig']->render('current_projects.html.twig',
-            array('projects' => Project::getAll());
+            array('projects' => Project::getAll()));
+    });
+
+    $app->get('/new_project', function() use ($app) {
+        return $app['twig']->render('new_project.html.twig');
     });
 
     // ADD Project
-    $app->post('/current_projects/{id}', function($id) use ($app) {
+    $app->post('/new_project', function($id) use ($app) {
         $new_project_input = formatFormInput($_POST);
         $new_project = new Project( $new_project_input['name'],
                                     $new_project_input['motivation'],
@@ -64,7 +68,7 @@
                                   );
         $new_project->save();
 
-        return $app['twig']->render('project.html.twig', array('projects' => Project::getAll());
+        return $app['twig']->render('new_project.html.twig', array('projects' => Project::getAll()));
     });
 
 
@@ -72,7 +76,7 @@
         $project = Project::find($id);
 
         return $app['twig']->render('project.html.twig',
-            array('project' => $project, 'steps' => Project::getSteps());
+            array('project' => $project, 'steps' => Project::getSteps()));
     });
 
     //
@@ -112,7 +116,7 @@
         $step_input = formatFormInput($_POST);
         $new_step = new Step( $step_input['description'], $id, $step_input['position']);
 
-        return $app['twig']->render('project.html.twig'),
+        return $app['twig']->render('project.html.twig',
             array('project' => $project, 'steps' => $project->getSteps())
         );
     });
