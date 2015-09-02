@@ -5,35 +5,7 @@
       <link href="css/new_habit_styles.css" rel="stylesheet">
   </head>
   <body>
-    <nav class = "navbar navbar-default">
-
-        <div class = "container-fluid">
-
-            <!--Brand and Toggle -->
-            <div class = "navbar-header">
-
-                <button type = "button" class = "navbar-toggle collapsed" data-toggle = "collapse"
-                        data-target = "#header-navbar-collapse-1" aria-expanded = "false">
-                        <span class = "icon-bar"></span>
-                        <span class = "icon-bar"></span>
-                        <span class = "icon-bar"></span>
-                </button>
-                <a class = "navbar-brand" href = "#">Life Coach</a>
-            </div>
-
-            <!--Nav links -->
-            <div class="collapse navbar-collapse" id="links-navbar-collapse-1">
-                <ul class="nav navbar-nav pull-right">
-                    <li ><a href="/dashboard">Dashboard</a></li>
-                    <li><a href="/current_projects">Projects</a></li>
-                    <li class = "active"><a href="/current_habits">Habits</a></li>
-                    <li><a href="#">Journal</a></li>
-                    <li><a href="#">About</a></li>
-                </ul>
-            </div>
-        </div>
-
-    </nav>
+    {% include 'navbar/nav.html' %}
 
     <div class = "container" id = "mainContainer">
       <div class = "row row-centered" id = "mainRow">

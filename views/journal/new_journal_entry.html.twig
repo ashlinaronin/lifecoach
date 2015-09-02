@@ -1,9 +1,11 @@
 <html>
     <head>
-        <title>Onnie's Journal</title>
+        <title>Annie's Journal</title>
     </head>
 
     <body>
+      {% include 'navbar/nav.html' %}
+
         <h1>{{ date }}</h1>
 
         {% if existing_entry is not empty %}
