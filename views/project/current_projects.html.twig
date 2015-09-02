@@ -1,11 +1,15 @@
+    <!-- Header twig template -->
 
-{% set vars = {
-    'page_title': 'Current Projects',
-    'css_url': '/css/current_projects.css'
-}
+    {% set vars = {
+      'page_title': 'Current Projects',
+      'css_url': '/css/current_projects.css'
+    }
 
-%}
-{% include 'partials/header.html.twig' with vars %}
+    %}
+    {% include 'partials/header.html.twig' with vars %}
+
+    <body>
+    <!-- Navbar twig template -->
 
     {% set active_page = '/project/current_projects' %}
     {% include 'partials/nav.html' %}
@@ -40,5 +44,5 @@
 
 
 
-  </body>
+    </body>
 </html>

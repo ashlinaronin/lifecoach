@@ -1,10 +1,18 @@
-<html>
-    <head>
-        <title>Annie's Journal</title>
-    </head>
+<!-- Header twig template -->
+
+{% set vars = {
+  'page_title': 'New Journal Entry',
+  'css_url': '/css/new_journal_entry.css'
+}
+
+%}
+{% include 'partials/header.html.twig' with vars %}
 
     <body>
-      {% include 'navbar/nav.html' %}
+        <!-- Navbar twig template -->
+
+        {% set active_page = '/journal/new_journal_entry' %}
+        {% include 'partials/nav.html' %}
 
         <h1>{{ date }}</h1>
 

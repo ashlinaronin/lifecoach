@@ -2,10 +2,11 @@
 
 {% set vars = {
   'page_title': 'Dashboard',
-  'css_url': '/css/current_projects.css'
+  'css_url': '/css/dashboard.css'
 }
 
 %}
+
 {% include 'partials/header.html.twig' with vars %}
 
 
@@ -13,7 +14,7 @@
 
         <!-- Nabar twig template -->
 
-        {% set active_page = '/project/dashboard' %}
+        {% set active_page = '/dashboard' %}
         {% include 'partials/nav.html' %}
         <div class = "container text-center" id = "mainContainer">
 

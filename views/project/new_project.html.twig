@@ -1,11 +1,18 @@
-<html>
-  <head>
-    <title>Onnie's Habits</title>
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/current_projects_styles.css" rel = "stylesheet">
-  </head>
-  <body>
+<!-- Header twig template -->
+
+{% set vars = {
+  'page_title': 'New Project',
+  'css_url': '/css/new_project.css'
+}
+
+%}
+{% include 'partials/header.html.twig' with vars %}
+
+<body>
+     {% set active_page = '/project/new_project' %}
     {% include 'partials/nav.html' %}
+
+
     <h3> Put stuff here</h3>
     <!-- Requires 4 input fields
           Name
@@ -15,5 +22,5 @@
 
 
 
-  </body>
-  </html>
+</body>
+</html>
