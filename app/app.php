@@ -6,7 +6,6 @@
     require_once __DIR__."/../src/Journal.php";
     require_once __DIR__."/../src/Step.php";
 
-
     use Symfony\Component\Debug\Debug;
     Debug::enable();
 
@@ -136,6 +135,7 @@
       return $app['twig']->render('new_habit.html.twig');
     });
 
+
     $app->get('/new_journal_entry', function() use ($app) {
         $time_zone = date_default_timezone_set('America/Los_Angeles');
         $todays_date = date("M-d-Y");
@@ -163,6 +163,12 @@
         }
         return $app['twig']->render('new_journal_entry.html.twig', array('date' => $todays_date, 'existing_entry' => $existing_entry, 'todays_entry' => $todays_entry));
     });
+
+
+    // Include Coach Routes
+    require_once __DIR__."/../routes/coach.php";
+
+
 
     return $app;
 ?>
