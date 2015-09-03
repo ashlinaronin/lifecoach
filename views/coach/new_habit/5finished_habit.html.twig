@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <html>
   <head>
     <title></title>
@@ -8,5 +9,58 @@
     finished habit
 
   <a href="/habit/current_habits">back to habit list</a> 
+=======
+<!-- Header twig template -->
+
+{% set vars = {
+  'page_title': 'New Habit',
+  'css_url': '/css/new_habit.css'
+}
+
+%}
+{% include 'partials/header.html.twig' with vars %}
+
+    <body>
+      <!-- Navbar twig template -->
+
+      {% set active_page = '/habit/new_habit_motivation' %}
+      {% include 'partials/nav.html' %}
+
+      <!-- Habit display twig template -->
+      <div class = "container" id = "mainContainer">
+        <div class = "row row-centered" id = "mainRow">
+
+          <div class = "col-xl-8 col-lg-8 col-md-11 col-sm-12 col-sm-offset-1 col-centered mainBody">
+
+
+                <h1>Nice job! Here's your habit:</h1>
+
+          </div>
+        <!-- </div> -->
+
+          <div class = "col-xl-5 col-lg-5 col-md-5 col-sm-5 col-sm-offset-1 col-centered mainBody" id="habits">
+          {% include 'coach/partials/habit_display.html.twig' %}
+          </div>
+
+        </div>
+        <br>
+        <div class = "row row-centered" id = "buttonRow">
+          <div class = "col-xl-5 col-lg-5 col-md-5 col-sm-5 col-sm-offset-1 col-centered mainBody" id="habits">
+            <form action='/project/current_projects'>
+
+                  <button class = "btn btn-primary" type='submit'>Habit Home</button>
+
+            </form>
+
+            <form action='/dashboard'>
+
+                  <button class = "btn btn-default" type='submit'>Your Dashboard</button>
+
+            </form>
+          </div>
+
+        </div>
+      </div>
+>>>>>>> efdb4e382ee4ed255ebd13dd4040d95488c47b74
   </body>
 </html>

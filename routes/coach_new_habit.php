@@ -15,7 +15,7 @@
     ** of an in-progress habit which have already been defined. */
 
 
-    $coach_new_habit->get('/name', function() use ($app) {
+    $coach_new_habit->get('/new_habit_name', function() use ($app) {
       return $app['twig']->render('coach/new_habit/1new_habit_name.html.twig');
     });
 
