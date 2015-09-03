@@ -129,6 +129,8 @@
     /* 6. Project complete. Great job! Balloons, fiesta, music...
     ** Go back to dashboard. */
     $coach_active_project->get('/{id}/project_complete', function($id) use ($app) {
+        $project = Project::find($id);
+
         return $app['twig']->render('coach/active_project/6project_complete.html.twig', array(
             'project' => $project
         ));
