@@ -25,10 +25,10 @@
             <div class = "col-xl-8 col-lg-8 col-md-11 col-sm-12 col-sm-offset-1 col-centered mainBody">
 
             <h1>Here's what you came up with</h1>
-            <h3>"{{ dump }}"</h3>
+            <p style = "font-style: italic;">"{{ dump }}"</p>
 
             <p>{% if project.getSteps|length == 0 %}
-                Looking at your dump, what do you think is the most basic step possible you could start this project with?
+                Looking at these steps, what do you think is the most basic step possible you could start this project with?
             {% else %}
                 What is the next smallest step that needs to be done?
             {% endif %}</p>

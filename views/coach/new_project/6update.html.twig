@@ -12,15 +12,68 @@
 
     <body>
 
-        <!-- Nabar twig template -->
+      {% set active_page = '/coach/current_projects' %}
+      {% include 'partials/nav.html' %}
 
-        {% set active_page = '/coach/current_projects' %}
-        {% include 'partials/nav.html' %}
-        Great work so far. Take a look at the preview of your project and see if there's anything you'd like to change.
+      <div class = "container" id = "mainContainer">
 
-        {% include 'coach/partials/project_display.html.twig' %}
+        <div class = "row row-centered" id = "mainRow">
 
-        ((this should be a project edit form))
+            <div class = "col-xl-8 col-lg-8 col-md-11 col-sm-12 col-sm-offset-1 col-centered mainBody">
+                <!-- Nabar twig template -->
 
+                <h1>Great work so far.</h1>
+                <p>Take a look at the preview of your project and see if there's anything you'd like to change.</p>
+            </div>
+
+            <!-- <div class = "col-xl-5 col-lg-5 col-md-5 col-sm-5 col-sm-offset-1 col-centered">
+
+
+
+            </div> -->
+
+          </div>
+          {% include 'coach/partials/project_display.html.twig' %}
+
+          ((this should be a project edit form))
+
+          <div class = "col-xl-5 col-lg-5 col-md-5 col-sm-5 col-sm-offset-1 col-centered">
+
+          <form action = '/coach/new_project/{{project.getId }}' method = 'post'>
+            <div class = 'form-group'>
+                <input id = 'update' name = 'update' type = 'hidden' value = 'patch'>
+                <input id = 'project' name = 'project' type = 'text'>
+                <label for = 'project'>Change this project?</label>
+                <input id = 'steps' name = 'steps' type = 'text'>
+                <label for = 'steps'>Add a step?</label>
+            </div>
+            <button name = 'submit' class = 'btn btn-primary'>Update</button>
+          </form>
+
+
+          
+
+          <form action='/coach/new_project/{{ project.getId }}/finished' method='post'>
+
+              <div class="form-group">
+
+                <div class="input-group input-append date" id="datePicker">
+
+                  <input id = 'due_date' name='due_date' class ='form-control' type='date'>
+
+                  <span class="input-group-addon add-on">
+
+                    <span class="glyphicon glyphicon-calendar"></span>
+
+                  </span>
+
+                </div>
+
+              </div>
+              <button class = "btn btn-primary" type='submit'>Next question</button>
+          </form>
+
+        </div>
+      </div>
     </body>
 </html>
