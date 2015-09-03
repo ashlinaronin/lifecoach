@@ -1,11 +1,22 @@
-<html>
-  <head>
-    <title></title>
-  </head>
-  <body>
+<!-- Header twig template -->
+
+{% set vars = {
+  'page_title': 'Home Page',
+  'css_url': '/css/index.css'
+}
+
+%}
+{% include 'partials/header.html.twig' with vars %}
+
+<body>
+<!-- Navbar twig template -->
+
+{% set active_page = '/project/current_projects' %}
+{% include 'partials/nav.html' %}
+
     <h1>Landing Page</h1>
 
-    <a href='/dashboard'>dashboard</a> 
+    <a href='/dashboard'>dashboard</a>
 
   </body>
 </html>

@@ -1,8 +1,21 @@
-<html>
-    <head>
-        <title>Edit/Update Your New Project</title>
-    </head>
+<!-- Header twig template -->
+
+{% set vars = {
+  'page_title': 'New Project',
+  'css_url': '/css/new_project.css'
+}
+
+%}
+
+{% include 'partials/header.html.twig' with vars %}
+
+
     <body>
+
+        <!-- Nabar twig template -->
+
+        {% set active_page = '/coach/current_projects' %}
+        {% include 'partials/nav.html' %}
         Great work so far. Take a look at the preview of your project and see if there's anything you'd like to change.
 
         {% include 'coach/partials/project_display.html.twig' %}

@@ -1,12 +1,21 @@
-<html>
-    <head>
-        <title>Life Coach</title>
-        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
-        <link href="css/dashboard_styles.css" rel = "stylesheet">
-    </head>
+<!-- Header twig template -->
+
+{% set vars = {
+  'page_title': 'Dashboard',
+  'css_url': '/css/dashboard.css'
+}
+
+%}
+
+{% include 'partials/header.html.twig' with vars %}
+
+
     <body>
 
-        {% include 'navbar/nav.html' %}
+        <!-- Nabar twig template -->
+
+        {% set active_page = '/dashboard' %}
+        {% include 'partials/nav.html' %}
         <div class = "container text-center" id = "mainContainer">
 
             <div class = "row text-center">
@@ -26,7 +35,7 @@
                     <h1><a href = "/project/current_projects">Projects<a/></h1>
                     <!-- Check for amount of active projects-->
                     <h5><a href = "/project/current_projects">3 active projects</a></h5>
-                    <h5><a href = "/project/new_projects">Add a new project</a></h5>
+                    <h5><a href = "/coach/new_project">Add a new project</a></h5>
                 </div>
 
                 <div class = "col-xl-3 col-lg-3 col-md-3 col-sm-3 col-centered mainBody" id = "habits">
@@ -41,10 +50,13 @@
                     <h1><a href = "/journal/new_journal_entry">Journal</a></h1>
                     <h5><a href = "/journal/entries_archive">old entries</a></h5>
                 </div>
-
             </div>
+
+            <footer class="footer">
+              <p>Footer</p>
+            </footer>
+
+
           </div>
-
-
     </body>
 </html>

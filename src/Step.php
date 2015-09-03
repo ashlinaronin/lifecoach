@@ -9,16 +9,22 @@
 		private $id;
 		private $complete;
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> upstream/master
 		function __construct($description, $project_id, $position, $id=null, $complete=0)
 		{
 			$this->description = $description;
 			$this->project_id  = (int)$project_id;
 			$this->position    = (int)$position;
 			$this->id          = (int)$id;
+<<<<<<< HEAD
 			$this->complete    = (int)$complete;
+=======
+			$this->complete    = (int)$complete; 
+>>>>>>> upstream/master
 		}
-
 
 
 		// Get and Set Methods ====================================================
@@ -56,15 +62,25 @@
 
 		function setComplete($new_complete_boolean)
 		{
+<<<<<<< HEAD
 			$this->complete = $new_complete_boolean;
+=======
+			$this->complete = $new_complete_boolean; 
+>>>>>>> upstream/master
 		}
 
 		function getComplete()
 		{
+<<<<<<< HEAD
 			return $this->complete;
 		}
 
 
+=======
+			return $this->complete; 
+		}
+
+>>>>>>> upstream/master
 		function getId()
 		{
 			return $this->id;
@@ -77,10 +93,11 @@
 
 		function save()
 		{
-			$GLOBALS['DB']->exec("INSERT INTO steps (description,project_id,position) VALUES (
+			$GLOBALS['DB']->exec("INSERT INTO steps (description,project_id,position,complete) VALUES (
 				'{$this->getDescription()}',
 				 {$this->getProjectId()},
-				 {$this->getPosition()}
+				 {$this->getPosition()},
+				 {$this->getComplete()}
 			);");
 			$this->id = $GLOBALS['DB']->lastInsertId();
 		}
@@ -104,6 +121,13 @@
 		{
 			$GLOBALS['DB']->exec("UPDATE steps SET position = '{$new_position}' WHERE id = {$this->getId()};");
 			$this->setPosition($new_position);
+		}
+
+
+		function updateComplete($new_complete)
+		{
+			$GLOBALS['DB']->exec("UPDATE steps SET complete = '{$new_complete}' WHERE id = {$this->getId()};");
+			$this->setComplete($new_complete);
 		}
 
 

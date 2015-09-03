@@ -252,6 +252,7 @@
             $this->assertEquals($new_due_date,$result[0]->getDueDate());
 
         }
+   
 
 
         function test_getSteps()
@@ -317,9 +318,15 @@
         function test_getNextStep()
         {
             //Arrange
+<<<<<<< HEAD
             $name = "Build a shed";
             $motivation = "have storage";
             $due_date = "2015-09-09";
+=======
+            $name = "Learn French";
+            $motivation = "To travel";
+            $due_date = "2015-10-10";
+>>>>>>> upstream/master
             $priority = 1;
             $test_project = new Project($name,$motivation,$due_date,$priority);
             $test_project->save();
@@ -329,6 +336,7 @@
             $position = 1;
             $test_step = new Step($description, $project_id, $position);
             $test_step->save();
+<<<<<<< HEAD
             $test_step->setComplete(1);
 
             $description2 = "Eat French bread";
@@ -338,11 +346,30 @@
 
             //Act
             $result = Project::getAll();
+=======
+>>>>>>> upstream/master
+
+            //Assert
+            $this->assertEquals($test_step2,$result[0]->getNextStep());
+
+<<<<<<< HEAD
+        }
+=======
+            $description2 = "Eat French bread";
+            $position2 = 2;
+            $test_step2 = new Step($description2, $project_id, $position2);
+            $test_step2->save();
+
+            //Act
+            $test_step->updateComplete(1);
+            $result = Project::getAll(); 
 
             //Assert
             $this->assertEquals($test_step2,$result[0]->getNextStep());
 
         }
+    
+>>>>>>> upstream/master
 
     }
 

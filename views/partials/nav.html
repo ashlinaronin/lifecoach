@@ -1,3 +1,13 @@
+{% set navigation_bar = [
+  ['/dashboard', 'Dashboard'],
+  ['/coach/current_projects', 'Projects'],
+  ['#', 'Habits'],
+  ['#', 'Journal'],
+  ['#', 'About'],
+] %}
+{% set active_page = active_page|default('/dashboard') %}
+
+
 <nav class = "navbar navbar-default">
 
     <div class = "container-fluid">
@@ -17,11 +27,19 @@
         <!--Nav links -->
         <div class="collapse navbar-collapse" id="links-navbar-collapse-1">
             <ul class="nav navbar-nav pull-right">
-                <li class = "active"><a href="/dashboard">Dashboard</a></li>
+
+                <!-- <li class = "active"><a href="/dashboard">Dashboard</a></li>
                 <li><a href="/project/current_projects">Projects</a></li>
-                <li><a href="/habit/current_habits">Habits</a></li>
-                <li><a href="/journal/entries_archive">Journal</a></li>
-                <li><a href="#">About</a></li>
+                <li><a href="#">Habits</a></li>
+                <li><a href="#">Journal</a></li>
+                <li><a href="#">About</a></li> -->
+
+                {% for link in navigation_bar %}
+                  <li {% if link[0] == active_page %}class='active'{% endif %}>
+                    <a href="{{ link[0] }}">{{ link[1] }}</a>
+                  </li>
+                {% endfor %}
+
             </ul>
         </div>
     </div>

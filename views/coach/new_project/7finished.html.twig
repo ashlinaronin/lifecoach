@@ -1,8 +1,21 @@
-<html>
-    <head>
-        <title>Finished</title>
-    </head>
+<!-- Header twig template -->
+
+{% set vars = {
+  'page_title': 'New Project',
+  'css_url': '/css/new_project.css'
+}
+
+%}
+
+{% include 'partials/header.html.twig' with vars %}
+
+
     <body>
+
+        <!-- Nabar twig template -->
+
+        {% set active_page = '/coach/current_projects' %}
+        {% include 'partials/nav.html' %}
         Nice job!
 
         Here's your project:

@@ -1,13 +1,21 @@
-<html>
-    <head>
-        <title>{% if project.getSteps|length == 0 %}
-                First Step
-                {% elseif project.getSteps|length > 0 %}
-                Next Step
-                {% endif %}
-        </title>
-    </head>
+<!-- Header twig template -->
+
+{% set vars = {
+  'page_title': 'New Project',
+  'css_url': '/css/new_project.css'
+}
+
+%}
+
+{% include 'partials/header.html.twig' with vars %}
+
+
     <body>
+
+        <!-- Nabar twig template -->
+
+        {% set active_page = '/coach/current_projects' %}
+        {% include 'partials/nav.html' %}
         Take a look at what you came up with. Here's your dump:<br>
         {{ dump }}<br><br>
 
