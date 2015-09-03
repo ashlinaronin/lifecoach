@@ -4,7 +4,10 @@
 * @backupStaticAttributes disabled
 */
     require_once "src/Habit.php";
-    $server = 'mysql:host=localhost:3306;dbname=lifecoach_test';
+
+
+    // require_once "src/DailyCompleted.php";
+    $server = 'mysql:host=localhost;dbname=lifecoach_test';
     $username = 'root';
     $password = 'root';
     $DB = new PDO($server, $username, $password);
@@ -275,5 +278,140 @@
 
 
         }
+
+      function testCountHabitLength()
+      {
+        $name = "Meditate";
+        $motivation = "Clarity";
+        $interval_days = 3;
+        $completed = False;
+        $test_habit = new Habit($name, $motivation, $interval_days, $completed);
+        $test_habit->save();
+
+        $test_habit_id = $test_habit->getId();
+        $test_habit->countHabitLength($test_habit_id);
+
+
+        $result = $GLOBALS['DB']->query("SELECT * FROM daily_completed WHERE habit_id = {$test_habit_id};");
+        $days_array = array();
+        foreach ($result as $row) {
+          array_push($days_array, $row['day_id']);
+        }
+
+
+        $this->assertEquals([0, 1, 2], $days_array);
+      }
+
+    function testCompleteTodayOnDayId()
+    {
+      $name = "Meditate";
+      $motivation = "Clarity";
+      $interval_days = 3;
+      $completed = False;
+      $test_habit = new Habit($name, $motivation, $interval_days, $completed);
+      $test_habit->save();
+
+      $test_habit_id = $test_habit->getId();
+      $test_habit->countHabitLength($test_habit_id);
+
+      $test_habit->completeOnDayId($test_habit_id);
+
+      $days = $GLOBALS['DB']->query("SELECT * FROM daily_completed WHERE habit_id = {$test_habit_id} AND complete_today = true;");
+      $days_array = array();
+      foreach ($days as $day) {
+        array_push($days_array, $day['day_id']);
+        }
+
+        $found_day_id = min($days_array);
+        $result = $found_day_id;
+
+        $this->assertEquals(0, $result);
+
     }
+
+    function testCompleteOnDayId2()
+
+    function testGetDaysCompleted()
+    {
+      $name = "Meditate";
+      $motivation = "Clarity";
+      $interval_days = 5;
+      $completed = False;
+      $test_habit = new Habit($name, $motivation, $interval_days, $completed);
+      $test_habit->save();
+
+      $test_habit_id = $test_habit->getId();
+      $test_habit->countHabitLength($test_habit_id);
+
+      $test_habit->completeOnDayId($test_habit_id);
+
+
+      $result = $test_habit->getDaysCompleted($test_habit_id);
+
+      $this->assertEquals(1, $result);
+
+    }
+
+    function testGet2DaysCompleted()
+    {
+      $name = "Meditate";
+      $motivation = "Clarity";
+      $interval_days = 5;
+      $completed = False;
+      $test_habit = new Habit($name, $motivation, $interval_days, $completed);
+      $test_habit->save();
+
+      $test_habit_id = $test_habit->getId();
+      $test_habit->countHabitLength($test_habit_id);
+
+      $test_habit->completeOnDayId($test_habit_id);
+
+
+      $result = $test_habit->getDaysCompleted($test_habit_id) + $test_habit->getDaysCompleted($test_habit_id);
+
+      $this->assertEquals(2, $result);
+
+    }
+
+
+    function testGetActiveHabitCount()
+    {
+      $name = "Meditate";
+      $motivation = "Clarity";
+      $interval_days = 5;
+      $completed = False;
+      $test_habit = new Habit($name, $motivation, $interval_days, $completed);
+      $test_habit->save();
+
+      $result = Habit::getActiveHabitCount();
+
+      $this->assertEquals(1, $result);
+
+
+    }
+
+    function testGetActiveHabitCount2()
+    {
+      $name = "Meditate";
+      $motivation = "Clarity";
+      $interval_days = 5;
+      $completed = False;
+      $test_habit = new Habit($name, $motivation, $interval_days, $completed);
+      $test_habit->save();
+
+      $name2 = "Go running";
+      $motivation2 = "Fitness";
+      $interval_days2 = 35;
+      $id2 = 5;
+      $completed2 = False;
+      $test_habit2 = new Habit($name2, $motivation2, $interval_days2, $completed2, $id2);
+      $test_habit2->save();
+
+      $result = Habit::getActiveHabitCount();
+
+      $this->assertEquals(2, $result);
+
+
+    }
+  }
 ?>
