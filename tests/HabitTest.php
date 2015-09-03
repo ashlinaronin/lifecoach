@@ -4,6 +4,7 @@
 * @backupStaticAttributes disabled
 */
     require_once "src/Habit.php";
+    // require_once "src/DailyCompleted.php";
     $server = 'mysql:host=localhost;dbname=lifecoach_test';
     $username = 'root';
     $password = 'root';
@@ -275,5 +276,28 @@
 
 
         }
+
+      function testCountHabitLength()
+      {
+        $name = "Meditate";
+        $motivation = "Clarity";
+        $interval_days = 3;
+        $completed = False;
+        $test_habit = new Habit($name, $motivation, $interval_days, $completed);
+        $test_habit->save();
+
+        $test_habit_id = $test_habit->getId();
+        $test_habit->countHabitLength($test_habit_id);
+
+
+        $result = $GLOBALS['DB']->query("SELECT * FROM daily_completed WHERE habit_id = {$test_habit_id};");
+        $days_array = array();
+        foreach ($result as $row) {
+          array_push($days_array, $row['day_id']);
+        }
+        var_dump($result);
+
+        $this->assertEquals([0, 1, 2], $days_array);
+      }
     }
 ?>
