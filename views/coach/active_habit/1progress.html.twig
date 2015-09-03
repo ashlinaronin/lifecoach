@@ -1,0 +1,21 @@
+<html>
+  <head>
+    <title></title>
+  </head>
+  <body>
+
+    <p>Here are the number of days you have completed your habit: {{ days }}</p>
+
+    <p>Have you done your habit today?</p>
+
+    <form action="/coach/active_habit/success/{{ habit.getId }}" method="post">
+      <button type='submit'>Yes</button>
+    </form>
+
+    <form action="/coach/active_habit/fail/{{ habit.getId }}">
+      <button type='submit'>No</button>
+    </form>
+
+
+  </body>
+</html>

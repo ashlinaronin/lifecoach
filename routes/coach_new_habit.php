@@ -73,6 +73,7 @@
       $habit = Habit::find($id);
       $interval_days = $_POST['intervaldays'];
       $habit->updateIntervalDays($interval_days);
+      $habit->countHabitLength($habit->getId());
       return $app['twig']->render('coach/new_habit/5finished_habit.html.twig', array('habit' => $habit));
     });
 
