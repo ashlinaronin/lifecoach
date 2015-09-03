@@ -56,7 +56,19 @@
         $project = Project::find($id);
 
         return $app['twig']->render('coach/active_project/3reorder_steps.html.twig', array(
-            'project' => $project
+            'project' => $project,
+            'steps' => $project->getSteps()
+        ));
+    });
+
+    $coach_active_project->post('/{id}/reorder_steps', function($id) use ($app) {
+        $project = Project::find($id);
+
+        // process the updating here for updating steps
+
+        return $app['twig']->render('coach/active_project/3reorder_steps.html.twig', array(
+            'project' => $project,
+            'steps' => $project->getSteps()
         ));
     });
 
