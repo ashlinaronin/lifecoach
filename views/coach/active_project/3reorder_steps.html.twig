@@ -17,7 +17,7 @@
             <!-- List with handle -->
             {# populate list with steps from current project #}
                 {% if steps is not empty %}
-                    <div id="listWithHandle" class="list-group">
+                    <div id="step_list" class="list-group">
                         {% for step in steps %}
                             <div class="list-group-item" data-id="{{ step.getId }}">
                                 <span class="drag-handle">&#9776;</span>
@@ -37,12 +37,10 @@
         <script>
             var update_link = document.getElementById('update_link');
 
-            // List with handle
-            var sort = Sortable.create(listWithHandle, {
-                handle: '.drag-handle',
+            // Create steps list
+            var sort = Sortable.create(step_list, {
                 animation: 150,
-                dataIdAttr: 'data-id',
-                group: "localStorage-example"
+                dataIdAttr: 'data-id'
             });
 
             // Define step ids using Twig so we can update them
@@ -60,8 +58,9 @@
             update_link.onclick = function()
             {
                 var get_url = "/coach/active_project/{{ project.getId }}/reorder_steps?";
-
                 var new_positions = sort.toArray();
+
+                // Pass new step positions in URL in format step_id=new_postition
                 for (i = 0; i < step_ids.length; i++)
                 {
                     get_url += new_positions[i] += "=" + (i+1) + "&";
@@ -69,8 +68,6 @@
 
                 window.location.href = get_url;
             }
-
-
 
         </script>
         </div>
