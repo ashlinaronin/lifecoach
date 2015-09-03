@@ -91,6 +91,12 @@
             $step->updateComplete(0);
         }
 
+
+        // If finishing this step completes the project, then update complete in project
+        // and re-direct on twig page to project complete page.
+        //if length of project get incomplete steps = 0 then update complete true
+
+
         return $app['twig']->render('coach/active_project/5complete.html.twig', array(
             'project' => $project,
             'step' => $step

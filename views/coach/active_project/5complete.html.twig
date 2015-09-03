@@ -1,6 +1,10 @@
 <html>
     <head>
         <title>{{ project.getName }}: {{ step.getDescription }}</title>
+        {# re-direct to project complete page if completing this last step finished the project #}
+        {% if project.getComplete == true %}
+        
+        {% endif %}
     </head>
     <body>
         <h1>Great. Glad you feel confident you can complete {{ step.getDescription }}.</h1>
