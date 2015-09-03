@@ -1,5 +1,7 @@
 <html>
     <head>
+        <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+
         <title>{{ project.getName }}</title>
     </head>
     <body>
@@ -8,6 +10,7 @@
         <p><strong>{{ project.getMotivation }}</strong></p>
 
         <p>You're doing great so far. x steps of x are complete.</p>
+        {% include 'coach/partials/project_progress_bar.html.twig' %}
 
         {# we should format the date nicer than this... twig has some options #}
         <p>Your project is due on {{ project.getDueDate }}</p>

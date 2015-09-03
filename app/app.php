@@ -13,7 +13,7 @@
 
     $app['debug'] = true;
 
-    $server = 'mysql:host=localhost;dbname=lifecoach';
+    $server = 'mysql:host=localhost:3306;dbname=lifecoach';
     $username = 'root';
     $password = 'root';
     $DB = new PDO($server, $username, $password);

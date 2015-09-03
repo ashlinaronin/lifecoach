@@ -57,8 +57,11 @@
     $coach_active_project->get('/{id}/complete', function($id) use ($app) {
         $project = Project::find($id);
 
+
+        // get next step should work here
         return $app['twig']->render('coach/active_project/5complete.html.twig', array(
-            'project' => $project
+            'project' => $project,
+            'step' => $project->getNextStep()
         ));
     });
 
@@ -67,17 +70,23 @@
     $coach_active_project->post('/{id}/complete', function($id) use ($app) {
         $project = Project::find($id);
 
+        // should we do this way thru hidden form or thru $project->getNextStep() again?
+        $step = Step::find($_POST['step_id']);
+
+        if ($_POST['completed'] == 'true') {
+            $step->updateCompleted(true);
+        }
+
         return $app['twig']->render('coach/active_project/5complete.html.twig', array(
-            'project' => $project
+            'project' => $project,
+            'step' => $step
         ));
     });
 
 
     /* 6. Enough for today. More positive reinforcement, progress bar.
-    ** Redirect to dashboard.
-    **
-    */
-    $coach_active_project->post('/{id}/enough', function($id) use ($app) {
+    ** Redirect to dashboard. */
+    $coach_active_project->get('/{id}/enough', function($id) use ($app) {
         $project = Project::find($id);
 
         return $app['twig']->render('coach/active_project/6enough.html.twig', array(
