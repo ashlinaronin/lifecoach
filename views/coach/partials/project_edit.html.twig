@@ -1,4 +1,6 @@
+<div class = "row row-centered" id = "mainRow">
 
+  <div class = "col-xl-8 col-lg-8 col-md-11 col-sm-12 col-sm-offset-1 col-centered mainBody">
       <h3>Project: {{ project.getName }}</h3>
       {% if project.getMotivation != null %}
           <p><strong>Project Motivation:</strong> {{ project.getMotivation }}</p>
@@ -18,3 +20,5 @@
       {% else %}
           No steps yet.
       {% endif %}
+  </div>
+</div>

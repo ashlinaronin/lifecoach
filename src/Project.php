@@ -142,8 +142,9 @@
 
         function getSteps ()
         {
+            // Order by position for updating functionality elsewhere
             $steps_query = $GLOBALS['DB']->query(
-                "SELECT * FROM steps WHERE project_id = {$this->getId()};"
+                "SELECT * FROM steps WHERE project_id = {$this->getId()} ORDER BY position;"
             );
 
             $matching_steps = array();

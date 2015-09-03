@@ -15,7 +15,7 @@
     ** of an in-progress habit which have already been defined. */
 
 
-    $coach_new_habit->get('/name', function() use ($app) {
+    $coach_new_habit->get('/new_habit_name', function() use ($app) {
       return $app['twig']->render('coach/new_habit/1new_habit_name.html.twig');
     });
 
@@ -73,12 +73,13 @@
       $habit = Habit::find($id);
       $interval_days = $_POST['intervaldays'];
       $habit->updateIntervalDays($interval_days);
+      $habit->countHabitLength($habit->getId());
       return $app['twig']->render('coach/new_habit/5finished_habit.html.twig', array('habit' => $habit));
     });
 
 
 
-    
+
 
     // Place all urls in this file at /coach/new_project/*
     $app->mount('/coach/new_habit', $coach_new_habit);

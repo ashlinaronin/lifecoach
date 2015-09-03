@@ -15,7 +15,7 @@
 
     $app['debug'] = true;
 
-    $server = 'mysql:host=localhost;dbname=lifecoach';
+    $server = 'mysql:host=localhost:3306;dbname=lifecoach';
     $username = 'root';
     $password = 'root';
     $DB = new PDO($server, $username, $password);
@@ -36,6 +36,9 @@
     $app->register(new Silex\Provider\TwigServiceProvider(), array(
         'twig.path' => __DIR__.'/../views'
     ));
+
+    // Set timezone for date formatting
+    $app['twig']->getExtension('core')->setTimezone('America/Los_Angeles');
 
 
     //Home page
@@ -65,6 +68,7 @@
     require_once __DIR__."/../routes/coach_new_project.php";
     require_once __DIR__."/../routes/coach_active_project.php";
     require_once __DIR__."/../routes/coach_new_habit.php";
+    require_once __DIR__."/../routes/coach_active_habit.php"; 
     require_once __DIR__."/../routes/habit.php";
     require_once __DIR__."/../routes/journal.php";
     require_once __DIR__."/../routes/project.php";

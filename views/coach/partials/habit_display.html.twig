@@ -1,8 +1,6 @@
-<div>
-    <p><strong>Habit Name:</strong> {{ habit.getName }}</p>
-    {% if habit.getMotivation != null %}
-        <p><strong>Project Motivation:</strong> {{ habit.getMotivation }}</p>
-    {% endif %}
 
-
-</div>
+      <h3>Habit: {{ habit.getName }}</h3>
+      {% if habit.getMotivation != null %}
+      <p><strong>Habit Motivation:</strong> {{ habit.getMotivation }}</p>
+      <p><strong>Days to Complete:</strong> {{ habit.getIntervalDays }}</p>
+      {% endif %}

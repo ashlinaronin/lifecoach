@@ -5,7 +5,7 @@
 * @backupStaticAttributes disabled
 */
   require_once "src/Journal.php";
-  $server = 'mysql:host=localhost;dbname=lifecoach_test';
+  $server = 'mysql:host=localhost:3306;dbname=lifecoach_test';
   $username = 'root';
   $password = 'root';
   $DB = new PDO($server, $username, $password);
@@ -46,7 +46,7 @@
             $content = "Today I walked the dog.";
             $date  = date("Y-m-d");
 
-            var_dump($date);
+            
 
             $test_journal = new Journal($content, $date);
             $result = $test_journal->getDate();
@@ -109,7 +109,7 @@
 
             $result = Journal::getAll();
 
-            var_dump($result);
+
 
 
             $this->assertEquals([$test_journal, $test_journal2], $result);
