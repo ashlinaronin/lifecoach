@@ -314,6 +314,35 @@
 
         }
 
+        // function test_getNextStep()
+        // {
+        //     //Arrange
+        //     $name = "Learn French";
+        //     $motivation = "To travel";
+        //     $due_date = "2015-10-10";
+        //     $priority = 1;
+        //     $test_project = new Project($name,$motivation,$due_date,$priority);
+        //     $test_project->save();
+
+        //     $description = "Buy a beret";
+        //     $project_id = $test_project->getId();
+        //     $position = 1;
+        //     $test_step = new Step($description, $project_id, $position);
+        //     $test_step->save();
+        //     $test_step->updateComplete(1);
+
+        //     $description2 = "Eat French bread";
+        //     $position2 = 2;
+        //     $test_step2 = new Step($description2, $project_id, $position2);
+        //     $test_step2->save();
+
+        //     //Act
+        //     $result = Project::getAll(); 
+
+        //     //Assert
+        //     $this->assertEquals($test_step2,$result[0]->getNextStep());
+
+        // }
 
 
 

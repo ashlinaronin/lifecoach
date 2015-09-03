@@ -129,7 +129,6 @@
         }
 
 
-
         // Methods involving other tables ===================================
 
 
@@ -148,11 +147,25 @@
                 $project_id = $step['project_id'];
                 $position = $step['position'];
                 $id = $step['id'];
+                $complete = $step['complete'];
                 $new_step = new Step($description,$project_id,$position,$id);
                 array_push($matching_steps, $new_step);
             }
             return $matching_steps;
         }
+
+
+        function getNextStep()
+        {
+            $step = $GLOBALS['DB']->exec(
+                "SELECT id,description,project_id,min(position),complete FROM 
+                    projects JOIN steps ON (projects.id = steps.project_id
+                                            AND steps.complete = 0);");
+            $next_step = new Step($step['description'],$step['project_id'],$step['position'],$step['id'],$step['complete']);
+
+            return $next_step; 
+        }
+
 
         function deleteStep ($step_to_delete)
         {
