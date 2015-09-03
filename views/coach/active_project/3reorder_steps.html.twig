@@ -22,7 +22,7 @@
                         {% for step in steps %}
                             <div class="list-group-item" data-id="{{ step.getPosition }}">
                                 <span class="drag-handle">&#9776;</span>
-                              {{ step.getDescription }}
+                              {{ step.getPosition }}. {{ step.getDescription }}
                             </div>
                         {% endfor %}
                     </div>
