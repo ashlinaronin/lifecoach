@@ -9,13 +9,14 @@
 		private $id;
 		private $complete;
 
+
 		function __construct($description, $project_id, $position, $id=null, $complete=0)
 		{
 			$this->description = $description;
 			$this->project_id  = (int)$project_id;
 			$this->position    = (int)$position;
 			$this->id          = (int)$id;
-			$this->complete    = (int)$complete; 
+			$this->complete    = (int)$complete;
 		}
 
 
@@ -54,13 +55,14 @@
 
 		function setComplete($new_complete_boolean)
 		{
-			$this->complete = $new_complete_boolean; 
+			$this->complete = $new_complete_boolean;
 		}
 
 		function getComplete()
 		{
-			return $this->complete; 
+			return $this->complete;
 		}
+
 
 		function getId()
 		{
