@@ -1,6 +1,17 @@
 <?php
     $coach_active_project = $app['controllers_factory'];
 
+
+    /* If user somehow accidentally went to the url /coach/active_project/
+    ** without a project id, just show the current projects page. */
+    $coach_active_project->get('/', function() use ($app) {
+        return $app['twig']->render('project/current_projects.html.twig', array(
+            'projects' => Project::getAll()
+        ));
+    });
+
+
+
     /* 1. First page in active project coach flow.
     ** Display progress & positive reinforcement. */
     $coach_active_project->get('/{id}', function($id) use ($app) {
@@ -17,7 +28,8 @@
         $project = Project::find($id);
 
         return $app['twig']->render('coach/active_project/2next_step.html.twig', array(
-            'project' => $project
+            'project' => $project,
+            'next_step' => $project->getNextStep()
         ));
     });
 
@@ -70,11 +82,13 @@
     $coach_active_project->post('/{id}/complete', function($id) use ($app) {
         $project = Project::find($id);
 
-        // should we do this way thru hidden form or thru $project->getNextStep() again?
+        // Pass step id to here through hidden form input
         $step = Step::find($_POST['step_id']);
 
-        if ($_POST['completed'] == 'true') {
-            $step->updateCompleted(true);
+        if (!empty($_POST['complete']) && $_POST['complete'] == 'true') {
+            $step->updateComplete(1);
+        } else {
+            $step->updateComplete(0);
         }
 
         return $app['twig']->render('coach/active_project/5complete.html.twig', array(
@@ -83,16 +97,27 @@
         ));
     });
 
+    /* 6. Project complete. Great job! Balloons, fiesta, music...
+    ** Go back to dashboard. */
+    $coach_active_project->get('/{id}/project_complete', function($id) use ($app) {
+        return $app['twig']->render('coach/active_project/6project_complete.html.twig', array(
+            'project' => $project
+        ));
+    });
 
-    /* 6. Enough for today. More positive reinforcement, progress bar.
+
+
+    /* 7. Enough for today. More positive reinforcement, progress bar.
     ** Redirect to dashboard. */
     $coach_active_project->get('/{id}/enough', function($id) use ($app) {
         $project = Project::find($id);
 
-        return $app['twig']->render('coach/active_project/6enough.html.twig', array(
+        return $app['twig']->render('coach/active_project/7enough.html.twig', array(
             'project' => $project
         ));
     });
+
+
 
 
 

@@ -9,7 +9,10 @@
         <p>Let me remind you of your motivation for this project:</p>
         <p><strong>{{ project.getMotivation }}</strong></p>
 
-        <p>You're doing great so far. x steps of x are complete.</p>
+        <p>You're doing great so far.
+            {# uncomment this when rick finishes project.getIncompleteSteps #}
+            {# {{ project.getSteps|length - project.getIncompleteSteps|length }}  #}
+        x    steps of {{ project.getSteps|length }} steps are complete.</p>
         {% include 'coach/partials/project_progress_bar.html.twig' %}
 
         {# we should format the date nicer than this... twig has some options #}
