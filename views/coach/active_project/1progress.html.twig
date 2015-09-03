@@ -1,10 +1,21 @@
-<html>
-    <head>
-        <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+<!-- Header twig template -->
 
-        <title>{{ project.getName }}</title>
-    </head>
+{% set vars = {
+  'page_title': '{project.getName}',
+  'css_url': '/css/new_project.css'
+}
+
+%}
+
+{% include 'partials/header.html.twig' with vars %}
+
+
     <body>
+
+        <!-- Nabar twig template -->
+
+        {% set active_page = '/coach/current_projects' %}
+        {% include 'partials/nav.html' %}
         <h1>Hi! I'm glad you have time to work on something.</h1>
         <p>Let me remind you of your motivation for this project:</p>
         <p><strong>{{ project.getMotivation }}</strong></p>
@@ -13,7 +24,7 @@
 
         <p>{{ project.getSteps|length - project.getIncompleteSteps|length }}
             steps of {{ project.getSteps|length }} steps are complete.</p>
-            
+
         {% include 'coach/partials/project_progress_bar.html.twig' %}
 
         {# we should format the date nicer than this... twig has some options #}
