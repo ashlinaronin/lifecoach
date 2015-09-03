@@ -13,7 +13,7 @@
 
     $app['debug'] = true;
 
-    $server = 'mysql:host=localhost;dbname=lifecoach';
+    $server = 'mysql:host=localhost:3306;dbname=lifecoach';
     $username = 'root';
     $password = 'root';
     $DB = new PDO($server, $username, $password);
@@ -34,6 +34,9 @@
     $app->register(new Silex\Provider\TwigServiceProvider(), array(
         'twig.path' => __DIR__.'/../views'
     ));
+
+    // Set timezone for date formatting
+    $app['twig']->getExtension('core')->setTimezone('America/Los_Angeles');
 
 
     //Home page

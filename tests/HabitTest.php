@@ -4,6 +4,8 @@
 * @backupStaticAttributes disabled
 */
     require_once "src/Habit.php";
+
+
     // require_once "src/DailyCompleted.php";
     $server = 'mysql:host=localhost;dbname=lifecoach_test';
     $username = 'root';
