@@ -14,15 +14,34 @@
         {% set active_page = '/journal/new_journal_entry' %}
         {% include 'partials/nav.html' %}
 
-        <h1>{{ date }}</h1>
+        <div class = "container" id = "mainContainer">
+
+          <div class = "row row-centered" id = "mainRow">
+
+              <div class = "col-xl-8 col-lg-8 col-md-11 col-sm-12 col-sm-offset-1 col-centered mainBody">
 
 
-        <form action='/journal/save_journal_entry' method='post'>
-              <label for = 'entry'>Today's entry</label>
-              <input id = 'entry' name='entry' type='text'>
+                  <h1>{{ date }}</h1>
 
-              <button type='submit'>Submit</button>
-          </form>
+
+                  <label for = 'entry'>Today's entry</label>
+                  <form action='/journal/save_journal_entry' method='post'>
+
+                    <div class = 'form-group'>
+
+                      <textarea class = 'form-control' rows = '5' id = 'journal_entry'></textarea>
+                        <br>
+                        <button type='submit' class = 'btn btn-primary'>Submit</button>
+
+                    </div>
+
+                  </form>
+
+              </div>
+
+          </div>
+
+        </div>
 
     </body>
 </html>
