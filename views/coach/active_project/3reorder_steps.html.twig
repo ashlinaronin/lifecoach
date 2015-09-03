@@ -1,38 +1,52 @@
 <html>
     <head>
         <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-
-        <title>{{ project.getName }}: Re-order steps</title>
+        <link href="/css/navbar.css" rel="stylesheet">
+        <link href="/css/main.css" rel="stylesheet">
+        <link href="/css/new_project.css" rel="stylesheet">
         <script src="http://rubaxa.github.io/Sortable/Sortable.js"></script>
-
+        <title>{{ project.getName }}: Re-order steps</title>
     </head>
     <body>
-        <div class="container">
-            <p>
-                Perhaps the order of the steps is stopping you from making progress.
-            </p>
 
-            <p>Try re-ordering them and see if it looks any better.</p>
+        {% set active_page = '/coach/active_project' %}
+        {% include 'partials/nav.html' %}
 
-            <!-- List with handle -->
-            {# populate list with steps from current project #}
-                {% if steps is not empty %}
-                    <div id="step_list" class="list-group">
-                        {% for step in steps %}
-                            <div class="list-group-item" data-id="{{ step.getId }}">
-                                <span class="drag-handle">&#9776;</span>
-                              {{ loop.index }}. {{ step.getDescription }}
+        <div class = "container" id = "mainContainer">
+            <div class = "row row-centered" id = "mainRow">
+
+                <div class = "col-xl-8 col-lg-8 col-md-11 col-sm-12 col-sm-offset-1 col-centered mainBody" id="habits">
+
+                    <h1>Re-order steps</h1>
+                    <p>
+                        Perhaps the order of the steps is stopping you from making progress.
+                    </p>
+
+                    <p>Try re-ordering them and see if it looks any better.</p>
+
+                    <!-- List with handle -->
+                    {# populate list with steps from current project #}
+                        {% if steps is not empty %}
+                            <div id="step_list" class="list-group">
+                                {% for step in steps %}
+                                    <div class="list-group-item" data-id="{{ step.getId }}">
+                                        <span class="drag-handle">&#9776;</span>
+                                      {{ loop.index }}. {{ step.getDescription }}
+                                    </div>
+                                {% endfor %}
                             </div>
-                        {% endfor %}
-                    </div>
-                {% else %}
-                    <span>No steps whadda hell??</span>
-                {% endif %}
-            {# end populate list #}
+                        {% else %}
+                            <span>No steps whadda hell??</span>
+                        {% endif %}
+                    {# end populate list #}
 
-          <p><a id="update_link" href="#">Update</a></p>
-          <p><a href="/coach/active_project/{{ project.getId }}/next_step">Looks good, I'm ready to move on.</a></p>
-          <p><a href="/coach/active_project/{{ project.getId }}/add_step">I'm not quite comfortable yet. Think I might need to add more steps.</a></p>
+                    <p><a id="update_link" href="#">Update</a></p>
+                    <p><a href="/coach/active_project/{{ project.getId }}/next_step">Looks good, I'm ready to move on.</a></p>
+                    <p><a href="/coach/active_project/{{ project.getId }}/add_step">I'm not quite comfortable yet. Think I might need to add more steps.</a></p>
+
+                </div>
+            </div>
+        </div>
 
         <script>
             var update_link = document.getElementById('update_link');
@@ -70,6 +84,5 @@
             }
 
         </script>
-        </div>
     </body>
 </html>

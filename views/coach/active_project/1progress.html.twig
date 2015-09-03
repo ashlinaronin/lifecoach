@@ -1,7 +1,7 @@
 <!-- Header twig template -->
 
 {% set vars = {
-  'page_title': '#{project.getName}',
+  'page_title': "MindSet :: #{project.getName}",
   'css_url': '/css/new_project.css'
 }
 
@@ -38,7 +38,7 @@
 
                     <p>Your project is due on {{ project.getDueDate|date("l, F dS, Y") }}.</p>
 
-                    <a href='/coach/active_project/{{ project.getId }}/next_step'>
+                    <a href='/coach/active_project/{{ project.getId }}/next_step' role="button" class="btn btn-default">
                         I'm ready to get started!
                     </a>
 
