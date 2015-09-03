@@ -1,7 +1,7 @@
 <!-- Header twig template -->
 
 {% set vars = {
-  'page_title': '{project.getName}',
+  'page_title': '#{project.getName}',
   'css_url': '/css/new_project.css'
 }
 
@@ -14,26 +14,43 @@
 
         <!-- Nabar twig template -->
 
-        {% set active_page = '/coach/current_projects' %}
+        {% set active_page = '/coach/active_project' %}
         {% include 'partials/nav.html' %}
-        <h1>Hi! I'm glad you have time to work on something.</h1>
-        <p>Let me remind you of your motivation for this project:</p>
-        <p><strong>{{ project.getMotivation }}</strong></p>
 
-        <p>You're doing great so far.</p>
+        <div class = "container" id = "mainContainer">
 
-        <p>{{ project.getSteps|length - project.getIncompleteSteps|length }}
-            steps of {{ project.getSteps|length }} steps are complete.</p>
+            <div class = "row row-centered" id = "mainRow">
 
-        {% include 'coach/partials/project_progress_bar.html.twig' %}
+                <div class = "col-xl-8 col-lg-8 col-md-11 col-sm-12 col-sm-offset-1 col-centered mainBody">
 
-        {# we should format the date nicer than this... twig has some options #}
-        <p>Your project is due on {{ project.getDueDate }}</p>
+                    <h1>Hi! I'm glad you have time to work on something.</h1>
 
-        <a href='/coach/active_project/{{ project.getId }}/next_step'>
-            I'm ready to get started!
-        </a>
+                    <p>Your motivation for this project is
+                        <strong>{{ project.getMotivation }}</strong>.
+                    </p>
+
+                    <p>You're doing great so far.
+                        {{ project.getSteps|length - project.getIncompleteSteps|length }}
+                        of {{ project.getSteps|length }} steps are complete!
+                    </p>
+
+                    {% include 'coach/partials/project_progress_bar.html.twig' %}
+
+                    <p>Your project is due on {{ project.getDueDate|date("l, F dS, Y") }}.</p>
+
+                    <a href='/coach/active_project/{{ project.getId }}/next_step'>
+                        I'm ready to get started!
+                    </a>
+
+                </div>
+
+            </div>
+
+            <!-- <div class = "col-xl-5 col-lg-5 col-md-5 col-sm-5 col-sm-offset-1 col-centered mainBody"> -->
 
 
+            <!-- </div> -->
+
+        </div>
     </body>
 </html>

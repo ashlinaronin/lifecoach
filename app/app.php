@@ -35,6 +35,9 @@
         'twig.path' => __DIR__.'/../views'
     ));
 
+    // Set timezone for date formatting
+    $app['twig']->getExtension('core')->setTimezone('America/Los_Angeles');
+
 
     //Home page
     $app->get('/', function() use ($app){

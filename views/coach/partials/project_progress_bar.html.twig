@@ -1,10 +1,5 @@
-<!-- start project progress bar -->
-<div class="container">
-    <h2>Progress on {{ project.getName }} so far:</h2>
-        <div class="progress">
-            <div class="progress-bar" role="progressbar" aria-valuenow="{{ progress_percent }}" aria-valuemin="0" aria-valuemax="100" style="width:{{progress_percent}}%">
-                {{ progress_percent }}%
-            </div>
-        </div>
+<div class="progress">
+    <div class="progress-bar" role="progressbar" aria-valuenow="{{ progress_percent }}" aria-valuemin="0" aria-valuemax="100" style="width:{{progress_percent}}%">
+        {{ progress_percent }}%
+    </div>
 </div>
-<!-- end project progress bar-->
