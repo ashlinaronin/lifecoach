@@ -66,9 +66,9 @@
             return $this->priority;
         }
 
-        function setComplete ($new_boolean)
+        function setComplete ($new_complete)
         {
-            $this->complete = (int)$new_boolean;
+            $this->complete = $new_complete;
         }
 
         function getComplete ()
@@ -129,6 +129,13 @@
         }
 
 
+        function updateComplete($new_complete)
+        {
+            $GLOBALS['DB']->exec("UPDATE projects SET complete = {$new_complete} WHERE id = {$this->getId()};");
+            $this->setComplete($new_complete);
+        }
+
+
         // Methods involving other tables ===================================
 
 
@@ -136,9 +143,7 @@
         function getSteps ()
         {
             $steps_query = $GLOBALS['DB']->query(
-                "SELECT steps.* FROM
-                    projects JOIN steps ON (projects.id = steps.project_id)
-                 WHERE projects.id = {$this->getId()} ORDER BY priority;"
+                "SELECT * FROM steps WHERE project_id = {$this->getId()};"
             );
 
             $matching_steps = array();
@@ -148,7 +153,7 @@
                 $position = $step['position'];
                 $id = $step['id'];
                 $complete = $step['complete'];
-                $new_step = new Step($description,$project_id,$position,$id);
+                $new_step = new Step($description,$project_id,$position,$id,$complete);
                 array_push($matching_steps, $new_step);
             }
             return $matching_steps;
@@ -157,12 +162,14 @@
 
         function getNextStep()
         {
-            $step = $GLOBALS['DB']->exec(
-                "SELECT id,description,project_id,min(position),complete FROM 
-                    projects JOIN steps ON (projects.id = steps.project_id
-                                            AND steps.complete = 0);");
-            $next_step = new Step($step['description'],$step['project_id'],$step['position'],$step['id'],$step['complete']);
-
+            // Returns one row with the lowest priority value for matching project_id rows with complete values of 0
+            $step_query = $GLOBALS['DB']->query(
+                "SELECT id,description,project_id,complete,min(position) as position FROM steps WHERE complete = 0 AND project_id = {$this->getId()};");
+            
+            foreach($step_query as $step) {
+            
+                $next_step = new Step($step['description'],$step['project_id'],$step['position'],$step['id'],$step['complete']);
+            }
             return $next_step; 
         }
 

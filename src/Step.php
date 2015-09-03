@@ -15,7 +15,7 @@
 			$this->project_id  = (int)$project_id;
 			$this->position    = (int)$position;
 			$this->id          = (int)$id;
-			$this->complete    = (int)$complete;
+			$this->complete    = (int)$complete; 
 		}
 
 
@@ -74,10 +74,11 @@
 
 		function save()
 		{
-			$GLOBALS['DB']->exec("INSERT INTO steps (description,project_id,position) VALUES (
+			$GLOBALS['DB']->exec("INSERT INTO steps (description,project_id,position,complete) VALUES (
 				'{$this->getDescription()}',
 				 {$this->getProjectId()},
-				 {$this->getPosition()}
+				 {$this->getPosition()},
+				 {$this->getComplete()}
 			);");
 			$this->id = $GLOBALS['DB']->lastInsertId();
 		}
