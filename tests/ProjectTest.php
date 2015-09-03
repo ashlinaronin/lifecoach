@@ -20,7 +20,7 @@
 
         protected function tearDown()
         {
-            //Project::deleteAll();
+            Project::deleteAll();
             Step::deleteAll();
         }
 

@@ -143,12 +143,7 @@
         function getSteps ()
         {
             $steps_query = $GLOBALS['DB']->query(
-                "SELECT * FROM steps WHERE project_id = {$this->getId()}"
-
-
-                //"SELECT steps.* FROM
-                //    projects JOIN steps ON (projects.id = steps.project_id)
-                // WHERE projects.id = {$this->getId()} ORDER BY priority;"
+                "SELECT * FROM steps WHERE project_id = {$this->getId()};"
             );
 
             $matching_steps = array();
