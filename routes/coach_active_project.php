@@ -16,8 +16,21 @@
     ** Display progress & positive reinforcement. */
     $coach_active_project->get('/{id}', function($id) use ($app) {
         $project = Project::find($id);
+
+        $all_steps_count = sizeof($project->getSteps());
+
+        if ($all_steps_count != 0) {
+            $incomplete_steps_count = sizeof($project->getIncompleteSteps());
+            $complete_steps_count = $all_steps_count - $incomplete_steps_count;
+            $progress_percent = (int) (($complete_steps_count / $all_steps_count) * 100);
+        } else {
+            // If there are no steps, then progress percent is definitely 0.
+            $progress_percent = 0;
+        }
+
         return $app['twig']->render('coach/active_project/1progress.html.twig', array(
-            'project' => $project
+            'project' => $project,
+            'progress_percent' => $progress_percent
         ));
     });
 
@@ -91,14 +104,24 @@
             $step->updateComplete(0);
         }
 
+        // get percent complete on this project
+        $all_steps_count = sizeof($project->getSteps());
+        $incomplete_steps_count = sizeof($project->getIncompleteSteps());
+        $complete_steps_count = $all_steps_count - $incomplete_steps_count;
+        $progress_percent = (int) (($complete_steps_count / $all_steps_count) * 100);
+
 
         // If finishing this step completes the project, then update complete in project
         // and re-direct on twig page to project complete page.
         //if length of project get incomplete steps = 0 then update complete true
+        if ($incomplete_steps_count == 0) {
+            $project->updateComplete(1);
+        }
 
 
         return $app['twig']->render('coach/active_project/5complete.html.twig', array(
             'project' => $project,
+            'progress_percent' => $progress_percent,
             'step' => $step
         ));
     });

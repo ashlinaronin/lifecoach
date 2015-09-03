@@ -3,10 +3,13 @@
         <title>{{ project.getName }}: {{ step.getDescription }}</title>
         {# re-direct to project complete page if completing this last step finished the project #}
         {% if project.getComplete == true %}
-        
+            {# put meta http equiv redirect here #}
         {% endif %}
     </head>
     <body>
+        {# only display this stuff if the project is not yet complete #}
+
+
         <h1>Great. Glad you feel confident you can complete {{ step.getDescription }}.</h1>
         <p>Let me know when you've finished it.</p>
 
@@ -25,5 +28,6 @@
         {% endif %}
 
         <p><a href="/coach/active_project/{{ project.getId }}/enough">That's enough for right now.</a></p>
+
     </body>
 </html>
