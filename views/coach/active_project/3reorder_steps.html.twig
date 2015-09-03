@@ -9,20 +9,19 @@
     <body>
         <div class="container">
             <p>
-                You should prolly try reordering the steps cuz it was too daunting.
+                Perhaps the order of the steps is stopping you from making progress.
             </p>
 
-
-
+            <p>Try re-ordering them and see if it looks any better.</p>
 
             <!-- List with handle -->
             {# populate list with steps from current project #}
                 {% if steps is not empty %}
                     <div id="listWithHandle" class="list-group">
                         {% for step in steps %}
-                            <div class="list-group-item" data-id="{{ step.getPosition }}">
+                            <div class="list-group-item" data-id="{{ step.getId }}">
                                 <span class="drag-handle">&#9776;</span>
-                              {{ step.getPosition }}. {{ step.getDescription }}
+                              {{ loop.index }}. {{ step.getDescription }}
                             </div>
                         {% endfor %}
                     </div>
@@ -31,73 +30,49 @@
                 {% endif %}
             {# end populate list #}
 
-
-
-
-
-
-
-
-          <!-- form to send updated step order info-->
-          <!-- <form action="/coach/active_project/{{ project.getId }}/reorder_steps" method="post">
-
-          </form> -->
-          <!-- end form to send updated step order info-->
-
-          <span id="printSpan">stuff here</span>
+          <p><a id="update_link" href="#">Update</a></p>
+          <p><a href="/coach/active_project/{{ project.getId }}/next_step">Looks good, I'm ready to move on.</a></p>
+          <p><a href="/coach/active_project/{{ project.getId }}/add_step">I'm not quite comfortable yet. Think I might need to add more steps.</a></p>
 
         <script>
-            var printSpan = document.getElementById('printSpan');
-            var list_order = new Array();
-            var new_orders = new Array();
+            var update_link = document.getElementById('update_link');
 
             // List with handle
             var sort = Sortable.create(listWithHandle, {
                 handle: '.drag-handle',
                 animation: 150,
                 dataIdAttr: 'data-id',
-                group: "localStorage-example",
-                store: {
-                    /**
-                     * Get the order of elements. Called once during initialization.
-                     * @param   {Sortable}  sortable
-                     * @returns {Array}
-                     */
-                    get: function (sortable) {
-                        var order = localStorage.getItem(sortable.options.group);
-                        return order ? order.split('|') : [];
-                    },
-
-                    /**
-                     * Save the order of elements. Called onEnd (when the item is dropped).
-                     * @param {Sortable}  sortable
-                     */
-                    set: function (sortable) {
-                        var order = sortable.toArray();
-                        localStorage.setItem(sortable.options.group, order.join('|'));
-                    }
-                }
+                group: "localStorage-example"
             });
 
-            // Here we need to send post data to PHP from javascript with the new order of list
-            list_order = sort.toArray();
-            for (index = 0; index < list_order.length; index++) {
+            // Define step ids using Twig so we can update them
+            var step_ids = [
+                {% for step in steps %}
+                    {{ step.getId }}
 
-                // need to add to http post request here one items new place
-                // then send http request out of for loop
-                // also need to make sure its updating
-                // and need a button to submit new order
-                // new_orders[index] = list_order[index];
+                    {# only add a comma to steps b4 last one #}
+                    {% if loop.index != steps|length %}
+                        ,
+                    {% endif %}
+                {% endfor %}
+            ];
+
+            update_link.onclick = function()
+            {
+                var get_url = "/coach/active_project/{{ project.getId }}/reorder_steps?";
+
+                var new_positions = sort.toArray();
+                for (i = 0; i < step_ids.length; i++)
+                {
+                    get_url += new_positions[i] += "=" + (i+1) + "&";
+                }
+
+                window.location.href = get_url;
             }
-            printSpan.innerHTML = new_orders;
 
 
-            // printSpan.innerHTML = sort.toArray();
 
         </script>
-
-            ((re order steps form))
-
         </div>
     </body>
 </html>

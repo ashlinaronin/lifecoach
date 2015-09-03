@@ -55,16 +55,14 @@
     $coach_active_project->get('/{id}/reorder_steps', function($id) use ($app) {
         $project = Project::find($id);
 
-        return $app['twig']->render('coach/active_project/3reorder_steps.html.twig', array(
-            'project' => $project,
-            'steps' => $project->getSteps()
-        ));
-    });
+        foreach($_GET as $step_id => $new_position) {
+            // key should be step id
+            // value should be new position
 
-    $coach_active_project->post('/{id}/reorder_steps', function($id) use ($app) {
-        $project = Project::find($id);
 
-        // process the updating here for updating steps
+            $step = Step::find($step_id);
+            $step->updatePosition($new_position);
+        }
 
         return $app['twig']->render('coach/active_project/3reorder_steps.html.twig', array(
             'project' => $project,
@@ -76,11 +74,43 @@
     /* 4. Give user option to add steps.
     ** "Does your project still seem daunting? Maybe you haven't broken
     ** it into small enough steps. Try adding another step or two." */
-    $coach_active_project->post('/{id}/add_step', function($id) use ($app) {
+    $coach_active_project->get('/{id}/add_step', function($id) use ($app) {
         $project = Project::find($id);
 
         return $app['twig']->render('coach/active_project/4add_step.html.twig', array(
-            'project' => $project
+            'project' => $project,
+            'steps' => $project->getSteps()
+        ));
+    });
+
+    $coach_active_project->post('/{id}/add_step', function($id) use ($app) {
+        $project = Project::find($id);
+        $steps = $project->getSteps();
+
+        // If we have a $_POST for the step description, add it now.
+        if (!empty($_POST['step_description'])) {
+
+            $step_position = 1;
+            if (sizeof($steps) == 0) {
+                // There are no steps yet. This step should be added at pos 1.
+                $step_position = 1;
+            } else {
+                // If we have 3 steps, should add new one at pos 4.
+                // Start counting steps from 1.
+                $step_position = sizeof($steps) + 1;
+            }
+
+            $new_step = new Step(
+                $_POST['step_description'],
+                $project->getId(),
+                $step_position
+            );
+            $new_step->save();
+        }
+
+        return $app['twig']->render('coach/active_project/4add_step.html.twig', array(
+            'project' => $project,
+            'steps' => $project->getSteps()
         ));
     });
 
