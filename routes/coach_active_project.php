@@ -141,8 +141,15 @@
     $coach_active_project->get('/{id}/enough', function($id) use ($app) {
         $project = Project::find($id);
 
+        // get percent complete on this project
+        $all_steps_count = sizeof($project->getSteps());
+        $incomplete_steps_count = sizeof($project->getIncompleteSteps());
+        $complete_steps_count = $all_steps_count - $incomplete_steps_count;
+        $progress_percent = (int) (($complete_steps_count / $all_steps_count) * 100);
+
         return $app['twig']->render('coach/active_project/7enough.html.twig', array(
-            'project' => $project
+            'project' => $project,
+            'progress_percent' => $progress_percent
         ));
     });
 

@@ -3,7 +3,7 @@
         <title>{{ project.getName }}: {{ step.getDescription }}</title>
         {# re-direct to project complete page if completing this last step finished the project #}
         {% if project.getComplete == true %}
-            {# put meta http equiv redirect here #}
+            <meta http-equiv="refresh" content="2;URL=/coach/active_project/project_complete">
         {% endif %}
     </head>
     <body>
