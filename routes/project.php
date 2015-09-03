@@ -37,11 +37,12 @@
         $new_project = new Project( $new_project_input['name'],
                                     $new_project_input['motivation'],
                                     $new_project_input['due_date'],
-                                    $new_project_input['position']
+                                    $new_project_input['priority']
                                   );
         $new_project->save();
+        $new_project_id = $new_project->getId();
         return $app['twig']->render('project/project.html.twig',
-            array('project' => $new_project, 'steps' => $new_project->getSteps()));
+            array('project' => Project::find($new_project_id), 'steps' => $new_project->getSteps()));
     });
 
 
@@ -102,7 +103,7 @@
     //
     // })
 
-    
+
 
 
 
