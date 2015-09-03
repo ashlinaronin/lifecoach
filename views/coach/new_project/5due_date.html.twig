@@ -16,18 +16,11 @@
 
         {% set active_page = '/coach/current_projects' %}
         {% include 'partials/nav.html' %}
-        When does this project need to be finished?
 
-        <form action="/coach/new_project/{{ project.getId }}/update" method="post">
-            <label for="due_date">Due Date</label>
 
-            <!-- I'm sure there is a nicer date picker than this turd -->
-            <input type="date" name="due_date">
-            <button type="submit">Submit</button>
-        </form>
+    <div class = "container" id = "mainContainer">
 
-        <div class = "container" id = "mainContainer">
-          <div class = "row row-centered" id = "mainRow">
+      <div class = "row row-centered" id = "mainRow">
 
             <div class = "col-xl-8 col-lg-8 col-md-11 col-sm-12 col-sm-offset-1 col-centered mainBody">
 
@@ -36,24 +29,31 @@
             </div>
             <div class = "col-xl-5 col-lg-5 col-md-5 col-sm-5 col-sm-offset-1 col-centered mainBody">
 
-            <div class="input-group input-append date" id="datePicker">
-              <form action='/coach/new_project/{{ project.getId }}/update' method='post'>
-                <div class="form-group">
-                    <input id = 'due_date' name='due_date' class ='form-control' type='date'>
-                    <span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
-                </div>
-            </div>
-                    <button class = "btn btn-primary" type='submit'>Next question</button>
+                  <form action='/coach/new_project/{{ project.getId }}/update' method='post'>
 
-                    <div class="input-group input-append date" id="datePicker">
-                        <input type="text" class="form-control" name="date" />
-                        <span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
-                    </div>
-              </form>
-            </div>
+                      <div class="form-group">
+
+                        <div class="input-group input-append date" id="datePicker">
+
+                          <input id = 'due_date' name='due_date' class ='form-control' type='date'>
+
+                          <span class="input-group-addon add-on">
+
+                            <span class="glyphicon glyphicon-calendar"></span>
+
+                          </span>
+
+                        </div>
+
+                      </div>
+                      <button class = "btn btn-primary" type='submit'>Next question</button>
+                  </form>
+
           </div>
-            {% include 'coach/partials/project_display.html.twig' %}
-        </div>
+
+      </div>
+        {% include 'coach/partials/project_display.html.twig' %}
+    </div>
 
     </body>
 </html>

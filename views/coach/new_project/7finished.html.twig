@@ -12,13 +12,42 @@
 
     <body>
 
-        <!-- Nabar twig template -->
+      <!-- Nabar twig template -->
 
-        {% set active_page = '/coach/current_projects' %}
-        {% include 'partials/nav.html' %}
-        Nice job!
+      {% set active_page = '/coach/current_projects' %}
+      {% include 'partials/nav.html' %}
 
-        Here's your project:
+      <div class = "container" id = "mainContainer">
+
+        <div class = "row row-centered" id = "mainRow">
+
+            <div class = "col-xl-8 col-lg-8 col-md-11 col-sm-12 col-sm-offset-1 col-centered mainBody">
+
+
+                  <h1>Nice job! Here's your project:</h1>
+
+            </div>
+
+        </div>
+
         {% include 'coach/partials/project_display.html.twig' %}
+        <div class = "col-xl-5 col-lg-5 col-md-5 col-sm-5 col-sm-offset-1 col-centered mainBody" id="habits">
+
+
+          <form action='/project/current_projects'>
+
+                <button class = "btn btn-primary" type='submit'>Project Home</button>
+
+          </form>
+
+          <form action='/dashboard'>
+
+                <button class = "btn btn-primary" type='submit'>Your Dashboard</button>
+
+          </form>
+
+        </div>
+
+      </div>
     </body>
 </html>
