@@ -132,18 +132,18 @@
 
       // edit for boolean
       // this is an attempt to count the number of habits that have not been completely completed
-      // static function getHabitCount()
-      // {
-      //   $returned_habits = $GLOBALS['DB']->query("SELECT * FROM habits WHERE completed = false;");
-      //
-      //   $count = 0;
-      //
-      //   foreach($returned_habits as $habit) {
-      //     $habit_count = $count++;
-      // }
-      // return $habit_count;
-      //
-      // }
+      static function getActiveHabitCount()
+      {
+        $returned_habits = $GLOBALS['DB']->query("SELECT * FROM habits WHERE completed = false;");
+
+        $count = 0;
+
+        foreach($returned_habits as $habit) {
+          $count++;
+      }
+      return $count;
+
+      }
 
       //find the habit from the habit_id
       //get the interval_days saved with that habit
@@ -164,13 +164,14 @@
         }
       }
 
-      //take a habit id and check the join table
-      //for the smallest day_id with false in the same row
-    function getNextDayId($habit_id)
+
+
+    //update the complete_today column
+    function completeOnDayId($habit_id)
     {
       $this_habit = Habit::find($habit_id);
 
-      $days = $GLOBALS['DB']->query("SELECT * FROM daily_completed WHERE complete_today = false, habit_id = {$habit_id};");
+      $days = $GLOBALS['DB']->query("SELECT day_id FROM daily_completed WHERE complete_today = false AND habit_id = {$habit_id};");
       $days_array = array();
       foreach ($days as $day) {
         array_push($days_array, $day['day_id']);
@@ -178,14 +179,26 @@
 
       $found_day_id = min($days_array);
 
-      return $found_day_id;
+      $GLOBALS['DB']->exec("UPDATE daily_completed SET complete_today = true WHERE day_id = {$found_day_id};");
     }
 
-    //update the complete_today column
-    function completeTodayOnDayId($day_id)
+    function getDaysCompleted($habit_id)
     {
-      $GLOBALS['DB']->exec("UPDATE daily_completed SET complete_today = true WHERE day_id = {$day_id};");
+      $this_habit = Habit::find($habit_id);
+
+      $days = $GLOBALS['DB']->query("SELECT day_id FROM daily_completed WHERE complete_today = true AND habit_id = {$habit_id};");
+
+      $count = 0;
+
+      foreach ($days as $day) {
+        $count++;
+      }
+
+      return $count;
+
     }
+
+    // still need a method to complete a habit
     }
 
 ?>
