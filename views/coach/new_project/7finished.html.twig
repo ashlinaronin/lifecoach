@@ -21,33 +21,34 @@
 
         <div class = "row row-centered" id = "mainRow">
 
-            <div class = "col-xl-8 col-lg-8 col-md-11 col-sm-12 col-sm-offset-1 col-centered mainBody">
+          <div class = "col-xl-8 col-lg-8 col-md-11 col-sm-12 col-sm-offset-1 col-centered mainBody">
 
 
-                  <h1>Nice job! Here's your project:</h1>
+                <h1>Nice job! Here's your project:</h1>
 
-            </div>
+          </div>
 
-        </div>
-
-        {% include 'coach/partials/project_display.html.twig' %}
-        <div class = "col-xl-5 col-lg-5 col-md-5 col-sm-5 col-sm-offset-1 col-centered mainBody" id="habits">
-
-
-          <form action='/project/current_projects'>
-
-                <button class = "btn btn-primary" type='submit'>Project Home</button>
-
-          </form>
-
-          <form action='/dashboard'>
-
-                <button class = "btn btn-primary" type='submit'>Your Dashboard</button>
-
-          </form>
+          <div class = "col-xl-5 col-lg-5 col-md-5 col-sm-5 col-sm-offset-1 col-centered mainBody" id="habits">
+          {% include 'coach/partials/project_display.html.twig' %}
+          </div>
 
         </div>
+        <br>
+        <div class = "row row-centered" id = "buttonRow">
+          <div class = "col-xl-5 col-lg-5 col-md-5 col-sm-5 col-sm-offset-1 col-centered mainBody" id="habits">
+            <form action='/project/current_projects'>
 
+                  <button class = "btn btn-primary" type='submit'>Project Home</button>
+
+            </form>
+
+            <form action='/dashboard'>
+
+                  <button class = "btn btn-default" type='submit'>Your Dashboard</button>
+
+            </form>
+          </div>
+        </div>
       </div>
     </body>
 </html>
