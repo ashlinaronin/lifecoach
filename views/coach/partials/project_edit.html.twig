@@ -1,0 +1,24 @@
+<div class = "row row-centered" id = "mainRow">
+
+  <div class = "col-xl-8 col-lg-8 col-md-11 col-sm-12 col-sm-offset-1 col-centered mainBody">
+      <h3>Project: {{ project.getName }}</h3>
+      {% if project.getMotivation != null %}
+          <p><strong>Project Motivation:</strong> {{ project.getMotivation }}</p>
+      {% endif %}
+
+      {% if project.getDueDate != '0000-00-00' %}
+          <p><strong>Project Due Date:</strong> {{ project.getDueDate }}</p>
+      {% endif %}
+
+
+      {% if (steps is defined) and (steps is not empty) %}
+          <ul>
+              {% for step in steps %}
+                  <li>{{ step.getPosition }}. {{ step.getDescription}}</li>
+              {% endfor %}
+          </ul>
+      {% else %}
+          No steps yet.
+      {% endif %}
+  </div>
+</div>
