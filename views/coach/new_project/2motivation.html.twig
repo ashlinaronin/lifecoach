@@ -1,17 +1,51 @@
-<html>
-    <head>
-        <title>Motivation</title>
-    </head>
-    <body>
-        What inspires you to pursue this project? Try to answer this in a sentence or two.
+<!-- Header twig template -->
 
+{% set vars = {
+  'page_title': 'New Project',
+  'css_url': '/css/new_project.css'
+}
+
+%}
+
+{% include 'partials/header.html.twig' with vars %}
+
+    <body>
+
+<<<<<<< HEAD
         <form action="/coach/new_project/{{ project.getId }}/prereqs" method="post">
             <label for="motivation">Motivation</label>
             <input type="text" name="motivation">
             <button type="submit">Submit</button>
         </form>
+=======
+        <!-- Nabar twig template -->
+
+        {% set active_page = '/coach/current_projects' %}
+        {% include 'partials/nav.html' %}
+
+        <div class = "container" id = "mainContainer">
+          <div class = "row row-centered" id = "mainRow">
+
+            <div class = "col-xl-8 col-lg-8 col-md-11 col-sm-12 col-sm-offset-1 col-centered mainBody">
+
+            <h1>What inspires you to pursue this project?</h1>
+            <p>Try to answer this in a sentence or two.</p>
+            </div>
+            <div class = "col-xl-5 col-lg-5 col-md-5 col-sm-5 col-sm-offset-1 col-centered mainBody">
 
 
-        {% include 'coach/partials/project_display.html.twig' %}
+              <form action='/coach/new_project/{{ project.getId }}/prereqs' method='post'>
+                <div class="form-group">
+                    <input id = 'motivation' name='motivation' class ='form-control' type='text'>
+                </div>
+>>>>>>> d0b5e51cde391c4b02b5b3de39a7f28de6150383
+
+                    <button class = "btn btn-primary" type='submit'>Next question</button>
+              </form>
+            </div>
+          </div>
+            {% include 'coach/partials/project_display.html.twig' %}
+        </div>
+
     </body>
 </html>
