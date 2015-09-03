@@ -23,8 +23,9 @@
 
           <h1>Active Habits</h1>
             {% if habits is not empty %}
+            {% for habit in habits %}
             <ul>
-                {% for habit in habits %}
+
                 <li>{{ habit.getName }} <a href="/habit/habits/{{ habit.getId }}">Edit</a><a href="habits/{{ habit.getId }}/coaching">Coaching</a></li>
                 <ul>{{ habit.getIntervalDays }} days (eventually want days completed)</ul>
             </ul>
