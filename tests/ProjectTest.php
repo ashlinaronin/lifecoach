@@ -11,7 +11,7 @@
 
     $server = 'mysql:host=localhost;dbname=lifecoach_test';
     $username = 'root';
-    $password = '';
+    $password = 'root';
     $DB = new PDO($server, $username, $password);
 
 
@@ -20,8 +20,8 @@
 
         protected function tearDown()
         {
-            Project::deleteAll();
-            //Step::deleteAll();
+            //Project::deleteAll();
+            Step::deleteAll();
         }
 
         function test_getName()
@@ -345,27 +345,7 @@
             $this->assertEquals($test_step2,$result[0]->getNextStep());
 
         }
-
-        function test_updateComplete()
-        {
-            //Arrange
-            $name = "Build a shed";
-            $motivation = "have storage";
-            $due_date = "2015-09-09";
-            $priority = 1;
-            $test_project = new Project($name,$motivation,$due_date,$priority);
-            $test_project->save();
-
-            $new_complete = 1;
-
-            //Act
-            $test_project->updateComplete($new_complete);
-            $result = Project::getAll();
-
-            //Assert
-            $this->assertEquals($new_complete,$result[0]->getComplete());
-
-        }     
+    
 
     }
 
