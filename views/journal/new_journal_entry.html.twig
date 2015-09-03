@@ -1,12 +1,15 @@
 <html>
     <head>
-        <title>Onnie's Journal</title>
+        <title>Life Coach</title>
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+        <link href="/css/dashboard_styles.css" rel = "stylesheet">
     </head>
-
     <body>
+        {% include 'navbar/nav.html' %}
+        
         <h1>{{ date }}</h1>
 
-  
+
         <form action='/journal/save_journal_entry' method='post'>
               <label for = 'entry'>Today's entry</label>
               <input id = 'entry' name='entry' type='text'>

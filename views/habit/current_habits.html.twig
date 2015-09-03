@@ -2,38 +2,12 @@
   <head>
     <title>Onnie's Habits</title>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/current_projects_styles.css" rel = "stylesheet">
+    <link href="/css/current_projects_styles.css" rel = "stylesheet">
   </head>
   <body>
-    <nav class = "navbar navbar-default">
 
-        <div class = "container-fluid">
 
-            <!--Brand and Toggle -->
-            <div class = "navbar-header">
-
-                <button type = "button" class = "navbar-toggle collapsed" data-toggle = "collapse"
-                        data-target = "#header-navbar-collapse-1" aria-expanded = "false">
-                        <span class = "icon-bar"></span>
-                        <span class = "icon-bar"></span>
-                        <span class = "icon-bar"></span>
-                </button>
-                <a class = "navbar-brand" href = "#">Life Coach</a>
-            </div>
-
-            <!--Nav links -->
-            <div class="collapse navbar-collapse" id="links-navbar-collapse-1">
-                <ul class="nav navbar-nav pull-right">
-                    <li><a href="/dashboard">Dashboard</a></li>
-                    <li><a href="/current_projects">Projects</a></li>
-                    <li class = "active"><a href="/current_habits">Habits</a></li>
-                    <li><a href="#">Journal</a></li>
-                    <li><a href="#">About</a></li>
-                </ul>
-            </div>
-        </div>
-
-    </nav>
+      {% include 'navbar/nav.html' %}
 
     <div class = "container" id = "mainContainer">
       <div class = "row row-centered" id = "mainRow">
@@ -44,7 +18,7 @@
             <ul>
                 {% for habit in habits %}
                 <li>{{ habit.getName }} <a href="/habit/habits/{{ habit.getId }}">Edit</a><a href="habits/{{ habit.getId }}/coaching">Coaching</a></li>
-                <ul>{{ habit.getIntervalDays }} days (eventually want days completed)</ul> 
+                <ul>{{ habit.getIntervalDays }} days (eventually want days completed)</ul>
             </ul>
             {% endfor %}
 
@@ -52,7 +26,7 @@
             <p>No habits currently entered.</p>
 
             {% endif %}
-            <p><a href="/habit/new_habit">Click here to enter a new habit.</a></p>
+            <p><a href="/coach/new_habit/new_habit_name">Click here to enter a new habit.</a></p>
         </div>
       </div>
     </div>

@@ -26,10 +26,15 @@
         return $app['twig']->render('journal/edit_journal_entry.html.twig', array('journal' => $todays_entry));
     });
 
+    $journal->get('/entries/{id}', function($id) use ($app) {
+      $entry = Journal::find($id);
+      return $app ['twig']->render('journal/entry.html.twig', array('entry' => $entry));
+    });
+
     $journal->patch('/entries/{id}', function($id) use ($app) {
       $entry = Journal::find($id);
       $entry_content = $entry->getContent();
-      $latest_entry = $entry_content . $_POST['content'];
+      $latest_entry = $entry_content . " " . $_POST['content'];
       $entry->updateContent($latest_entry);
       return $app ['twig']->render('journal/entry.html.twig', array('entry' => $entry));
     });
@@ -37,12 +42,12 @@
     $journal->patch('/entries_edit/{id}', function($id) use ($app) {
     $entry = Journal::find($id);
     $entry_content = $entry->getContent();
-    $latest_entry = $entry_content . $_POST['content'];
+    $latest_entry = $entry_content . " " . $_POST['content'];
     $entry->updateContent($latest_entry);
     return $app ['twig']->render('journal/entry.html.twig', array('entry' => $entry));
   });
 
-    $journal->get("/entries_archive", function() use ($app){
+    $journal->get('/entries_archive', function() use ($app){
       $entries = Journal::getAll();
       return $app['twig']->render('journal/entries_archive.html.twig', array('entries' => $entries));
     });

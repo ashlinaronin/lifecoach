@@ -7,15 +7,17 @@
         private $due_date;
         private $priority;
         private $id;
+        private $complete;
 
 
-        function __construct($name, $motivation, $due_date, $priority, $id = null)
+        function __construct($name, $motivation, $due_date, $priority, $id = null, $complete=0)
         {
             $this->name = $name;
             $this->motivation = $motivation;
             $this->due_date = $due_date;
-            $this->priority = $priority;
+            $this->priority = (int)$priority;
             $this->id = (int) $id;
+            $this->complete = (int)$complete;
         }
 
 
@@ -64,6 +66,16 @@
             return $this->priority;
         }
 
+        function setComplete ($new_boolean)
+        {
+            $this->complete = (int)$new_boolean;
+        }
+
+        function getComplete ()
+        {
+            return $this->complete;
+        }
+
         function getId()
         {
             return $this->id;
@@ -76,13 +88,14 @@
 
         function save()
         {
-            $GLOBALS['DB']->exec("INSERT INTO projects (name,motivation,due_date,priority) VALUES(
+            $GLOBALS['DB']->exec("INSERT INTO projects (name,motivation,due_date,priority,complete) VALUES(
                 '{$this->getName()}',
                 '{$this->getMotivation()}',
                 '{$this->getDueDate()}',
-                {$this->getPriority()}
+                 {$this->getPriority()},
+                 {$this->getComplete()}
             );");
-            $this->id = (int) $GLOBALS['DB']->lastInsertId();
+            $this->id = $GLOBALS['DB']->lastInsertId();
         }
 
 
