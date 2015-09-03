@@ -19,7 +19,6 @@
 		protected function tearDown()
 		{
 			Step::deleteAll();
-			// Project::deleteAll();
 		}
 
 		function test_getDescription()
