@@ -7,15 +7,16 @@
 		private $project_id;
 		private $position;
 		private $id;
+		private $complete;
 
-		function __construct($description, $project_id, $position, $id=null)
+		function __construct($description, $project_id, $position, $id=null, $complete=0)
 		{
 			$this->description = $description;
 			$this->project_id  = (int)$project_id;
 			$this->position    = (int)$position;
 			$this->id          = (int)$id;
+			$this->complete    = (int)$complete;
 		}
-
 
 
 		// Get and Set Methods ====================================================
@@ -49,6 +50,16 @@
 		function getPosition()
 		{
 			return $this->position;
+		}
+
+		function setComplete($new_complete_boolean)
+		{
+			$this->complete = $new_complete_boolean; 
+		}
+
+		function getComplete()
+		{
+			return $this->complete; 
 		}
 
 		function getId()
@@ -90,6 +101,13 @@
 		{
 			$GLOBALS['DB']->exec("UPDATE steps SET position = '{$new_position}' WHERE id = {$this->getId()};");
 			$this->setPosition($new_position);
+		}
+
+
+		function updateComplete($new_complete)
+		{
+			$GLOBALS['DB']->exec("UPDATE steps SET complete = '{$new_complete}' WHERE id = {$this->getId()};");
+			$this->setComplete($new_complete);
 		}
 
 
