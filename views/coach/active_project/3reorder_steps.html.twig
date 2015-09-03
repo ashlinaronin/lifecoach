@@ -1,8 +1,82 @@
 <html>
     <head>
+        <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+
         <title>{{ project.getName }}: Re-order steps</title>
+        <script src="http://rubaxa.github.io/Sortable/Sortable.js"></script>
+
     </head>
     <body>
-        ((re order steps form))
+        <div class="container">
+
+            <!-- List with handle -->
+          <div id="listWithHandle" class="list-group">
+            <div class="list-group-item" data-id="1">
+              <span class="glyphicon glyphicon-move" aria-hidden="true"></span>
+              Drag me by the handle
+            </div>
+            <div class="list-group-item" data-id="2">
+              <span class="glyphicon glyphicon-move" aria-hidden="true"></span>
+              You can also select text
+            </div>
+            <div class="list-group-item" data-id="3">
+              <span class="glyphicon glyphicon-move" aria-hidden="true"></span>
+              Best of both worlds!
+            </div>
+          </div>
+
+        <script>
+            var printSpan = document.getElementById('print');
+
+            // List with handle
+            var sort = Sortable.create(listWithHandle, {
+                handle: '.glyphicon-move',
+                animation: 150,
+                group: "localStorage-example",
+                    store: {
+                        /**
+                         * Get the order of elements. Called once during initialization.
+                         * @param   {Sortable}  sortable
+                         * @returns {Array}
+                         */
+                        get: function (sortable) {
+                            var order = localStorage.getItem(sortable.options.group);
+                            return order ? order.split('|') : [];
+                        },
+
+                        /**
+                         * Save the order of elements. Called onEnd (when the item is dropped).
+                         * @param {Sortable}  sortable
+                         */
+                        set: function (sortable) {
+                            var order = sortable.toArray();
+                            localStorage.setItem(sortable.options.group, order.join('|'));
+                        }
+                    }
+            });
+
+            printSpan.innerHTML = sort.toArray().toString();
+
+        </script>
+        <span id="printSpan">stuff here</span>
+            ((re order steps form))
+            <!-- Editable list -->
+        	<!-- <a name="e"></a>
+        	<div class="container" style="margin-top: 100px">
+        		<div id="filter" style="margin-left: 30px">
+        			<div><div data-force="5" class="layer title title_xl">Editable list</div></div>
+
+        			<div style="margin-top: -8px; margin-left: 10px" class="block__list block__list_words">
+        				<ul id="editable">
+        					<li>Оля<i class="js-remove">✖</i></li>
+        					<li>Владимир<i class="js-remove">✖</i></li>
+        					<li>Алина<i class="js-remove">✖</i></li>
+        				</ul>
+
+        				<button id="addUser">Add</button>
+        			</div>
+        		</div>
+        	</div> -->
+        </div>
     </body>
 </html>
