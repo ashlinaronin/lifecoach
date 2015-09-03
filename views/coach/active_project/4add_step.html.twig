@@ -1,8 +1,17 @@
 <html>
     <head>
-        <title></title>
+        <title>{{ project.getName }}: Add Step</title>
     </head>
     <body>
+        <p>Does your project still seem daunting? Maybe you haven't broken it into small enough steps. Try adding another step or two.</p>
 
+        {% include 'coach/partials/project_display.html.twig' %}
+        <form action="/coach/active_project/{{ project.getId }}/add_step" method="post">
+            <label for="step_description">Step description</label>
+            <input type="text" name="step_description">
+            <button type="submit">Submit</button>
+        </form>
+
+        <p><a href="/coach/active_project/{{ project.getId }}/reorder_steps">Re-order steps</a></p>
     </body>
 </html>

@@ -49,29 +49,32 @@
     // Display a single Project page
     $project->get('/project/{id}', function($id) use ($app) {
         $project = Project::find($id);
-        return $app['twig']->render('project/project.html.twig',
-            array('project' => $project, 'steps' => $project->getSteps()));
+        return $app['twig']->render('project/project.html.twig', array(
+            'project' => $project,
+            'steps' => $project->getSteps()
+        ));
     });
 
-    // Update a singel Project and re-diplay the page
-    $project->patch('/project/{id}', function($id) use ($app) {
-        $project = Project::find($id);
-        if(!empty($new_name = $_POST['name'])) {
-            $project->updateName(preg_quote($new_name,"'"));
-        }
-        if(!empty($new_motivation = $_POST['motivation'])) {
-            $project->updateMotivation(preg_quote($new_motivation));
-        }
-        if(!empty($new_due_date = $_POST['due_date'])) {
-            $project->updateDueDate(preg_quote($new_due_date));
-        }
-        if(!empty($new_priority = $_POST['priority'])) {
-            $project->updatePriority(preg_quote($new_priority));
-        }
-        return $app['twig']->render('project/project.html.twig',
-            array('project' => $project, 'steps' => $project->getSteps())
-        );
-    });
+    // // Update a singel Project and re-diplay the page
+    // $project->patch('/project/{id}', function($id) use ($app) {
+    //     $project = Project::find($id);
+    //
+    //     if (!empty($new_name = $_POST['name'])) {
+    //         $project->updateName(preg_quote($new_name));
+    //     }
+    //     if(!empty($new_motivation = $_POST['motivation'])) {
+    //         $project->updateMotivation(preg_quote($new_motivation));
+    //     }
+    //     if(!empty($new_due_date = $_POST['due_date'])) {
+    //         $project->updateDueDate(preg_quote($new_due_date));
+    //     }
+    //     if(!empty($new_priority = $_POST['priority'])) {
+    //         $project->updatePriority(preg_quote($new_priority));
+    //     }
+    //     return $app['twig']->render('project/project.html.twig',
+    //         array('project' => $project, 'steps' => $project->getSteps())
+    //     );
+    // });
 
     // Delete a single Project and display current Projects list page
     $project->delete('/project/{id}', function($id) use ($app) {

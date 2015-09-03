@@ -1,0 +1,13 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+        <title>{{ project.getName }}: Finished for Today</title>
+    </head>
+    <body>
+        <p>That's enough for today. Great work!</p>
+
+        {% include 'coach/partials/project_progress_bar.html.twig' %}
+
+        <p><a href="/dashboard">Home</a></p>
+    </body>
+</html>

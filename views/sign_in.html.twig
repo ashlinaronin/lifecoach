@@ -1,0 +1,44 @@
+<!-- Header twig template -->
+
+{% set vars = {
+  'page_title': 'Home Page',
+  'css_url': '/css/index.css'
+}
+
+%}
+{% include 'partials/header.html.twig' with vars %}
+
+<body>
+<!-- Navbar twig template -->
+
+{% set active_page = '/project/current_projects' %}
+{% include 'partials/nav.html' %}
+
+
+
+    <h1>Sign In</h1>
+
+    <form action='/dashboard' method='post'>
+        <div class="row">
+            <div class="col-xs-1">
+                <label for ='email'>Email:</label>
+            </div>
+            <div class="col-xs-5">
+                <input id='email' name='email' type='text' placeholder="email@domain.com" required>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-1">
+                <label for ='password'>Password:</label>
+            </div>
+            <div class="col-xs-5">
+                <input id='password' name='password' type='password' placeholder="" required>
+            </div>
+        </div>
+        <button class="btn-default" type="submit">Sign In</button>
+        <br/>
+    </form>
+
+
+  </body>
+</html>
