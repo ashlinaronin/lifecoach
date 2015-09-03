@@ -177,8 +177,11 @@
         array_push($days_array, $day['day_id']);
       }
 
+      if ($days_array == []) {
+        $found_day_id = 0;
+      } else {
       $found_day_id = min($days_array);
-
+      }
       $GLOBALS['DB']->exec("UPDATE daily_completed SET complete_today = true WHERE day_id = {$found_day_id};");
     }
 

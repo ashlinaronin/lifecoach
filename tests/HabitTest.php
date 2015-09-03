@@ -327,6 +327,8 @@
 
     }
 
+    function testCompleteOnDayId2()
+
     function testGetDaysCompleted()
     {
       $name = "Meditate";
