@@ -1,11 +1,14 @@
-<html>
-    <head>
-        <title>Life Coach</title>
-        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
-        <link href="/css/dashboard_styles.css" rel = "stylesheet">
-    </head>
+<!-- Header twig template -->
+
+{% set vars = {
+  'page_title': 'Edit Journal Entry',
+  'css_url': '/css/new_journal_entry.css'
+}
+
+%}
+{% include 'partials/header.html.twig' with vars %}
     <body>
-        {% include 'navbar/nav.html' %}
+        {% include 'partials/nav.html' %}
 
     {% for entry in entries %}
         <li><a href="/journal/entries/{{ entry.getId }}">{{ entry.getDate }}</a></li>
