@@ -61,7 +61,7 @@
 
 		function getComplete()
 		{
-			return $this->complete; 
+			return $this->complete;
 		}
 
 
