@@ -160,6 +160,26 @@
         }
 
 
+        function getIncompleteSteps ()
+        {
+            $steps_query = $GLOBALS['DB']->query(
+                "SELECT * FROM steps WHERE complete=0 AND project_id = {$this->getId()};"
+            );
+
+            $matching_steps = array();
+            foreach($steps_query as $step) {
+                $description = $step['description'];
+                $project_id = $step['project_id'];
+                $position = $step['position'];
+                $id = $step['id'];
+                $complete = $step['complete'];
+                $new_step = new Step($description,$project_id,$position,$id,$complete);
+                array_push($matching_steps, $new_step);
+            }
+            return $matching_steps;
+        }
+
+
         function getNextStep()
         {
             // Returns one row with the lowest priority value for matching project_id rows with complete values of 0
