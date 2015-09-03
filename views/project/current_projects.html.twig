@@ -26,15 +26,15 @@
           {% if projects is not empty %}
           <ul>
               {% for project in projects %}
-              <li><a href="/project/projects/{{ project.getId }}">{{ project.getName }}</a></li>
+              <li><a href="/project/project/{{ project.getId }}">{{ project.getName }}</a></li>
           </ul>
           {% endfor %}
 
           {% else %}
           <p>No projects currently entered.</p>
-          <p><a href="/project/new_project">Click here to add a new project.</a></p>
-          {% endif %}
 
+          {% endif %}
+          <p><a href="/project/new_project">Click here to add a new project.</a></p>
         </div>
 
 
