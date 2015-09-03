@@ -7,10 +7,6 @@
     require_once __DIR__."/../src/Step.php";
     require_once __DIR__."/../src/User.php";
 
-    session_start();
-    if (empty($_SESSION['user'])) {
-        $_SESSION['user'] = array();
-    }
 
     use Symfony\Component\Debug\Debug;
     Debug::enable();
@@ -44,14 +40,25 @@
 
     //Home page
     $app->get('/', function() use ($app){
-      return $app['twig']->render('index.html.twig');
+      return $app['twig']->render('sign_in.html.twig');
     });
 
     $app->get('/dashboard', function() use ($app) {
         return $app['twig']->render('dashboard.html.twig');
     });
 
-
+    $app->post("/dashboard", function() use ($app) {
+        $email = $_POST['email'];
+        $password = $_POST['password'];
+        $new_user = new User(preg_quote($_POST['email'], "'"),preg_quote($_POST['password'], "'") );
+        $new_user->save();
+        $user = $new_user->authenticate($email);
+        if ( $user != null ) {
+            $count = Project::countProjects();
+            return $app['twig']->render('dashboard.html.twig', array('user' => $user,'project_number' => $count));
+        }
+        else { return $app['twig']->render('index.html.twig'); }
+    });
 
 
     // Include Other Routes

@@ -240,6 +240,17 @@
             return $projects;
         }
 
+        static function countProjects()
+        {
+            $returned_projects = $GLOBALS['DB']->query("SELECT * FROM projects");
+
+            $count = 0;
+            foreach($returned_projects as $project){
+                $count++;
+            }
+            return $count;
+        }
+
 
         static function deleteAll()
         {

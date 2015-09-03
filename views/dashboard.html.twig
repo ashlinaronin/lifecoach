@@ -22,7 +22,7 @@
 
                 <div class = "col-md-11 col-sm-11">
 
-                    <h1>Hello Annie,</h1>
+                    <h1>Hello {{user.getName}}</h1>
                     <p>What would you like to work on?</p>
 
                 </div>
@@ -34,7 +34,7 @@
 
                     <h1><a href = "/project/current_projects">Projects<a/></h1>
                     <!-- Check for amount of active projects-->
-                    <h5><a href = "/project/current_projects">3 active projects</a></h5>
+                    <h5><a href = "/project/current_projects">{{project_number}} active projects</a></h5>
                     <h5><a href = "/coach/new_project">Add a new project</a></h5>
                 </div>
 
