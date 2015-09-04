@@ -24,9 +24,11 @@
 
         <h1>Active projects</h1>
           {% if projects is not empty %}
+          {% for project in projects %}
           <ul>
-              {% for project in projects %}
               <li><a href="/project/project/{{ project.getId }}">{{ project.getName }}</a></li>
+              <a href="/project/project/{{ project.getId }}">Edit</a>
+              <a href="/coach/current_project/progress/{{ project.getId }}">Coaching</a>
           </ul>
           {% endfor %}
 

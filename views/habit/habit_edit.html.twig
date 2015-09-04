@@ -1,13 +1,20 @@
-<html>
-  <head>
-    <title>Onnie's Habits</title>
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
-    <link href="/css/current_projects_styles.css" rel = "stylesheet">
-  </head>
+{% set vars = {
+    'page_title': 'New Habit Name',
+    'css_url': '/css/new_habit_styles.css'
+}
+
+%}
+{% include 'partials/header.html.twig' with vars %}
   <body>
 
+    {% set active_page = '/habit/new_habit_name' %}
+    {% include 'partials/nav.html' %}
 
-      
+
+<div class = "container" id = "mainContainer">
+  <div class = "row row-centered" id = "mainRow">
+
+    <div class = "col-xl-8 col-lg-8 col-md-11 col-sm-12 col-sm-offset-1 col-centered mainBody" id="habits">
 
     <h1>Edit {{ habit.getName }} habit</h1>
 
@@ -18,27 +25,31 @@
               <label for="name">Update the habit name:</label>
               <input id="name" name="name" type="text">
 
-              <button type="submit">Update</button>
+              <button type="submit" class = "btn btn-primary">Update</button>
 
 
               <p>Current motivation: {{ habit.getMotivation }}</p>
               <label for="motivation">Update the habit motivation:</label>
               <input id="motivation" name="motivation" type="text">
 
-              <button type="submit">Update</button>
+              <button type="submit" class = "btn btn-primary">Update</button>
 
               <p>Current interval days: {{ habit.getIntervalDays }}</p>
               <label for="interval_days">Update the length of this habit:</label>
               <input id="interval_days" name="interval_days" type="text">
 
-              <button type="submit">Update</button>
+              <button type="submit" class = "btn btn-primary">Update</button>
 
             </form>
 
             <form action="/habit/habits/{{ habit.getId }}" method="post">
                 <input name="_method" type="hidden" value = "delete">
 
-                <button type="submit">Delete this Habit</button>
+                <button type="submit" class = "btn btn-primary">Delete this Habit</button>
             </form>
+
+      </div>
+  </div>
+</div>
 </body>
 </html>

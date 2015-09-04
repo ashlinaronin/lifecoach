@@ -7,21 +7,40 @@
 
 %}
 {% include 'partials/header.html.twig' with vars %}
+
     <body>
+        {% set active_page = '/journal/new_journal_entry' %}
         {% include 'partials/nav.html' %}
-        <h1>{{ journal.getDate }}</h1>
-
-        {{ journal.getContent }}
 
 
-        <form action='/journal/entries/{{ journal.getId }}' method='post'>
-              <input name="_method" type="hidden" value="patch">
+        <div class = "container" id = "mainContainer">
 
-              <label for="content">Add more to this entry</label>
-              <input id="content" name="content" type="text">
+          <div class = "row row-centered" id = "mainRow">
 
-              <button type='submit'>Submit</button>
-        </form>
+              <div class = "col-xl-8 col-lg-8 col-md-11 col-sm-12 col-sm-offset-1 col-centered mainBody">
 
+              <h1>{{ journal.getDate }}</h1>
+
+              <label for = 'content'>Edit today's entry</label>
+              <form action='/journal/entries/{{ journal.getId }}' method='post'>
+
+
+                <!-- added journal.getContent to value in textarea tag, but can't get
+                it to display the previous entry-->
+                <div class = 'form-group'>
+                  <input name="_method" type="hidden" value="patch">
+                  <textarea class = 'form-control' rows = '5' id = 'content' name = 'content' value = '{{ journal.getContent }}'></textarea>
+                    <br>
+                    <button type='submit' class = 'btn btn-primary'>Submit</button>
+
+                </div>
+
+              </form>
+
+              </div>
+
+          </div>
+
+      </div>
     </body>
 </html>
