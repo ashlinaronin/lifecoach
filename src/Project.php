@@ -164,7 +164,7 @@
         function getIncompleteSteps ()
         {
             $steps_query = $GLOBALS['DB']->query(
-                "SELECT * FROM steps WHERE complete=0 AND project_id = {$this->getId()};"
+                "SELECT * FROM steps WHERE complete=0 AND project_id = {$this->getId()} ORDER BY position;"
             );
 
             $matching_steps = array();

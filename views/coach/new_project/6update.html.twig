@@ -13,46 +13,49 @@
       {% include 'partials/nav.html' %}
 
       <div class = "container" id = "mainContainer">
-
         <div class = "row row-centered" id = "mainRow">
-
             <div class = "col-xl-8 col-lg-8 col-md-11 col-sm-12 col-sm-offset-1 col-centered mainBody">
                 <h1>Great work so far.</h1>
                 <p>Take a look at the preview of your project below.</p>
-                <p>If the steps are a bit out of order, feel free to move them around.</p>
-            </div>
+                <p>Feel free to re-order the steps.</p>
+            <!-- </div> -->
 
             <!-- <div class = "col-xl-5 col-lg-5 col-md-5 col-sm-5 col-sm-offset-1 col-centered">
             </div> -->
 
-        </div>
 
-        <h3>{{ project.getName}}</h3>
-        <p><strong>Motivation:</strong> {{ project.getMotivation }}</p>
-        <p><strong>Due:</strong> {{ project.getDueDate|date("l, F dS, Y")}}.</p>
 
-          <!-- List with handle -->
-          {# populate list with steps from current project #}
-              {% if steps is not empty %}
-                  <div id="step_list" class="list-group">
-                      {% for step in steps %}
-                          <div class="list-group-item" data-id="{{ step.getId }}">
-                              <span class="drag-handle">&#9776;</span>
-                            {{ loop.index }}. {{ step.getDescription }}
-                          </div>
-                      {% endfor %}
-                  </div>
-              {% else %}
-                  <span>No steps whadda hell??</span>
-              {% endif %}
-          {# end populate list #}
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3>{{ project.getName}}</h3>
+                        <p><strong>Motivation:</strong> {{ project.getMotivation }}</p>
+                        <p><strong>Due:</strong> {{ project.getDueDate|date("l, F dS, Y")}}.</p>
+                    </div>
+                    <div class="panel-body">
+                          <!-- List with handle -->
+                          {# populate list with steps from current project #}
+                              {% if steps is not empty %}
+                                  <div id="step_list" class="list-group">
+                                      {% for step in steps %}
+                                          <div class="list-group-item" data-id="{{ step.getId }}">
+                                              <span class="drag-handle">&#9776;</span>
+                                            {{ loop.index }}. {{ step.getDescription }}
+                                          </div>
+                                      {% endfor %}
+                                  </div>
+                              {% else %}
+                                  <span>No steps whadda hell??</span>
+                              {% endif %}
+                          {# end populate list #}
+                    </div>
+                </div>
 
-          <p><a id="update_link" href="#" role="button" class="btn btn-primary">Update</a>
-          <a href="/coach/new_project/{{ project.getId }}/finished" role="button" class="btn btn-info">Looks good, I'm finished.</a></p>
-
-            <div class = "col-xl-5 col-lg-5 col-md-5 col-sm-5 col-sm-offset-1 col-centered">
+                <!-- <p><a id="update_link" href="#" role="button" class="btn btn-primary">Update</a> -->
+                <a id="update_link" href="#" role="button" class="btn btn-primary">Looks good! I'm finished.</a></p>
             </div>
-      </div>
+        </div>
+    </div>
+<!-- </div> -->
       <script>
           var update_link = document.getElementById('update_link');
 
@@ -76,7 +79,7 @@
 
           update_link.onclick = function()
           {
-              var get_url = "/coach/new_project/{{ project.getId }}/update?";
+              var get_url = "/coach/new_project/{{ project.getId }}/finished?";
               var new_positions = sort.toArray();
 
               // Pass new step positions in URL in format step_id=new_postition

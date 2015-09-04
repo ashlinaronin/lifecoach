@@ -48,10 +48,10 @@
             }
         }
 
-        // Something about Rick's next step method messes up position.
+        // Something about Rick's next step method is messing up.
         // So we bypass it in a hacky way.
-        $nextstepid = $project->getNextStep()->getId();
-        $next_step = Step::find($nextstepid);
+        // Set order by in get incomplete steps.
+        $next_step = $project->getIncompleteSteps()[0];
 
 
         // get percent complete on this project

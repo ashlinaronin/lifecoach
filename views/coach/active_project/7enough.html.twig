@@ -1,13 +1,28 @@
-<html>
-    <head>
-        <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-        <title>{{ project.getName }}: Finished for Today</title>
-    </head>
+{% set vars = {
+  'page_title': "MindSet :: #{project.getName}: Finished for today",
+  'css_url': '/css/new_project.css'
+}
+
+%}
+
+{% include 'partials/header.html.twig' with vars %}
     <body>
-        <p>That's enough for today. Great work!</p>
+        {% set active_page = '/coach/active_project' %}
+        {% include 'partials/nav.html' %}
 
-        {% include 'coach/partials/project_progress_bar.html.twig' %}
+        <div class = "container" id = "mainContainer">
+            <div class = "row row-centered" id = "mainRow">
+                <div class = "col-xl-8 col-lg-8 col-md-11 col-sm-12 col-sm-offset-1 col-centered mainBody">
 
-        <p><a href="/dashboard">Home</a></p>
+
+                    <h1>That's plenty for today. Great work!</h1>
+
+                    {% include 'coach/partials/project_progress_bar.html.twig' %}
+
+                    <a role="button" class="btn btn-primary" href="/coach/active_project/{{project.getId}}">Keep going</a>
+
+                </div>
+            </div>
+        </div>
     </body>
 </html>
