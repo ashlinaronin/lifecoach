@@ -26,9 +26,9 @@
           {% if projects is not empty %}
           {% for project in projects %}
           <ul>
-              <li><a href="/project/project/{{ project.getId }}">{{ project.getName }}</a></li>
-              <a href="/project/project/{{ project.getId }}">Edit</a>
-              <a href="/coach/current_project/progress/{{ project.getId }}">Coaching</a>
+              <li><a href="/coach/active_project/{{ project.getId }}">{{ project.getName }}</a></li>
+              <!-- Skip editing for now. Coach does it anyway.-->
+              <!-- <a href="/project/project/{{ project.getId }}">Edit</a> -->
           </ul>
           {% endfor %}
 
@@ -36,7 +36,7 @@
           <p>No projects currently entered.</p>
 
           {% endif %}
-          <p><a href="/project/new_project">Click here to add a new project.</a></p>
+          <p><a href="/coach/new_project">Click here to add a new project.</a></p>
         </div>
 
 
