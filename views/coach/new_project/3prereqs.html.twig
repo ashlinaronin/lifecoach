@@ -1,7 +1,7 @@
 <!-- Header twig template -->
 
 {% set vars = {
-  'page_title': 'New Project',
+  'page_title': "MindSet :: #{project.getName}: Brain Dump",
   'css_url': '/css/new_project.css'
 }
 
@@ -23,22 +23,29 @@
 
             <div class = "col-xl-8 col-lg-8 col-md-11 col-sm-12 col-sm-offset-1 col-centered mainBody">
 
-            <h1>Write some steps for your project</h1>
-            <p>Can you think of any things that need to be finished before you can start on this project?</p>
+            <h1>Brain-Dump</h1>
+            <h3>Let's try something.</h3>
+            <p>Try to think of everything you need to do in order to finish this project.</p>
+            <p>Don't worry about the order right now.</p>
+            <p>I'll help you put together a plan in the next few pages.</p>
             </div>
             <div class = "col-xl-5 col-lg-5 col-md-5 col-sm-5 col-sm-offset-1 col-centered mainBody">
 
 
               <form action='/coach/new_project/{{ project.getId }}/step' method='post'>
                 <div class="form-group">
-                    <input id = 'dump' name='dump' class ='form-control' type='text'>
+                    <textarea id = 'dump' name='dump' class ='form-control' type='text' rows='12'></textarea>
                 </div>
 
-                    <button class = "btn btn-primary" type='submit'>Next question</button>
+                    <button class = "btn btn-primary" type='submit'>Continue</button>
               </form>
+
+                <div>
+                    {% include 'coach/partials/project_display.html.twig' %}
+                </div>
             </div>
           </div>
-            {% include 'coach/partials/project_display.html.twig' %}
+
         </div>
 
     </body>

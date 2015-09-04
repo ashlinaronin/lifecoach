@@ -1,7 +1,7 @@
 <!-- Header twig template -->
 
 {% set vars = {
-  'page_title': 'New Project',
+  'page_title': "MindSet :: #{project.getName}: Due",
   'css_url': '/css/new_project.css'
 }
 
@@ -46,13 +46,15 @@
                         </div>
 
                       </div>
-                      <button class = "btn btn-primary" type='submit'>Next question</button>
+                      <button class = "btn btn-primary" type='submit'>Complete</button>
                   </form>
+
+                  {% include 'coach/partials/project_display.html.twig' %}
 
           </div>
 
       </div>
-        {% include 'coach/partials/project_display.html.twig' %}
+
     </div>
 
     </body>

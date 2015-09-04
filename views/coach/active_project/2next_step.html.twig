@@ -1,7 +1,7 @@
 <!-- Header twig template -->
 
 {% set vars = {
-  'page_title': 'New Project',
+  'page_title': "MindSet :: #{project.getName}",
   'css_url': '/css/new_project.css'
 }
 
@@ -23,15 +23,19 @@
 
                 <div class = "col-xl-8 col-lg-8 col-md-11 col-sm-12 col-sm-offset-1 col-centered mainBody">
 
-                    <h1>Your next step on this project is:</h1>
+                    <h1>Your next step for {{ project.getName }} is:</h1>
 
                     <h4>{{ next_step.getPosition }}. {{ next_step.getDescription }}</h4>
 
                     <p>
                         Are you confident that you can complete this step today?
                     </p>
-                    <a href="/coach/active_project/{{ project.getId }}/complete" role="button" class="btn btn-default">Yep!</a>
+                    <a href="/coach/active_project/{{ project.getId }}/complete" role="button" class="btn btn-primary">Yep!</a>
                     <a href="/coach/active_project/{{ project.getId }}/reorder_steps" role="button" class="btn btn-default">Not totally...</a>
+
+                    <div><h3>{{ project.getName}} progress</h3>
+                        {% include 'coach/partials/project_progress_bar.html.twig' %}
+                    </div>
 
                 </div>
             </div>

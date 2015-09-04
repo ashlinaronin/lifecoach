@@ -27,10 +27,10 @@
 
     // Create default Project for all users for adding Chores
     // populate it with (description,motivation,due_date,priority)
-    if(empty(Project::getAll())) {
-        $default_project = new Project("Chores",null,"0000-00-00",0);
-        $default_project->save();
-    }
+    // if(empty(Project::getAll())) {
+    //     $default_project = new Project("Chores",null,"0000-00-00",0);
+    //     $default_project->save();
+    // }
 
 
     $app->register(new Silex\Provider\TwigServiceProvider(), array(
@@ -68,7 +68,7 @@
     require_once __DIR__."/../routes/coach_new_project.php";
     require_once __DIR__."/../routes/coach_active_project.php";
     require_once __DIR__."/../routes/coach_new_habit.php";
-    require_once __DIR__."/../routes/coach_active_habit.php"; 
+    require_once __DIR__."/../routes/coach_active_habit.php";
     require_once __DIR__."/../routes/habit.php";
     require_once __DIR__."/../routes/journal.php";
     require_once __DIR__."/../routes/project.php";

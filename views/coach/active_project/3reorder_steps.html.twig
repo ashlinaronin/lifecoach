@@ -5,7 +5,7 @@
         <link href="/css/main.css" rel="stylesheet">
         <link href="/css/new_project.css" rel="stylesheet">
         <script src="http://rubaxa.github.io/Sortable/Sortable.js"></script>
-        <title>{{ project.getName }}: Re-order steps</title>
+        <title>MindSet :: {{ project.getName }}: Re-order steps</title>
     </head>
     <body>
 
@@ -40,9 +40,9 @@
                         {% endif %}
                     {# end populate list #}
 
-                    <p><a id="update_link" href="#">Update</a></p>
-                    <p><a href="/coach/active_project/{{ project.getId }}/next_step">Looks good, I'm ready to move on.</a></p>
-                    <p><a href="/coach/active_project/{{ project.getId }}/add_step">I'm not quite comfortable yet. Think I might need to add more steps.</a></p>
+                    <!-- <p><a id="update_link" href="#" role="button" class="btn btn-primary">Update</a></p> -->
+                    <p><a id="update_link" class="btn btn-primary" role="button" href="#">Looks good.</a>
+                    <a class="btn btn-default" role="button" href="/coach/active_project/{{ project.getId }}/add_step">Meh. I still don't feel confident...</a></p>
 
                 </div>
             </div>
@@ -71,7 +71,7 @@
 
             update_link.onclick = function()
             {
-                var get_url = "/coach/active_project/{{ project.getId }}/reorder_steps?";
+                var get_url = "/coach/active_project/{{ project.getId }}/next_step?";
                 var new_positions = sort.toArray();
 
                 // Pass new step positions in URL in format step_id=new_postition

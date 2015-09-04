@@ -1,36 +1,60 @@
 <html>
     <head>
+        <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+        <link href="/css/navbar.css" rel="stylesheet">
+        <link href="/css/main.css" rel="stylesheet">
+        <link href="/css/new_project.css" rel="stylesheet">
         <title>{{ project.getName }}: {{ step.getDescription }}</title>
         {# re-direct to project complete page if completing this last step finished the project #}
         {% if project.getComplete == true %}
-            <meta http-equiv="refresh" content="2;URL=/coach/active_project/{{ project.getId }}/project_complete">
+            <meta http-equiv="refresh" content="1;URL=/coach/active_project/{{ project.getId }}/project_complete">
         {% endif %}
     </head>
     <body>
-        {# only display this stuff if the project is not yet complete #}
-        {% if project.getComplete == false %}
 
-            <h1>Great. Glad you feel confident you can complete {{ step.getDescription }}.</h1>
-            <p>Let me know when you've finished it.</p>
+        {% set active_page = '/coach/active_project' %}
+        {% include 'partials/nav.html' %}
 
-            <form action="/coach/active_project/{{ project.getId }}/complete" method="post">
-                <input type="hidden" name="step_id" value="{{ step.getId }}">
-                <input type="checkbox" name="complete" value="true" onchange="this.form.submit();"
-                     {% if step.getComplete == true %} checked{% endif %}>
-                 I finished this step!!!!!!
-            </form>
+        <div class = "container" id = "mainContainer">
+            <div class = "row row-centered" id = "mainRow">
+                <div class = "col-xl-8 col-lg-8 col-md-11 col-sm-12 col-sm-offset-1 col-centered mainBody">
 
-            {# Only display next step link if this step is complete. #}
-            {% if step.getComplete == true %}
-                <p><a href="/coach/active_project/{{ project.getId }}/next_step">
-                    I'm ready for the next step.
-                </a></p>
-            {% endif %}
+                    {# only display this stuff if the project is not yet complete #}
+                    {% if project.getComplete == false %}
+                        <h1>I'm glad you're confident you can complete {{ step.getDescription }}.</h1>
+                        <h3>Let me know when you've finished.</h3>
+                        <!-- <p>Take your time. Remember, this is for you.</p> -->
 
-            <p><a href="/coach/active_project/{{ project.getId }}/enough">That's enough for right now.</a></p>
-        {% else %}
-            Yay you completed the project!
-        {% endif %}
+                        <form action="/coach/active_project/{{ project.getId }}/complete" method="post">
+                            <input type="hidden" name="step_id" value="{{ step.getId }}">
 
+                            <div class="form-group">
+                                <input type="checkbox" autofocus name="complete" value="true" onchange="this.form.submit();"
+                                     {% if step.getComplete == true %} checked{% endif %}>
+                                 I've just finished {{ step.getDescription }}!
+                            </div>
+                        </form>
+
+                        {# Only display next step link if this step is complete. #}
+                        <p>
+                        {% if step.getComplete == true %}
+                            <a role="button" class="btn btn-primary" href="/coach/active_project/{{ project.getId }}/next_step">
+                                I'm ready for the next step.
+                            </a>
+
+
+                        {% endif %}
+
+                        <a role="button" class="btn btn-default" href="/coach/active_project/{{ project.getId }}/enough">That's enough for right now.</a></p>
+                    {% else %}
+                        <h1>Great job! Re-directing...</h1>
+                    {% endif %}
+
+                    <div><h3>{{ project.getName}} progress</h3>
+                        {% include 'coach/partials/project_progress_bar.html.twig' %}
+                    </div>
+                </div>
+            </div>
+        </div>
     </body>
 </html>

@@ -1,7 +1,7 @@
 <!-- Header twig template -->
 
 {% set vars = {
-  'page_title': 'New Project',
+  'page_title': "MindSet :: #{project.getName}: Add a Step",
   'css_url': '/css/new_project.css'
 }
 
@@ -24,14 +24,16 @@
 
             <div class = "col-xl-8 col-lg-8 col-md-11 col-sm-12 col-sm-offset-1 col-centered mainBody">
 
-            <h1>Here's what you came up with</h1>
-            <p style = "font-style: italic;">"{{ dump }}"</p>
+            <h1>Here's what you came up with.</h1>
+            <pre>{{ dump }}</pre>
 
-            <p>{% if project.getSteps|length == 0 %}
-                Looking at these steps, what do you think is the most basic step possible you could start this project with?
+            {% if project.getSteps|length == 0 %}
+                <h3>Let's think about a first step.</h3>
+                <p>Looking at your brain dump, can you pick one step that <strong>must</strong> be done first?</p>
             {% else %}
-                What is the next smallest step that needs to be done?
-            {% endif %}</p>
+                <h3>Let's talk next steps.</h3>
+                <p>What's the most crucial thing to do now?</p>
+            {% endif %}
             </div>
             <div class = "col-xl-5 col-lg-5 col-md-5 col-sm-5 col-sm-offset-1 col-centered mainBody">
 
@@ -40,18 +42,24 @@
                 <div class="form-group">
                   <!-- pass dump in hidden post so user can continue to reference it-->
                     <input type="hidden" name="dump" value="{{dump}}">
-                    <input id = 'step_description' name='step_description' class ='form-control' type='text'>
+                    <input id = 'step_description' name='step_description' autofocus class ='form-control' type='text'
+                        {% if project.getSteps|length == 0 %}
+                            placeholder='First step'>
+                        {% else %}
+                            placeholder='Next step'>
+                        {% endif %}
                 </div>
 
-                    <button class = "btn btn-primary" type='submit'>Next question</button>
+                    <button class = "btn btn-primary" type='submit'>Add step</button>
+                    <a href="/coach/new_project/{{ project.getId }}/due_date" class="btn btn-info" role="button">That's enough steps.</a>
               </form>
 
-              <a href="/coach/new_project/{{ project.getId }}/due_date">That's enough steps.</a><br><br>
+              {% include 'coach/partials/project_display.html.twig' %}
 
             </div>
           </div>
-          
-              {% include 'coach/partials/project_display.html.twig' %}
+
+
 
         </div>
 

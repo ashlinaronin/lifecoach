@@ -1,7 +1,7 @@
 <!-- Header twig template -->
 
 {% set vars = {
-  'page_title': 'New Project',
+  'page_title': "MindSet :: #{project.getName}: Motivation",
   'css_url': '/css/new_project.css'
 }
 
@@ -22,17 +22,17 @@
             <div class = "col-xl-8 col-lg-8 col-md-11 col-sm-12 col-sm-offset-1 col-centered mainBody">
 
             <h1>What inspires you to pursue this project?</h1>
-            <p>Try to answer this in a sentence or two.</p>
+            <p>Try to answer in a sentence or two.</p>
             </div>
             <div class = "col-xl-5 col-lg-5 col-md-5 col-sm-5 col-sm-offset-1 col-centered mainBody">
 
 
               <form action='/coach/new_project/{{ project.getId }}/prereqs' method='post'>
                 <div class="form-group">
-                    <input id = 'motivation' name='motivation' class ='form-control' type='text'>
+                    <input id = 'motivation' name='motivation' class ='form-control' type='text' autofocus>
                 </div>
 
-                    <button class = "btn btn-primary" type='submit'>Next question</button>
+                    <button class = "btn btn-primary" type='submit'>Continue</button>
               </form>
             </div>
           </div>

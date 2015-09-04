@@ -123,11 +123,27 @@
         ));
     });
 
+    // Get route to update step positions from JS values
+    $coach_new_project->get('/{id}/update', function($id) use ($app) {
+        $project = Project::find($id);
+
+        // Get updated step position values from JS
+        foreach($_GET as $step_id => $new_position) {
+            $step = Step::find($step_id);
+            $step->updatePosition($new_position);
+        }
+
+        return $app['twig']->render('coach/new_project/6update.html.twig', array(
+            'project' => $project,
+            'steps' => $project->getSteps()
+        ));
+    });
+
 
 
     /* 7. If anything was edited, update it here.
     ** Display congratulations, redirect to dashboard. */
-    $coach_new_project->post('/{id}/finished', function($id) use ($app) {
+    $coach_new_project->get('/{id}/finished', function($id) use ($app) {
         $project = Project::find($id);
 
         // logic to do updating here

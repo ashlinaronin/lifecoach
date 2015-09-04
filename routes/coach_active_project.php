@@ -40,9 +40,30 @@
     $coach_active_project->get('/{id}/next_step', function($id) use ($app) {
         $project = Project::find($id);
 
+        // If we got some updated step position values from JS, use 'em'
+        if (!empty($_GET)) {
+            foreach($_GET as $step_id => $new_position) {
+                $step = Step::find($step_id);
+                $step->updatePosition($new_position);
+            }
+        }
+
+        // Something about Rick's next step method messes up position.
+        // So we bypass it in a hacky way.
+        $nextstepid = $project->getNextStep()->getId();
+        $next_step = Step::find($nextstepid);
+
+
+        // get percent complete on this project
+        $all_steps_count = sizeof($project->getSteps());
+        $incomplete_steps_count = sizeof($project->getIncompleteSteps());
+        $complete_steps_count = $all_steps_count - $incomplete_steps_count;
+        $progress_percent = (int) (($complete_steps_count / $all_steps_count) * 100);
+
         return $app['twig']->render('coach/active_project/2next_step.html.twig', array(
             'project' => $project,
-            'next_step' => $project->getNextStep()
+            'next_step' => $next_step,
+            'progress_percent' => $progress_percent
         ));
     });
 
@@ -55,14 +76,13 @@
     $coach_active_project->get('/{id}/reorder_steps', function($id) use ($app) {
         $project = Project::find($id);
 
-        foreach($_GET as $step_id => $new_position) {
-            // key should be step id
-            // value should be new position
-
-
-            $step = Step::find($step_id);
-            $step->updatePosition($new_position);
-        }
+        // Update button now links to next step page for clarity
+        // So we're not using this logic for now
+        // // Get updated step position values from JS
+        // foreach($_GET as $step_id => $new_position) {
+        //     $step = Step::find($step_id);
+        //     $step->updatePosition($new_position);
+        // }
 
         return $app['twig']->render('coach/active_project/3reorder_steps.html.twig', array(
             'project' => $project,
@@ -124,11 +144,23 @@
     $coach_active_project->get('/{id}/complete', function($id) use ($app) {
         $project = Project::find($id);
 
+        $all_steps_count = sizeof($project->getSteps());
+
+        if ($all_steps_count != 0) {
+            $incomplete_steps_count = sizeof($project->getIncompleteSteps());
+            $complete_steps_count = $all_steps_count - $incomplete_steps_count;
+            $progress_percent = (int) (($complete_steps_count / $all_steps_count) * 100);
+        } else {
+            // If there are no steps, then progress percent is definitely 0.
+            $progress_percent = 0;
+        }
+
 
         // get next step should work here
         return $app['twig']->render('coach/active_project/5complete.html.twig', array(
             'project' => $project,
-            'step' => $project->getNextStep()
+            'step' => $project->getNextStep(),
+            'progress_percent' => $progress_percent
         ));
     });
 

@@ -1,15 +1,12 @@
-<!-- Header twig template -->
-
-{% set vars = {
-  'page_title': 'New Project',
-  'css_url': '/css/new_project.css'
-}
-
-%}
-
-{% include 'partials/header.html.twig' with vars %}
-
-
+<html>
+    <head>
+        <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+        <link href="/css/navbar.css" rel="stylesheet">
+        <link href="/css/main.css" rel="stylesheet">
+        <link href="/css/new_project.css" rel="stylesheet">
+        <script src="http://rubaxa.github.io/Sortable/Sortable.js"></script>
+        <title>MindSet :: {{ project.getName }}: Edit</title>
+    </head>
     <body>
 
       {% set active_page = '/coach/current_projects' %}
@@ -20,60 +17,77 @@
         <div class = "row row-centered" id = "mainRow">
 
             <div class = "col-xl-8 col-lg-8 col-md-11 col-sm-12 col-sm-offset-1 col-centered mainBody">
-                <!-- Nabar twig template -->
-
                 <h1>Great work so far.</h1>
-                <p>Take a look at the preview of your project and see if there's anything you'd like to change.</p>
+                <p>Take a look at the preview of your project below.</p>
+                <p>If the steps are a bit out of order, feel free to move them around.</p>
             </div>
 
             <!-- <div class = "col-xl-5 col-lg-5 col-md-5 col-sm-5 col-sm-offset-1 col-centered">
-
-
-
             </div> -->
 
-          </div>
-          {% include 'coach/partials/project_display.html.twig' %}
-
-          ((this should be a project edit form))
-
-          <div class = "col-xl-5 col-lg-5 col-md-5 col-sm-5 col-sm-offset-1 col-centered">
-
-          <form action = '/coach/new_project/{{project.getId }}' method = 'post'>
-            <div class = 'form-group'>
-                <input id = 'update' name = 'update' type = 'hidden' value = 'patch'>
-                <input id = 'project' name = 'project' type = 'text'>
-                <label for = 'project'>Change this project?</label>
-                <input id = 'steps' name = 'steps' type = 'text'>
-                <label for = 'steps'>Add a step?</label>
-            </div>
-            <button name = 'submit' class = 'btn btn-primary'>Update</button>
-          </form>
-
-
-          
-
-          <form action='/coach/new_project/{{ project.getId }}/finished' method='post'>
-
-              <div class="form-group">
-
-                <div class="input-group input-append date" id="datePicker">
-
-                  <input id = 'due_date' name='due_date' class ='form-control' type='date'>
-
-                  <span class="input-group-addon add-on">
-
-                    <span class="glyphicon glyphicon-calendar"></span>
-
-                  </span>
-
-                </div>
-
-              </div>
-              <button class = "btn btn-primary" type='submit'>Next question</button>
-          </form>
-
         </div>
+
+        <h3>{{ project.getName}}</h3>
+        <p><strong>Motivation:</strong> {{ project.getMotivation }}</p>
+        <p><strong>Due:</strong> {{ project.getDueDate|date("l, F dS, Y")}}.</p>
+
+          <!-- List with handle -->
+          {# populate list with steps from current project #}
+              {% if steps is not empty %}
+                  <div id="step_list" class="list-group">
+                      {% for step in steps %}
+                          <div class="list-group-item" data-id="{{ step.getId }}">
+                              <span class="drag-handle">&#9776;</span>
+                            {{ loop.index }}. {{ step.getDescription }}
+                          </div>
+                      {% endfor %}
+                  </div>
+              {% else %}
+                  <span>No steps whadda hell??</span>
+              {% endif %}
+          {# end populate list #}
+
+          <p><a id="update_link" href="#" role="button" class="btn btn-primary">Update</a>
+          <a href="/coach/new_project/{{ project.getId }}/finished" role="button" class="btn btn-info">Looks good, I'm finished.</a></p>
+
+            <div class = "col-xl-5 col-lg-5 col-md-5 col-sm-5 col-sm-offset-1 col-centered">
+            </div>
       </div>
+      <script>
+          var update_link = document.getElementById('update_link');
+
+          // Create steps list
+          var sort = Sortable.create(step_list, {
+              animation: 150,
+              dataIdAttr: 'data-id'
+          });
+
+          // Define step ids using Twig so we can update them
+          var step_ids = [
+              {% for step in steps %}
+                  {{ step.getId }}
+
+                  {# only add a comma to steps b4 last one #}
+                  {% if loop.index != steps|length %}
+                      ,
+                  {% endif %}
+              {% endfor %}
+          ];
+
+          update_link.onclick = function()
+          {
+              var get_url = "/coach/new_project/{{ project.getId }}/update?";
+              var new_positions = sort.toArray();
+
+              // Pass new step positions in URL in format step_id=new_postition
+              for (i = 0; i < step_ids.length; i++)
+              {
+                  get_url += new_positions[i] += "=" + (i+1) + "&";
+              }
+
+              window.location.href = get_url;
+          }
+
+      </script>
     </body>
 </html>

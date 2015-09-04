@@ -7,7 +7,7 @@
 
 
     // require_once "src/DailyCompleted.php";
-    $server = 'mysql:host=localhost;dbname=lifecoach_test';
+    $server = 'mysql:host=localhost:3306;dbname=lifecoach_test';
     $username = 'root';
     $password = 'root';
     $DB = new PDO($server, $username, $password);
@@ -329,7 +329,7 @@
 
     }
 
-    function testCompleteOnDayId2()
+    // function testCompleteOnDayId2()
 
     function testGetDaysCompleted()
     {

@@ -1,17 +1,45 @@
-<html>
-    <head>
-        <title>{{ project.getName }}: Add Step</title>
-    </head>
+<!-- Header twig template -->
+
+{% set vars = {
+  'page_title': "MindSet :: #{project.getName}: Add step",
+  'css_url': '/css/new_project.css'
+}
+
+%}
+
+{% include 'partials/header.html.twig' with vars %}
+
     <body>
-        <p>Does your project still seem daunting? Maybe you haven't broken it into small enough steps. Try adding another step or two.</p>
+        {% set active_page = '/coach/active_project' %}
+        {% include 'partials/nav.html' %}
+        <div class = "container" id = "mainContainer">
+            <div class = "row row-centered" id = "mainRow">
+                <div class = "col-xl-8 col-lg-8 col-md-11 col-sm-12 col-sm-offset-1 col-centered mainBody">
+                    <h1>Add a step</h1>
+                    <p>Does your project still seem daunting?</p>
+                    <p>Maybe you haven't quite broken it into directly actionable steps.</p>
+                    <p>Try adding another step or two.</p>
 
-        {% include 'coach/partials/project_display.html.twig' %}
-        <form action="/coach/active_project/{{ project.getId }}/add_step" method="post">
-            <label for="step_description">Step description</label>
-            <input type="text" name="step_description">
-            <button type="submit">Submit</button>
-        </form>
+                    {% include 'coach/partials/project_display.html.twig' %}
 
-        <p><a href="/coach/active_project/{{ project.getId }}/reorder_steps">Re-order steps</a></p>
+                    <div class = "col-xl-5 col-lg-5 col-md-5 col-sm-5 col-sm-offset-1 col-centered mainBody" id="habits" clas>
+                        <form action="/coach/active_project/{{ project.getId }}/add_step" method="post">
+
+                            <div class="input-group">
+                                <input id="step_description" class="form-control" type="text" name="step_description" placeholder="New Step" autofocus>
+                                <span class="input-group-btn">
+                                    <button type="submit" class="btn btn-primary">Add step</button>
+                                </span>
+                            </div>
+
+
+                        </form>
+
+                        <p><a class="btn btn-info" role="button" href="/coach/active_project/{{ project.getId }}/reorder_steps">Try re-ordering steps</a>
+                        <a class="btn btn-default" role="button" href="/coach/active_project/{{ project.getId }}/next_step">Eh, it's fine</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
     </body>
 </html>

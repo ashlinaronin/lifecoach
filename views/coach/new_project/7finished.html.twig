@@ -1,7 +1,7 @@
 <!-- Header twig template -->
 
 {% set vars = {
-  'page_title': 'New Project',
+  'page_title': "MindSet :: #{project.getName}: Finished",
   'css_url': '/css/new_project.css'
 }
 
@@ -24,7 +24,10 @@
           <div class = "col-xl-8 col-lg-8 col-md-11 col-sm-12 col-sm-offset-1 col-centered mainBody">
 
 
-                <h1>Nice job! Here's your project:</h1>
+                <h1>Congratulations are in order!</h1>
+                <p>You've laid out everything you need to get started on a great new project.</p>
+                <p>Now all you have to do is actually work on it!</p>
+                <a class="btn btn-primary" role="button" href="/coach/active_project/{{ project.getId }}">Get started</a>
 
           </div>
         </div>
@@ -35,21 +38,11 @@
         </div
 
         <br>
-        <div class = "row row-centered" id = "buttonRow">
+        <!-- <div class = "row row-centered" id = "buttonRow">
           <div class = "col-xl-5 col-lg-5 col-md-5 col-sm-5 col-sm-offset-1 col-centered mainBody" id="habits">
-            <form action='/project/current_projects'>
 
-                  <button class = "btn btn-primary" type='submit'>Project Home</button>
-
-            </form>
-
-            <form action='/dashboard'>
-
-                  <button class = "btn btn-default" type='submit'>Your Dashboard</button>
-
-            </form>
           </div>
-        </div>
+        </div> -->
       </div>
     </body>
 </html>
